@@ -21,11 +21,24 @@ public class CheckBoxPanel extends JPanel {
 	{
 		setLayout(new GridLayout(4,1));
 		chromeCheckBox=new JCheckBox("Chrome");
-		ieCheckBox = new JCheckBox("IE");
-		firefoxCheckBox= new JCheckBox("Firefox");
-		operaCheckBox=new JCheckBox("opera");
-		setBorder(BorderFactory.createTitledBorder("Browsers"));
+		chromeCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+		chromeCheckBox.setForeground(Color.gray);
 		
+		ieCheckBox = new JCheckBox("IE");
+		ieCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+		ieCheckBox.setForeground(Color.gray);
+		
+		firefoxCheckBox= new JCheckBox("Firefox");
+		firefoxCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+		firefoxCheckBox.setForeground(Color.gray);
+		
+		operaCheckBox=new JCheckBox("Opera");
+		operaCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+		operaCheckBox.setForeground(Color.gray);
+		
+		
+		setBorder(BorderFactory.createTitledBorder("Browsers"));
+		setBackground(Color.white);
 		add(chromeCheckBox);
 		add(ieCheckBox);
 		add(firefoxCheckBox);
