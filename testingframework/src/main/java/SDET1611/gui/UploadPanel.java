@@ -136,7 +136,10 @@ class KeywordSheetTextListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JTextField input = (JTextField)e.getSource();		
 		runPanel.setKeywordSheetText(input.getText());
+		System.out.println("DEBUG--- input text : "+input.getText());
 	}
+	
+	
 }
 
 class DataSheetTextListener implements ActionListener {

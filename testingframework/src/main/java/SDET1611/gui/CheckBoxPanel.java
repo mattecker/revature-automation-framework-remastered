@@ -15,27 +15,39 @@ public class CheckBoxPanel extends JPanel {
 	
 	public CheckBoxPanel()
 	{
-		//Add name to check boxes
-		chromeCheckBox=new JCheckBox("Chrome");
-		ieCheckBox = new JCheckBox("IE");
-		firefoxCheckBox= new JCheckBox("Firefox");
-		operaCheckBox=new JCheckBox("opera");
 		
 		//Set layout of panel
 		setLayout(new GridLayout(4,1));
 		setBorder(BorderFactory.createTitledBorder("Browsers"));
-
-		//Add check boxes to panel
-		add(chromeCheckBox);
-		add(ieCheckBox);
-		add(firefoxCheckBox);
-		add(operaCheckBox);
 		
+		setLayout(new GridLayout(4,1));
+        chromeCheckBox=new JCheckBox("Chrome");
+        chromeCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        chromeCheckBox.setForeground(Color.gray);
+        
+        ieCheckBox = new JCheckBox("IE");
+        ieCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        ieCheckBox.setForeground(Color.gray);
+        
+        firefoxCheckBox= new JCheckBox("Firefox");
+        firefoxCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        firefoxCheckBox.setForeground(Color.gray);
+        
+        operaCheckBox=new JCheckBox("Opera");
+        operaCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        operaCheckBox.setForeground(Color.gray);
+        
 		//Add action listeners
 		chromeCheckBox.addActionListener(new ChromeCheckBoxListener());
 		ieCheckBox.addActionListener(new IECheckBoxListener());
 		firefoxCheckBox.addActionListener(new FirefoxCheckBoxListener());
 		operaCheckBox.addActionListener(new OperaCheckBoxListener());
+		
+		//Add check boxes to panel
+		add(chromeCheckBox);
+		add(ieCheckBox);
+		add(firefoxCheckBox);
+		add(operaCheckBox);
 	}
 }
 

@@ -75,19 +75,19 @@ public class RunPanel extends JPanel implements ActionListener {
 		return chromeCheckboxValue;
 	}
 	public void setIECheckValue(boolean isChecked) {
-		chromeCheckboxValue = isChecked; 
+		ieCheckboxValue = isChecked; 
 	}
 	public boolean getIECheckboxValue() {
 		return ieCheckboxValue;
 	}
 	public void setFirefoxCheckValue(boolean isChecked) {
-		chromeCheckboxValue = isChecked; 
+		firefoxCheckboxValue = isChecked; 
 	}
 	public boolean getFirefoxCheckboxValue() {
 		return firefoxCheckboxValue;
 	}
 	public void setOperaCheckValue(boolean isChecked) {
-		chromeCheckboxValue = isChecked; 
+		operaCheckboxValue = isChecked; 
 	}
 	public boolean getOperaCheckValue() {
 		return operaCheckboxValue;
@@ -96,13 +96,24 @@ public class RunPanel extends JPanel implements ActionListener {
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
 		
+		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
 		propertiesFile = getPropertiesFile();
 		
-		String keywordSheet = "TestSheet";
-		String dataSheet = "TestSheet";
-		String OS = "WINDOWS";
+		String keywordSheet = getKeywordSheetText();
+		String dataSheet = getDataSheetText();
+		
+		String temp = System.getProperty("os.name");
+		
+		if(temp.contains("Windows")){
+			OS = "WINDOWS";
+		}else if(temp.contains("Mac")){
+			OS = "MAC";
+		}else{
+			OS = "LINUX";
+		}
+		
 		String bit = "64";
 		
 		chromeCheckboxValue = getChromeCheckboxValue();
@@ -125,13 +136,19 @@ public class RunPanel extends JPanel implements ActionListener {
 			drivers+="Opera,";
 		
 		
+		System.out.println(chromeCheckboxValue);
+		System.out.println(ieCheckboxValue);
+		System.out.println(firefoxCheckboxValue);
+		System.out.println(operaCheckboxValue);
+		
+		System.out.println(drivers);
+		
 		drivers=drivers.substring(0, drivers.lastIndexOf(","));
+		
+		System.out.println(drivers);
 		
 		prepareTests.main(new String[] {
 					dataExcelFile.toString().replace("\\", "/"),
-					//"C:/Users/Joe/Documents/Newfolder/testData.xlsx",
-					//"C:/Users/Joe/Documents/Newfolder/testKeyword.xlsx",
-					//"C:/Users/Joe/Documents/Newfolder/test.properties",
 					keywordExcelFile.toString().replace("\\", "/"),
 					propertiesFile.toString().replace("\\", "/"),
 					keywordSheet,

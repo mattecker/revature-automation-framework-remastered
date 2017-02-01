@@ -38,6 +38,8 @@ public class GUI extends JFrame{
 	private GUITitle guiTitle;
 	private JPanel lastpanel;
 	private RunPanel runPanels;
+	private JLabel keywordSheetLabel;
+	private JLabel dataSheetLabel;
 	final int WINDOW_WIDTH=700,
 			  WINDOW_HEIGHT=500;
 	
@@ -109,8 +111,10 @@ public class GUI extends JFrame{
 		JButton uploadPropertiesButton = new JButton("Upload");
 	
 		//Add textfields
-        JTextField keywordSheetInput = new JTextField(10);
-        JTextField dataSheetInput = new JTextField(10);
+        JTextField keywordSheetTextField = new JTextField(10);
+        JTextField dataSheetTextField  = new JTextField(10);
+        
+        
         
 		JPanel panel = new JPanel();
 		
@@ -164,7 +168,7 @@ public class GUI extends JFrame{
 	      gbc.fill = GridBagConstraints.HORIZONTAL;
 	
 	      //gbc.gridwidth = 2;
-	      panel.add(keywordSheetInput,gbc);  
+	      panel.add(keywordSheetTextField,gbc);  
 	      
 	      //dataDriven Sheet
 	      gbc.gridx = 0;
@@ -176,13 +180,19 @@ public class GUI extends JFrame{
 	      gbc.gridy = 4;   
 	      gbc.gridheight = 2;
 	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	      panel.add(dataSheetInput,gbc);  
+	      panel.add(dataSheetTextField,gbc);  
 	      
-	    
+		  keywordSheetLabel = new JLabel("Keyword Sheet");
+	      dataSheetLabel = new JLabel("Data Sheet");
+	      add(keywordSheetLabel);
+	      add(dataSheetLabel);
+	      
 	      uploadKeywordExcelButton.addActionListener(new UploadKeywordExcelListener());
 		  uploadDataExcelButton.addActionListener(new UploadDataExcelListener());
 		  uploadPropertiesButton.addActionListener(new UploadPropertiesListener());
-	
+		  keywordSheetTextField.addActionListener(new KeywordSheetTextListener());
+		  dataSheetTextField.addActionListener(new DataSheetTextListener());
+		    
 	      add(panel);
 		  setVisible(true);
 
@@ -247,5 +257,31 @@ public class GUI extends JFrame{
 		}
 		
 	}
+	
+
+class KeywordSheetTextListener implements ActionListener {
+	
+	final RunPanel runPanel = new RunPanel();
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JTextField input = (JTextField)e.getSource();		
+		runPanel.setKeywordSheetText(input.getText());
+		System.out.println("DEBUG--- input text : "+input.getText());
+	}
+	
+	
+}
+
+class DataSheetTextListener implements ActionListener {
+	
+	final RunPanel runPanel = new RunPanel();
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JTextField input = (JTextField)e.getSource();		
+		runPanel.setDataSheetText(input.getText());
+	}
+}
 
 }
