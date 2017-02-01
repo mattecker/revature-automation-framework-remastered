@@ -16,59 +16,59 @@ import javax.swing.JTextField;
 
 public class UploadPanel extends JPanel {
 	
-	private String keywordFile="Keyword Driven File";
-	private String dataFile="Data Driven File";
-	private String propertiesFile="Properties File";
-	
 	private JLabel keywordLabel;
 	private JLabel dataLabel;
 	private JLabel propertiesLabel;
+	private JLabel keywordSheetLabel;
+	private JLabel dataSheetLabel;
 	
 	private JButton uploadKeywordExcelButton;
 	private JButton uploadDataExcelButton;
 	private JButton uploadPropertiesButton;
 	
-	private ButtonGroup bg;
-	
-	 private JLabel keywordSheet;
-	 private JLabel dataSheet;
-	 private JTextField keywordSheetInput;
-	 private JTextField dataSheetInput;
-	
+	static JTextField keywordSheetTextField;
+	private JTextField dataSheetTextField;
 	
 	public UploadPanel()
 	{
+		//Set grid layout
 		setLayout(new GridLayout(3,2));
-		keywordLabel=new JLabel("Keyword driven File");
-		dataLabel=new JLabel("Data Driven File");
-		propertiesLabel=new JLabel("Properties File");
 		
+		//Create labels
+		keywordLabel = new JLabel("Keyword driven File");
+		dataLabel = new JLabel("Data Driven File");
+		propertiesLabel = new JLabel("Properties File");
+		keywordSheetLabel = new JLabel("Keyword Sheet");
+        dataSheetLabel = new JLabel("Data Sheet");
+		
+		//Create buttons
 		uploadKeywordExcelButton = new JButton("Upload");
-		uploadDataExcelButton=new JButton("Upload");
-		uploadPropertiesButton=new JButton("Upload");
+		uploadDataExcelButton = new JButton("Upload");
+		uploadPropertiesButton = new JButton("Upload");
 		
-		keywordSheet = new JLabel("Keyword Sheet");
-        dataSheet= new JLabel("Data Sheet");
-        keywordSheetInput= new JTextField();
-        dataSheetInput=new JTextField();
+		//Create text fields
+        keywordSheetTextField = new JTextField();
+        dataSheetTextField = new JTextField();
         
+        //Add to panel
 		add(keywordLabel);
 		add(uploadKeywordExcelButton);
 		add(dataLabel);
 		add(uploadDataExcelButton);
 		add(propertiesLabel);
 		add(uploadPropertiesButton);
-		add(keywordSheet);
-        add(keywordSheetInput);
-        add(dataSheet);
-        add(dataSheetInput);
+		add(keywordSheetLabel);
+        add(keywordSheetTextField);
+        add(dataSheetLabel);
+        add(dataSheetTextField);
 		
 		// Add an action listeners to the buttons.
 	    uploadKeywordExcelButton.addActionListener(new UploadKeywordExcelListener());
 	    uploadDataExcelButton.addActionListener(new UploadDataExcelListener());
 	    uploadPropertiesButton.addActionListener(new UploadPropertiesListener());
+	    keywordSheetTextField.addActionListener(new KeywordSheetTextListener());
+	    dataSheetTextField.addActionListener(new DataSheetTextListener());
 	}
-
 }
 
 class UploadKeywordExcelListener implements ActionListener {
@@ -87,8 +87,6 @@ class UploadKeywordExcelListener implements ActionListener {
 			File keywordExcelFile = fc.getSelectedFile();
 			runPanel.setKeywordExcelFile(keywordExcelFile);
 		}
-		
-		
 	}
 }
 
@@ -104,12 +102,11 @@ class UploadDataExcelListener implements ActionListener {
 		int returnVal = fc.showOpenDialog(fc);
 		//If success then get file
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-			//Should be keyword excel file
+			//Should be data excel file
 			File dataExcelFile = fc.getSelectedFile();
 			runPanel.setDataExcelFile(dataExcelFile);
 		}	
 	}
-	
 }
 
 class UploadPropertiesListener implements ActionListener {
@@ -124,12 +121,32 @@ class UploadPropertiesListener implements ActionListener {
 		int returnVal = fc.showOpenDialog(fc);
 		//If success then get file
 		if(returnVal == JFileChooser.APPROVE_OPTION) {
-			//Should be keyword excel file
+			//Should be properties file
 			File propertiesFile = fc.getSelectedFile();
 			runPanel.setPropertiesFile(propertiesFile);
 		}	
 	}
-	
 }
 
+class KeywordSheetTextListener implements ActionListener {
+	
+	final RunPanel runPanel = new RunPanel();
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JTextField input = (JTextField)e.getSource();		
+		runPanel.setKeywordSheetText(input.getText());
+	}
+}
+
+class DataSheetTextListener implements ActionListener {
+	
+	final RunPanel runPanel = new RunPanel();
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JTextField input = (JTextField)e.getSource();		
+		runPanel.setDataSheetText(input.getText());
+	}
+}
 
