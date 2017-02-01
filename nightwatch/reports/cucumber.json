@@ -1,0 +1,138 @@
+[
+  {
+    "keyword": "Feature",
+    "line": 3,
+    "name": "Login",
+    "tags": [],
+    "uri": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/login.feature",
+    "elements": [
+      {
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Login to Flight",
+        "tags": [],
+        "id": "login;login-to-flight",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "name": "I open Flight Finder",
+            "result": {
+              "status": "passed",
+              "duration": 2625
+            },
+            "line": 7,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:12"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "the title is \"Welcome: Mercury Tours\"",
+            "result": {
+              "status": "passed",
+              "duration": 15
+            },
+            "line": 8,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:42"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "name": "the username form exists",
+            "result": {
+              "status": "passed",
+              "duration": 74
+            },
+            "line": 9,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:51"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "name": "the password form exists",
+            "result": {
+              "status": "passed",
+              "duration": 59
+            },
+            "line": 10,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:57"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "I type \"yuvi1\" as username",
+            "result": {
+              "status": "passed",
+              "duration": 76
+            },
+            "line": 11,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:20"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "name": "I type \"yuvi1\" as password",
+            "result": {
+              "status": "passed",
+              "duration": 62
+            },
+            "line": 12,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:26"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "name": "I click login",
+            "result": {
+              "status": "passed",
+              "duration": 56
+            },
+            "line": 13,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:32"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "name": "I wait \"1000\"",
+            "result": {
+              "status": "passed",
+              "duration": 1003
+            },
+            "line": 14,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:38"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "the title is \"Find a Flight: Mercury Tours:\"",
+            "result": {
+              "status": "passed",
+              "duration": 14
+            },
+            "line": 15,
+            "match": {
+              "location": "/Users/matt/Documents/git/RevatureAutomationFramework/nightwatch/features/step_definitions/login.js:42"
+            }
+          }
+        ]
+      }
+    ],
+    "id": "login"
+  }
+]
