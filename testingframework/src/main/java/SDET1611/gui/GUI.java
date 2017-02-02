@@ -25,7 +25,10 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
+import org.w3c.dom.css.RGBColor;
+
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
+import com.steadystate.css.dom.RGBColorImpl;
 
 /**
  * There is code duplicate from UploadPanel.java into this class
@@ -55,7 +58,7 @@ public class GUI extends JFrame{
 		setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setBackground(Color.white);
+		setBackground(new Color(201,203, 255));
 		JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File");
         JMenuItem menuItem = new JMenuItem("Exit");
@@ -74,15 +77,16 @@ public class GUI extends JFrame{
 	        Properties props = new Properties();
 	
 	        props.put("buttonColorLight", "50 230 227");
-	        props.put("buttonColorDark", "14 158 156");
+	        props.put("buttonColorDark", "38 63 255");
 	
 	        props.put("rolloverColorLight", "131 237 242"); 
-	        props.put("rolloverColorDark", "51 177 184"); 
+	        props.put("rolloverColorDark", "25 173 255"); 
 	
 	        // set your theme
 	        SmartLookAndFeel.setCurrentTheme(props);
 	        // select the Look and Feel
 	        UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+	        //com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
 	    }
         catch(Exception ex) {
         	ex.printStackTrace();
@@ -93,10 +97,10 @@ public class GUI extends JFrame{
         setJMenuBar(menuBar);
 		guiTitle = new GUITitle();
 		ckpanel=new CheckBoxPanel();
-		ckpanel.setBackground(Color.white);
+		ckpanel.setBackground(new Color(201,203, 255));
 		runPanels=new RunPanel();
-		runPanels.setBackground(Color.white);
-		guiTitle.setBackground(Color.white);
+		runPanels.setBackground(new Color(201,203, 255));
+		guiTitle.setBackground(new Color(201,203, 255));
 		
 		add(guiTitle, BorderLayout.NORTH);
 		add(ckpanel,BorderLayout.WEST);
@@ -124,7 +128,7 @@ public class GUI extends JFrame{
         
 		JPanel panel = new JPanel();
 		
-	      panel.setBackground(Color.white);
+	      panel.setBackground(new Color(201,203, 255));
 	      panel.setSize(300,300);
 	      GridBagLayout layout = new GridBagLayout();
 	
