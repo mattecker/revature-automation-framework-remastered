@@ -48,6 +48,7 @@ public class GUI extends JFrame{
 		super("Hybrid Testing App");
 		
 		setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setBackground(Color.white);
 		JMenuBar menuBar = new JMenuBar();
