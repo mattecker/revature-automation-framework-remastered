@@ -31,11 +31,12 @@ public class prepareTests {
     	
     	if(drivers!=null){
     	
-	    	Properties p = new Properties();
-	    	File f = new File(System.getProperty("user.dir")+"/src/main/resources/tests.properties");
 	    	
 	    	for(int i = 0; i < drivers.length; i++){
 	    		try{
+	    	    	Properties p = new Properties();
+	    	    	File f = new File(System.getProperty("user.dir")+"/src/main/resources/tests"+i+".properties");
+	    	    	
 	    	    	p.setProperty("OS", OS);
 	    	    	p.setProperty("bit", bit);
 	    			p.setProperty("dataFilePath", dataFilePath);
@@ -50,12 +51,6 @@ public class prepareTests {
 		    		
 		    		TestThread T = new TestThread( drivers[i]+" Thread" );
 					T.start();
-		    		try{
-		    			Thread.sleep(800);
-		    		}catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 	    		}catch(Exception e){
 	    			System.out.println(drivers[i]+" is not installed or cannot be found.");
 	    		}
