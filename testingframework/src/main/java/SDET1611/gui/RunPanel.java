@@ -19,7 +19,7 @@ public class RunPanel extends JPanel implements ActionListener {
 	static private boolean chromeCheckboxValue;
 	static private boolean ieCheckboxValue;
 	static private boolean firefoxCheckboxValue;
-	static private boolean operaCheckboxValue;
+//	static private boolean operaCheckboxValue;
 	
 	static private String keywordSheetText;
 	static private String dataSheetText;
@@ -86,12 +86,12 @@ public class RunPanel extends JPanel implements ActionListener {
 	public boolean getFirefoxCheckboxValue() {
 		return firefoxCheckboxValue;
 	}
-	public void setOperaCheckValue(boolean isChecked) {
-		operaCheckboxValue = isChecked; 
-	}
-	public boolean getOperaCheckValue() {
-		return operaCheckboxValue;
-	}
+//	public void setOperaCheckValue(boolean isChecked) {
+//		operaCheckboxValue = isChecked; 
+//	}
+//	public boolean getOperaCheckValue() {
+//		return operaCheckboxValue;
+//	}
 	
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
@@ -119,7 +119,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		chromeCheckboxValue = getChromeCheckboxValue();
 		ieCheckboxValue = getIECheckboxValue();
 		firefoxCheckboxValue = getFirefoxCheckboxValue();
-		operaCheckboxValue = getOperaCheckValue();
+//		operaCheckboxValue = getOperaCheckValue();
 		
 		String drivers = "";
 		
@@ -132,8 +132,8 @@ public class RunPanel extends JPanel implements ActionListener {
 		if(firefoxCheckboxValue)
 			drivers+="Firefox,";
 		
-		if(operaCheckboxValue)
-			drivers+="Opera,";
+//		if(operaCheckboxValue)
+//			drivers+="Opera,";
 		
 		
 		System.out.println(chromeCheckboxValue);

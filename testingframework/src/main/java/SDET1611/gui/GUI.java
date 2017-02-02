@@ -19,6 +19,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -105,6 +106,11 @@ public class GUI extends JFrame{
 		JLabel propertiesLabel = new JLabel("Properties File");
 		JLabel keywordSheet = new JLabel("Keyword Sheet");
         JLabel dataSheet = new JLabel("Data Sheet");
+        
+        //Add labels for file path display
+        JLabel showKeywordFileLoc = new JLabel("something");
+        JLabel showDataDrivenFileLoc = new JLabel("something");
+        JLabel showPropertiesFileLoc = new JLabel("something");
 		
 		//Add buttons
 		JButton uploadKeywordExcelButton = new JButton("Upload");
@@ -126,6 +132,11 @@ public class GUI extends JFrame{
 	      panel.setLayout(layout);        
 	      GridBagConstraints gbc = new GridBagConstraints();
 	
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 0;
+	      panel.add(showKeywordFileLoc,gbc);
+	      
 	      gbc.fill = GridBagConstraints.HORIZONTAL;
 	      gbc.gridx = 0;
 	      gbc.gridy = 0;
@@ -134,6 +145,11 @@ public class GUI extends JFrame{
 	      gbc.gridx = 3;
 	      gbc.gridy = 0;
 	      panel.add(uploadKeywordExcelButton,gbc); 
+	      
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 1;
+	      panel.add(showDataDrivenFileLoc,gbc);
 	
 	      gbc.fill = GridBagConstraints.HORIZONTAL;
 	      //gbc.ipady = 20;   
@@ -144,6 +160,11 @@ public class GUI extends JFrame{
 	      gbc.gridx = 3;
 	      gbc.gridy =1;       
 	      panel.add(uploadDataExcelButton,gbc);  
+	      
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 2;
+	      panel.add(showPropertiesFileLoc,gbc);
 	
 	      gbc.gridx = 0;
 	      gbc.gridy = 3;      

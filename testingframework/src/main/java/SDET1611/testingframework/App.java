@@ -2,6 +2,8 @@ package SDET1611.testingframework;
 
 import java.io.IOException;
 
+import javax.swing.JScrollPane;
+
 import SDET1611.gui.GUI;
 
 

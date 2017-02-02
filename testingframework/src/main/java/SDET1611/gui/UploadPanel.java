@@ -22,6 +22,10 @@ public class UploadPanel extends JPanel {
 	private JLabel keywordSheetLabel;
 	private JLabel dataSheetLabel;
 	
+	private JLabel showKeywordFile;
+	private JLabel showDataDrivenFile;
+	private JLabel showPropertiesFile;
+	
 	private JButton uploadKeywordExcelButton;
 	private JButton uploadDataExcelButton;
 	private JButton uploadPropertiesButton;
@@ -40,6 +44,11 @@ public class UploadPanel extends JPanel {
 		propertiesLabel = new JLabel("Properties File");
 		keywordSheetLabel = new JLabel("Keyword Sheet");
         dataSheetLabel = new JLabel("Data Sheet");
+        
+        //Display file paths
+        showKeywordFile = new JLabel("something");
+        showDataDrivenFile = new JLabel("something");
+        showPropertiesFile = new JLabel("something");
 		
 		//Create buttons
 		uploadKeywordExcelButton = new JButton("Upload");
@@ -52,10 +61,13 @@ public class UploadPanel extends JPanel {
         
         //Add to panel
 		add(keywordLabel);
+		add(showKeywordFile);//add
 		add(uploadKeywordExcelButton);
 		add(dataLabel);
+		add(showDataDrivenFile);//add
 		add(uploadDataExcelButton);
 		add(propertiesLabel);
+		add(showPropertiesFile);//add
 		add(uploadPropertiesButton);
 		add(keywordSheetLabel);
         add(keywordSheetTextField);

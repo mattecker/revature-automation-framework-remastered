@@ -11,7 +11,7 @@ public class CheckBoxPanel extends JPanel {
 	private JCheckBox chromeCheckBox;
 	private JCheckBox ieCheckBox;
 	private JCheckBox firefoxCheckBox;
-	private JCheckBox operaCheckBox;
+	//private JCheckBox operaCheckBox;
 	
 	public CheckBoxPanel()
 	{
@@ -33,15 +33,15 @@ public class CheckBoxPanel extends JPanel {
         firefoxCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
         firefoxCheckBox.setForeground(Color.gray);
         
-        operaCheckBox=new JCheckBox("Opera");
-        operaCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
-        operaCheckBox.setForeground(Color.gray);
+//        operaCheckBox=new JCheckBox("Opera");
+//        operaCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+//        operaCheckBox.setForeground(Color.gray);
         
 		//Add action listeners
 		chromeCheckBox.addActionListener(new ChromeCheckBoxListener());
 		ieCheckBox.addActionListener(new IECheckBoxListener());
 		firefoxCheckBox.addActionListener(new FirefoxCheckBoxListener());
-		operaCheckBox.addActionListener(new OperaCheckBoxListener());
+//		operaCheckBox.addActionListener(new OperaCheckBoxListener());
 		
 		//Add check boxes to panel
 		add(chromeCheckBox);
@@ -114,22 +114,22 @@ class FirefoxCheckBoxListener implements ActionListener {
 	}
 }
 
-class OperaCheckBoxListener implements ActionListener {
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		boolean isSelected = false;
-		RunPanel runPanel = new RunPanel();
-		
-		JCheckBox checkbox = (JCheckBox)e.getSource();
-		if(checkbox.isSelected()) {
-			isSelected = true;
-			//Opera check box is now selected
-			runPanel.setOperaCheckValue(isSelected);
-		} else {
-			//Opera check box is now unselected
-			runPanel.setOperaCheckValue(isSelected);
-		}
-	}
-}
+//class OperaCheckBoxListener implements ActionListener {
+//
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		
+//		boolean isSelected = false;
+//		RunPanel runPanel = new RunPanel();
+//		
+//		JCheckBox checkbox = (JCheckBox)e.getSource();
+//		if(checkbox.isSelected()) {
+//			isSelected = true;
+//			//Opera check box is now selected
+//			runPanel.setOperaCheckValue(isSelected);
+//		} else {
+//			//Opera check box is now unselected
+//			runPanel.setOperaCheckValue(isSelected);
+//		}
+//	}
+//}
