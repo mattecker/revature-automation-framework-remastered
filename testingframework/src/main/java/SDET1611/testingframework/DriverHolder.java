@@ -1,11 +1,12 @@
 package SDET1611.testingframework;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverHolder {
 	
@@ -109,6 +110,17 @@ public class DriverHolder {
 		return driver;
 	}
 	
+	private static WebDriver getEdgeDriver(){
+		System.setProperty("webdriver.edge.driver",dir+"MicrosoftWebDriver.exe");
+		EdgeDriver driver = new EdgeDriver();
+		return driver;
+	}
+	private static WebDriver getSafariDriver(){
+		System.setProperty("webdriver.safari.driver","/usr/bin/safaridriver");
+		SafariDriver driver = new SafariDriver();
+		return driver;
+	}
+	
 	public static WebDriver getDriver(String OS, String driverString, String bit){
 		switch(driverString){
 	      case "CHROME":
@@ -148,6 +160,8 @@ public class DriverHolder {
 	    		  return DriverHolder.getIEDriver64();
 	    	  else
 	    		  return DriverHolder.getIEDriver32();
+	      case "EDGE":
+	    	  return DriverHolder.getEdgeDriver();
 	      case "OPERA":
 	    	  if(OS.equals("MAC")){
 	    		  return DriverHolder.getOperaDriverMac();
@@ -165,8 +179,7 @@ public class DriverHolder {
 	    			  return DriverHolder.getOperaDriverLinux32();
 	    	  }
 	      case "SAFARI":
-	    	  
-	    	  return null;
+	    	  	return getSafariDriver();
 	      default:
 	    	  return null;  
 	      }
