@@ -139,7 +139,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		System.out.println(chromeCheckboxValue);
 		System.out.println(ieCheckboxValue);
 		System.out.println(firefoxCheckboxValue);
-		System.out.println(operaCheckboxValue);
+//		System.out.println(operaCheckboxValue);
 		
 		System.out.println(drivers);
 		
