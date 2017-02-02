@@ -47,7 +47,7 @@ public class CheckBoxPanel extends JPanel {
 		add(chromeCheckBox);
 		add(ieCheckBox);
 		add(firefoxCheckBox);
-		add(operaCheckBox);
+//		add(operaCheckBox);
 	}
 }
 
