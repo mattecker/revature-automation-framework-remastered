@@ -1,8 +1,7 @@
 package SDET1611.gui;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -22,7 +21,7 @@ public class UploadPanel extends JPanel {
 	private JLabel keywordSheetLabel;
 	private JLabel dataSheetLabel;
 	
-	private JLabel showKeywordFile;
+	static JLabel showKeywordFile;
 	private JLabel showDataDrivenFile;
 	private JLabel showPropertiesFile;
 	
@@ -35,6 +34,7 @@ public class UploadPanel extends JPanel {
 	
 	public UploadPanel()
 	{
+		RunPanel runPanel1 = new RunPanel();//add
 		//Set grid layout
 		setLayout(new GridLayout(3,2));
 		
@@ -46,9 +46,9 @@ public class UploadPanel extends JPanel {
         dataSheetLabel = new JLabel("Data Sheet");
         
         //Display file paths
-        showKeywordFile = new JLabel("something");
-        showDataDrivenFile = new JLabel("something");
-        showPropertiesFile = new JLabel("something");
+//        showKeywordFile = new JLabel(/*runPanel1.getKeywordPath()*/);//add
+//        showDataDrivenFile = new JLabel("something");
+//        showPropertiesFile = new JLabel("something");
 		
 		//Create buttons
 		uploadKeywordExcelButton = new JButton("Upload");
@@ -73,6 +73,9 @@ public class UploadPanel extends JPanel {
         add(keywordSheetTextField);
         add(dataSheetLabel);
         add(dataSheetTextField);
+        
+        //value change listener
+        //showKeywordFile.addActionListener(new ShowKeywordFileListener());
 		
 		// Add an action listeners to the buttons.
 	    uploadKeywordExcelButton.addActionListener(new UploadKeywordExcelListener());
@@ -87,6 +90,7 @@ class UploadKeywordExcelListener implements ActionListener {
 	
 	final JFileChooser fc = new JFileChooser();
 	final RunPanel runPanel = new RunPanel();
+	UploadPanel uploadPanel = new UploadPanel();
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -98,6 +102,8 @@ class UploadKeywordExcelListener implements ActionListener {
 			//Should be keyword excel file
 			File keywordExcelFile = fc.getSelectedFile();
 			runPanel.setKeywordExcelFile(keywordExcelFile);
+			//runPanel.setKeywordPath(keywordExcelFile);//add
+			//UploadPanel.showKeywordFile = new JLabel(runPanel.getKeywordPath());
 		}
 	}
 }
@@ -164,4 +170,3 @@ class DataSheetTextListener implements ActionListener {
 		runPanel.setDataSheetText(input.getText());
 	}
 }
-

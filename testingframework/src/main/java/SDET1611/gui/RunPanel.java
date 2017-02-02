@@ -16,6 +16,10 @@ public class RunPanel extends JPanel implements ActionListener {
 	static private File dataExcelFile;
 	static private File propertiesFile;
 	
+	static private String keywordPath;
+	static private String dataDrivenPath;
+	static private String popertiesPath;
+	
 	static private boolean chromeCheckboxValue;
 	static private boolean ieCheckboxValue;
 	static private boolean firefoxCheckboxValue;
@@ -33,10 +37,15 @@ public class RunPanel extends JPanel implements ActionListener {
 	
 	//Keyword file and sheet methods
 	public void setKeywordExcelFile(File file) {
+		keywordPath = file.getName();
 		keywordExcelFile = file;
 	}
 	public File getKeywordExcelFile() {
 		return keywordExcelFile;
+	}
+	public String getKeywordPath(){
+		System.out.println(keywordPath);
+		return keywordPath;
 	}
 	public void setKeywordSheetText(String kst) {
 		keywordSheetText = kst;
@@ -48,6 +57,10 @@ public class RunPanel extends JPanel implements ActionListener {
 	// Data file and sheet methods
 	public void setDataExcelFile(File file) {
 		dataExcelFile = file;
+		dataDrivenPath = file.getName();
+	}
+	public String getDataDrivenPath(){
+		return dataDrivenPath;
 	}
 	public File getDataExcelFile() {
 		return dataExcelFile;
@@ -62,6 +75,10 @@ public class RunPanel extends JPanel implements ActionListener {
 	//Property file methods
 	public void setPropertiesFile(File file) {
 		propertiesFile = file;
+		popertiesPath = file.getName();
+	}
+	public String getPropertiesFilePath(){
+		return popertiesPath;
 	}
 	public File getPropertiesFile() {
 		return propertiesFile;

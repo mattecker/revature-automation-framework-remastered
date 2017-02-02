@@ -44,6 +44,10 @@ public class GUI extends JFrame{
 	final int WINDOW_WIDTH=700,
 			  WINDOW_HEIGHT=500;
 	
+	private static JLabel showKeywordFileLoc = new JLabel("");
+	private static JLabel showDataDrivenFileLoc = new JLabel("");
+    private static JLabel showPropertiesFileLoc = new JLabel("");
+	
 	public GUI()
 	{
 		super("Hybrid Testing App");
@@ -106,11 +110,6 @@ public class GUI extends JFrame{
 		JLabel propertiesLabel = new JLabel("Properties File");
 		JLabel keywordSheet = new JLabel("Keyword Sheet");
         JLabel dataSheet = new JLabel("Data Sheet");
-        
-        //Add labels for file path display
-        JLabel showKeywordFileLoc = new JLabel("something");
-        JLabel showDataDrivenFileLoc = new JLabel("something");
-        JLabel showPropertiesFileLoc = new JLabel("something");
 		
 		//Add buttons
 		JButton uploadKeywordExcelButton = new JButton("Upload");
@@ -234,6 +233,7 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File keywordExcelFile = fc.getSelectedFile();
 				runPanel.setKeywordExcelFile(keywordExcelFile);
+				showKeywordFileLoc.setText(runPanel.getKeywordPath());
 			}
 			
 			
@@ -255,6 +255,7 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File dataExcelFile = fc.getSelectedFile();
 				runPanel.setDataExcelFile(dataExcelFile);
+				showDataDrivenFileLoc.setText(runPanel.getDataDrivenPath());
 			}	
 		}
 		
@@ -275,6 +276,7 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File propertiesFile = fc.getSelectedFile();
 				runPanel.setPropertiesFile(propertiesFile);
+				showPropertiesFileLoc.setText(runPanel.getPropertiesFilePath());
 			}	
 		}
 		
