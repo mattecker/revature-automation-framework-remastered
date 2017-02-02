@@ -161,6 +161,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		
 		System.out.println(drivers);
 		
+		//TODO Fix this last index out of bound exception error triggered by not selecting a browser.
 		drivers=drivers.substring(0, drivers.lastIndexOf(","));
 		
 		System.out.println(drivers);
@@ -177,8 +178,3 @@ public class RunPanel extends JPanel implements ActionListener {
 		});
 	}
 }
-
-
-	
-	
-

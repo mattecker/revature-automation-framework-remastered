@@ -49,7 +49,7 @@ public class prepareTests {
 		    		TestThread T = new TestThread( drivers[i]+" Thread" );
 					T.start();
 	    		}catch(Exception e){
-	    			System.out.println(drivers[i]+" is not installed or cannot be found.");
+	    			e.printStackTrace();
 	    		}
 	    	} 
 	    	
