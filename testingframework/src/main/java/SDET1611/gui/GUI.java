@@ -19,6 +19,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -42,6 +43,10 @@ public class GUI extends JFrame{
 	private JLabel dataSheetLabel;
 	final int WINDOW_WIDTH=700,
 			  WINDOW_HEIGHT=500;
+	
+	private static JLabel showKeywordFileLoc = new JLabel("");
+	private static JLabel showDataDrivenFileLoc = new JLabel("");
+    private static JLabel showPropertiesFileLoc = new JLabel("");
 	
 	public GUI()
 	{
@@ -126,6 +131,11 @@ public class GUI extends JFrame{
 	      panel.setLayout(layout);        
 	      GridBagConstraints gbc = new GridBagConstraints();
 	
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 0;
+	      panel.add(showKeywordFileLoc,gbc);
+	      
 	      gbc.fill = GridBagConstraints.HORIZONTAL;
 	      gbc.gridx = 0;
 	      gbc.gridy = 0;
@@ -134,6 +144,11 @@ public class GUI extends JFrame{
 	      gbc.gridx = 3;
 	      gbc.gridy = 0;
 	      panel.add(uploadKeywordExcelButton,gbc); 
+	      
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 1;
+	      panel.add(showDataDrivenFileLoc,gbc);
 	
 	      gbc.fill = GridBagConstraints.HORIZONTAL;
 	      //gbc.ipady = 20;   
@@ -144,6 +159,11 @@ public class GUI extends JFrame{
 	      gbc.gridx = 3;
 	      gbc.gridy =1;       
 	      panel.add(uploadDataExcelButton,gbc);  
+	      
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 2;
+	      panel.add(showPropertiesFileLoc,gbc);
 	
 	      gbc.gridx = 0;
 	      gbc.gridy = 3;      
@@ -213,6 +233,7 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File keywordExcelFile = fc.getSelectedFile();
 				runPanel.setKeywordExcelFile(keywordExcelFile);
+				showKeywordFileLoc.setText(runPanel.getKeywordPath());
 			}
 			
 			
@@ -234,6 +255,7 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File dataExcelFile = fc.getSelectedFile();
 				runPanel.setDataExcelFile(dataExcelFile);
+				showDataDrivenFileLoc.setText(runPanel.getDataDrivenPath());
 			}	
 		}
 		
@@ -254,6 +276,7 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File propertiesFile = fc.getSelectedFile();
 				runPanel.setPropertiesFile(propertiesFile);
+				showPropertiesFileLoc.setText(runPanel.getPropertiesFilePath());
 			}	
 		}
 		
