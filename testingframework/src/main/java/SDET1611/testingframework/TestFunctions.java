@@ -8,8 +8,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.openqa.selenium.WebDriver;
 
 public class TestFunctions {
-
 	File home = new File(System.getProperty("user.dir"));
+	
 	/**
 	 * This is just a demo that utilizes the WebOperation object
 	 * 
