@@ -8,8 +8,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.openqa.selenium.WebDriver;
 
 public class TestFunctions {
-
 	File home = new File(System.getProperty("user.dir"));
+	
 	/**
 	 * This is just a demo that utilizes the WebOperation object
 	 * 
@@ -40,6 +40,9 @@ public class TestFunctions {
 		wo.action(p, "go_to_url", "", "", "url");
 		wo.action(p, "input_text", "name", "username", "yuvi1");
 		wo.action(p, "input_text", "name", "password", "yuvi1");
+		
+		// close driver here
+		driver.close();
 	}
 	public void KeywordDrivenLoginTest() throws Exception {
 		
@@ -109,6 +112,9 @@ public class TestFunctions {
 	                System.out.println("New Testcase->"+row.getCell(0).toString() +" Started");
 					
 			}
-		}
+		} // end forloop
+		
+		// close driver here
+		driver.close();
 	}
 }

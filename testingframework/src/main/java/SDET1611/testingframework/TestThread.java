@@ -3,18 +3,18 @@ package SDET1611.testingframework;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 
+
 public class TestThread extends Thread {
 	private Thread t;
 	private String threadName;
 
-	TestThread( String name) {
+	TestThread(String name){
 		threadName = name;
 		System.out.println("Creating " +  threadName );
 	}
 
 	@Override
-	public void run() {
-		
+	public void run(){
 		try {
 			TestListenerAdapter tla = new TestListenerAdapter();
 			TestNG testng = new TestNG();
@@ -22,7 +22,7 @@ public class TestThread extends Thread {
 			//testng.settes
 			testng.addListener(tla);
 			testng.run();
-		}catch (Exception e) {
+		} catch(Exception e){
 			e.printStackTrace();
 			System.out.println("Thread " +  threadName + " interrupted.");
 		}
@@ -30,13 +30,11 @@ public class TestThread extends Thread {
 		System.out.println("Thread " +  threadName + " exiting.");
 	}
 
-	
-	public void start () {
+	public void start(){
 		System.out.println("Starting " +  threadName );
-		if (t == null) {
+		if(t == null){
 			t = new Thread (this, threadName);
-			t.start ();
+			t.start();
 		}
 	}
-	
 }

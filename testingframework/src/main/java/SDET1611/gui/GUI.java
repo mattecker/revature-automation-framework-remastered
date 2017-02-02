@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.Properties;
@@ -19,12 +21,16 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
+import org.w3c.dom.css.RGBColor;
+
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
+import com.steadystate.css.dom.RGBColorImpl;
 
 /**
  * There is code duplicate from UploadPanel.java into this class
@@ -43,13 +49,18 @@ public class GUI extends JFrame{
 	final int WINDOW_WIDTH=700,
 			  WINDOW_HEIGHT=500;
 	
+	private static JLabel showKeywordFileLoc = new JLabel("");
+	private static JLabel showDataDrivenFileLoc = new JLabel("");
+    private static JLabel showPropertiesFileLoc = new JLabel("");
+	
 	public GUI()
 	{
 		super("Hybrid Testing App");
 		
 		setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setBackground(Color.white);
+		setBackground(new Color(201,203, 255));
 		JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File");
         JMenuItem menuItem = new JMenuItem("Exit");
@@ -68,15 +79,16 @@ public class GUI extends JFrame{
 	        Properties props = new Properties();
 	
 	        props.put("buttonColorLight", "50 230 227");
-	        props.put("buttonColorDark", "14 158 156");
+	        props.put("buttonColorDark", "38 63 255");
 	
 	        props.put("rolloverColorLight", "131 237 242"); 
-	        props.put("rolloverColorDark", "51 177 184"); 
+	        props.put("rolloverColorDark", "25 173 255"); 
 	
 	        // set your theme
 	        SmartLookAndFeel.setCurrentTheme(props);
 	        // select the Look and Feel
 	        UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+	        //com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
 	    }
         catch(Exception ex) {
         	ex.printStackTrace();
@@ -87,10 +99,10 @@ public class GUI extends JFrame{
         setJMenuBar(menuBar);
 		guiTitle = new GUITitle();
 		ckpanel=new CheckBoxPanel();
-		ckpanel.setBackground(Color.white);
+		ckpanel.setBackground(new Color(201,203, 255));
 		runPanels=new RunPanel();
-		runPanels.setBackground(Color.white);
-		guiTitle.setBackground(Color.white);
+		runPanels.setBackground(new Color(201,203, 255));
+		guiTitle.setBackground(new Color(201,203, 255));
 		
 		add(guiTitle, BorderLayout.NORTH);
 		add(ckpanel,BorderLayout.WEST);
@@ -118,13 +130,18 @@ public class GUI extends JFrame{
         
 		JPanel panel = new JPanel();
 		
-	      panel.setBackground(Color.white);
+	      panel.setBackground(new Color(201,203, 255));
 	      panel.setSize(300,300);
 	      GridBagLayout layout = new GridBagLayout();
 	
 	      panel.setLayout(layout);        
 	      GridBagConstraints gbc = new GridBagConstraints();
 	
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 0;
+	      panel.add(showKeywordFileLoc,gbc);
+	      
 	      gbc.fill = GridBagConstraints.HORIZONTAL;
 	      gbc.gridx = 0;
 	      gbc.gridy = 0;
@@ -133,6 +150,11 @@ public class GUI extends JFrame{
 	      gbc.gridx = 3;
 	      gbc.gridy = 0;
 	      panel.add(uploadKeywordExcelButton,gbc); 
+	      
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 1;
+	      panel.add(showDataDrivenFileLoc,gbc);
 	
 	      gbc.fill = GridBagConstraints.HORIZONTAL;
 	      //gbc.ipady = 20;   
@@ -143,6 +165,11 @@ public class GUI extends JFrame{
 	      gbc.gridx = 3;
 	      gbc.gridy =1;       
 	      panel.add(uploadDataExcelButton,gbc);  
+	      
+	      gbc.fill = GridBagConstraints.HORIZONTAL;//add
+	      gbc.gridx = 4;
+	      gbc.gridy = 2;
+	      panel.add(showPropertiesFileLoc,gbc);
 	
 	      gbc.gridx = 0;
 	      gbc.gridy = 3;      
@@ -190,8 +217,8 @@ public class GUI extends JFrame{
 	      uploadKeywordExcelButton.addActionListener(new UploadKeywordExcelListener());
 		  uploadDataExcelButton.addActionListener(new UploadDataExcelListener());
 		  uploadPropertiesButton.addActionListener(new UploadPropertiesListener());
-		  keywordSheetTextField.addActionListener(new KeywordSheetTextListener());
-		  dataSheetTextField.addActionListener(new DataSheetTextListener());
+		  keywordSheetTextField.addFocusListener(new KeywordSheetTextListener());
+		  dataSheetTextField.addFocusListener(new DataSheetTextListener());
 		    
 	      add(panel);
 		  setVisible(true);
@@ -212,6 +239,7 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File keywordExcelFile = fc.getSelectedFile();
 				runPanel.setKeywordExcelFile(keywordExcelFile);
+				showKeywordFileLoc.setText(runPanel.getKeywordPath());
 			}
 			
 			
@@ -233,6 +261,7 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File dataExcelFile = fc.getSelectedFile();
 				runPanel.setDataExcelFile(dataExcelFile);
+				showDataDrivenFileLoc.setText(runPanel.getDataDrivenPath());
 			}	
 		}
 		
@@ -253,34 +282,49 @@ public class GUI extends JFrame{
 				//Should be keyword excel file
 				File propertiesFile = fc.getSelectedFile();
 				runPanel.setPropertiesFile(propertiesFile);
+				showPropertiesFileLoc.setText(runPanel.getPropertiesFilePath());
 			}	
 		}
 		
 	}
 	
 
-class KeywordSheetTextListener implements ActionListener {
+class KeywordSheetTextListener implements FocusListener {
 	
 	final RunPanel runPanel = new RunPanel();
-	
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
 		JTextField input = (JTextField)e.getSource();		
 		runPanel.setKeywordSheetText(input.getText());
 		System.out.println("DEBUG--- input text : "+input.getText());
+		
 	}
 	
 	
 }
 
-class DataSheetTextListener implements ActionListener {
+class DataSheetTextListener implements FocusListener {
 	
 	final RunPanel runPanel = new RunPanel();
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void focusGained(FocusEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
 		JTextField input = (JTextField)e.getSource();		
 		runPanel.setDataSheetText(input.getText());
+		
 	}
 }
 

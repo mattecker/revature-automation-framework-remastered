@@ -10,29 +10,26 @@ import org.openqa.selenium.support.ui.Select;
 
 public class WebOperation {
 	
-	
 	WebDriver driver;
 	
-	/**
-	 * @param driver
-	 */
 	public WebOperation(WebDriver driver) {
 		this.driver = driver;
 	}
 	
-
 	/**
-	 * @param p
-	 * @param operation
-	 * @param objectName
-	 * @param objectType
-	 * @param value
+	 * Performs a single action determined by passed parameters
+	 * @param p				A properties object
+	 * @param operation		The name of the operation to be performed
+	 * @param objectName	The name of the web element being interacted with
+	 * @param objectType	The type of the web element being interacted with
+	 * @param value			Additional data to be used depending on the operation / object type
 	 */
 	public boolean action(Properties p, String operation, String objectName, String objectType, String value) {
 		boolean testbool = false;
 		WebElement element;
+		
 		if(operation == null)
-		{operation="";} //protect from null pointers
+			{operation="";} //protect from null pointers
 		else{
 			/*
 			 * This switch statement executes a webDriver operation depending on the keyword column in
@@ -41,10 +38,10 @@ public class WebOperation {
 			switch(operation.toUpperCase()) {
 			case "CLICK":
 				element = driver.findElement(this.getObject(p, objectType, objectName));
-				if(element!=null){
+				if(element != null){
 					element.click();
-					testbool=true;
-				}//else{}//already false
+					testbool = true;
+				}
 				break;
 			case "SELECTBUTTON":
 			case "SELECT BUTTON":
@@ -53,30 +50,30 @@ public class WebOperation {
 			case "SELECTDROPDOWN":
 			case "SELECT_DROPDOWN":
 				element = driver.findElement(this.getObject(p, objectType, objectName));
-				if(element!=null){
+				if(element != null){
 					Select select = new Select(element);
 					select.selectByVisibleText(value);
-					testbool=true;
+					testbool = true;
 				}
 				break;
 			case "DESELECT DROPDOWN":
 			case "DESELECTDROPDOWN":
 			case "DESELECT_DROPDOWN":
 				element = driver.findElement(this.getObject(p, objectType, objectName));
-				if(element!=null){
+				if(element != null){
 					Select select = new Select(element);
 					select.deselectByValue(value);
-					testbool=true;
+					testbool = true;
 				}
 				break;
 			case "DESELECT ALL":
 			case "DESELECTALL":
 			case "DESELECT_ALL":
 				element = driver.findElement(this.getObject(p, objectType, objectName));
-				if(element!=null){
+				if(element != null){
 					Select select = new Select(element);
 					select.deselectAll();
-					testbool=true;
+					testbool = true;
 				}
 				break;
 			case "SELECT RADIO":
@@ -86,20 +83,20 @@ public class WebOperation {
 			case "SELECTCHECKBOX":
 			case "SELECT_CHECKBOX":
 				ArrayList<WebElement> list = (ArrayList<WebElement>) driver.findElements(this.getObject(p, objectType, objectName));
-				if(list!=null){
+				if(list != null){
 					list.get(list.indexOf(value)).click();
-					testbool=true;
+					testbool = true;
 				}
 				break;
 			case "DESELECT CHECKBOX":
 			case "DESELECTCHECKBOX":
 			case "DESELECT_CHECKBOX":
 				ArrayList<WebElement> olist = (ArrayList<WebElement>) driver.findElements(this.getObject(p, objectType, objectName));
-				if(olist!=null){
+				if(olist != null){
 					if(olist.get(olist.indexOf(value)).isSelected())
 						olist.get(olist.indexOf(value)).click();
 					//else already not selected 
-					testbool=true;
+					testbool = true;
 				}
 				break;
 			case "INPUT TEXT":
@@ -109,17 +106,17 @@ public class WebOperation {
 			case "TYPES":
 			case "WRITES":
 				element = driver.findElement(this.getObject(p, objectType, objectName));
-				if(element!=null){
+				if(element != null){
 					element.sendKeys(value);
-					testbool=true;
-				}//else{}//already false
+					testbool = true;
+				}
 				break;
 			case "GO TO URL":
 			case "GO_TO_URL":
 			case "GOTOURL":
-				if(driver!=null){
+				if(driver != null){
 					driver.get(value);
-					testbool=true;
+					testbool = true;
 				}
 				break;
 			case "CHECK TITLE":
@@ -128,13 +125,12 @@ public class WebOperation {
 			case "GET TITLE":
 			case "GET_TITLE":
 			case "GETTITLE":
-				if(driver!=null){
+				if(driver != null){
 					String txt = driver.getTitle().trim();
 					//System.out.println("Debug---  txt = '"+txt+"'  p.getProperty("+objectName+") = '"+p.getProperty(objectName).trim()+"'");
 					if(txt.equals(p.getProperty(objectName).trim())){
-						testbool=true;
+						testbool = true;
 					}
-					//else nothing because testbool is already false
 				}
 				break;
 			case "CHECK URL":
@@ -143,23 +139,22 @@ public class WebOperation {
 			case "GET URL":
 			case "GET_URL":
 			case "GETURL":
-				if(driver!=null){
+				if(driver != null){
 					String txt = driver.getCurrentUrl().trim();
 					//System.out.println("Debug---  txt = '"+txt+"'  p.getProperty("+objectName+") = '"+p.getProperty(objectName).trim()+"'");
 					if(txt.contains(p.getProperty(objectName).trim())){
-						testbool=true;
+						testbool = true;
 					}
-					//else nothing because testbool is already false
 				}
 				break;
 			case "GET TEXT":
 			case "GET_TEXT":
 			case "GETTEXT":
 				element = driver.findElement(this.getObject(p, objectType, objectName));
-				if(element!=null){
+				if(element != null){
 					String txt = element.getText();
-					if(txt==p.getProperty(objectName)){
-						testbool=true;
+					if(txt == p.getProperty(objectName)){
+						testbool = true;
 					}
 				}
 				else{
@@ -168,17 +163,17 @@ public class WebOperation {
 				break;
 			default:
 				//TODO : Unrecognised / unimplemented keyword
-				//driver.
 			}
 		}
 		return testbool;
 	}
 	
 	/**
-	 * @param p
-	 * @param type
-	 * @param value
-	 * @return
+	 * Gets a web element determined by passed parameters
+	 * @param p			A properties object
+	 * @param type		The type of selector to be used to find the element
+	 * @param value		The name or other identifying aspect of the element
+	 * @return			The requested web element
 	 */
 	private By getObject(Properties p, String type, String value) {
 		//System.out.println("DEBUG---PropertyName: " + type + "----DEBUG");
@@ -212,7 +207,6 @@ public class WebOperation {
 			break;
 		default:
 			//TODO
-			
 		}
 		
 		return toBeReturned;

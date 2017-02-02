@@ -16,10 +16,14 @@ public class RunPanel extends JPanel implements ActionListener {
 	static private File dataExcelFile;
 	static private File propertiesFile;
 	
+	static private String keywordPath;
+	static private String dataDrivenPath;
+	static private String popertiesPath;
+	
 	static private boolean chromeCheckboxValue;
 	static private boolean ieCheckboxValue;
 	static private boolean firefoxCheckboxValue;
-	static private boolean operaCheckboxValue;
+//	static private boolean operaCheckboxValue;
 	
 	static private String keywordSheetText;
 	static private String dataSheetText;
@@ -29,14 +33,20 @@ public class RunPanel extends JPanel implements ActionListener {
 		JButton runTestButton = new JButton("Run Test");
 		add(runTestButton);
 		runTestButton.addActionListener(this);
+		
 	}
 	
 	//Keyword file and sheet methods
 	public void setKeywordExcelFile(File file) {
+		keywordPath = file.getName();
 		keywordExcelFile = file;
 	}
 	public File getKeywordExcelFile() {
 		return keywordExcelFile;
+	}
+	public String getKeywordPath(){
+		//System.out.println(keywordPath);
+		return keywordPath;
 	}
 	public void setKeywordSheetText(String kst) {
 		keywordSheetText = kst;
@@ -48,6 +58,10 @@ public class RunPanel extends JPanel implements ActionListener {
 	// Data file and sheet methods
 	public void setDataExcelFile(File file) {
 		dataExcelFile = file;
+		dataDrivenPath = file.getName();
+	}
+	public String getDataDrivenPath(){
+		return dataDrivenPath;
 	}
 	public File getDataExcelFile() {
 		return dataExcelFile;
@@ -62,6 +76,10 @@ public class RunPanel extends JPanel implements ActionListener {
 	//Property file methods
 	public void setPropertiesFile(File file) {
 		propertiesFile = file;
+		popertiesPath = file.getName();
+	}
+	public String getPropertiesFilePath(){
+		return popertiesPath;
 	}
 	public File getPropertiesFile() {
 		return propertiesFile;
@@ -86,12 +104,12 @@ public class RunPanel extends JPanel implements ActionListener {
 	public boolean getFirefoxCheckboxValue() {
 		return firefoxCheckboxValue;
 	}
-	public void setOperaCheckValue(boolean isChecked) {
-		operaCheckboxValue = isChecked; 
-	}
-	public boolean getOperaCheckValue() {
-		return operaCheckboxValue;
-	}
+//	public void setOperaCheckValue(boolean isChecked) {
+//		operaCheckboxValue = isChecked; 
+//	}
+//	public boolean getOperaCheckValue() {
+//		return operaCheckboxValue;
+//	}
 	
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
@@ -119,7 +137,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		chromeCheckboxValue = getChromeCheckboxValue();
 		ieCheckboxValue = getIECheckboxValue();
 		firefoxCheckboxValue = getFirefoxCheckboxValue();
-		operaCheckboxValue = getOperaCheckValue();
+//		operaCheckboxValue = getOperaCheckValue();
 		
 		String drivers = "";
 		
@@ -132,17 +150,18 @@ public class RunPanel extends JPanel implements ActionListener {
 		if(firefoxCheckboxValue)
 			drivers+="Firefox,";
 		
-		if(operaCheckboxValue)
-			drivers+="Opera,";
+//		if(operaCheckboxValue)
+//			drivers+="Opera,";
 		
 		
 		System.out.println(chromeCheckboxValue);
 		System.out.println(ieCheckboxValue);
 		System.out.println(firefoxCheckboxValue);
-		System.out.println(operaCheckboxValue);
+//		System.out.println(operaCheckboxValue);
 		
 		System.out.println(drivers);
 		
+		//TODO Fix this last index out of bound exception error triggered by not selecting a browser.
 		drivers=drivers.substring(0, drivers.lastIndexOf(","));
 		
 		System.out.println(drivers);
@@ -159,8 +178,3 @@ public class RunPanel extends JPanel implements ActionListener {
 		});
 	}
 }
-
-
-	
-	
-

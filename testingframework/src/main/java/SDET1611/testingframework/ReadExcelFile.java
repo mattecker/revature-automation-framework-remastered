@@ -11,24 +11,26 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ReadExcelFile {
 
+	/**
+	 * Reads an excel file and returns a worksheet object
+	 * @param filePath 		The path to the excel file
+	 * @param fileName		The name of the excel file
+	 * @param sheetName		The name of the requested worksheet in the excel file.
+	 * @return				The requested worksheet
+	 * @throws 				IOException If the file cannot be found
+	 */
 	public static Sheet readExcel(String filePath, String fileName, String sheetName) throws IOException {
-		
-		//Get file
 		File file = new File(filePath);
-		//Read file bytes
 		FileInputStream inputStream = new FileInputStream(file);
-		//Create excel workbook
 		Workbook workBook = null;
-		//Get file extension to determine workbook object
 		String fileExtensionName = fileName.substring(fileName.indexOf("."));
-		//Check if extension is .xlsx file (Excel 2007 and up)
-		//Check if extension is .xls file (Excel 2003 and down)
+		
 		if(fileExtensionName.equals(".xlsx")) {
 			workBook = new XSSFWorkbook(inputStream);
 		} else if(fileExtensionName.equals(".xls")) {
 			workBook = new HSSFWorkbook(inputStream);
 		}
-		//Get sheet
+		
 		Sheet sheet = workBook.getSheet(sheetName);
 		
 		return sheet;
