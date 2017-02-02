@@ -21,66 +21,74 @@ public class RunPanel extends JPanel implements ActionListener {
 	static private boolean firefoxCheckboxValue;
 	static private boolean operaCheckboxValue;
 	
+	static private String keywordSheetText;
+	static private String dataSheetText;
+	
 	public RunPanel() {
+		
 		JButton runTestButton = new JButton("Run Test");
 		add(runTestButton);
-		//runTestButton.addActionListener(new runTestListener());
 		runTestButton.addActionListener(this);
 	}
 	
+	//Keyword file and sheet methods
 	public void setKeywordExcelFile(File file) {
 		keywordExcelFile = file;
 	}
-	
-	public void setDataExcelFile(File file) {
-		dataExcelFile = file;
-	}
-	
-	public void setPropertiesFile(File file) {
-		propertiesFile = file;
-	}
-	
 	public File getKeywordExcelFile() {
 		return keywordExcelFile;
 	}
+	public void setKeywordSheetText(String kst) {
+		keywordSheetText = kst;
+	}
+	public String getKeywordSheetText() {
+		return keywordSheetText;
+	}
 	
+	// Data file and sheet methods
+	public void setDataExcelFile(File file) {
+		dataExcelFile = file;
+	}
 	public File getDataExcelFile() {
 		return dataExcelFile;
 	}
+	public void setDataSheetText(String dst) {
+		dataSheetText = dst;
+	}
+	public String getDataSheetText() {
+		return dataSheetText;
+	}
 	
+	//Property file methods
+	public void setPropertiesFile(File file) {
+		propertiesFile = file;
+	}
 	public File getPropertiesFile() {
 		return propertiesFile;
 	}
 	
+	//Check box methods
 	public void setChromeCheckValue(boolean isChecked) {
-		System.out.println("DEBUG--setCheckboxValue " + isChecked);
 		chromeCheckboxValue = isChecked;
 	}
-	
-	public void setIECheckValue(boolean isChecked) {
-		chromeCheckboxValue = isChecked; 
-	}
-	
-	public void setFirefoxCheckValue(boolean isChecked) {
-		chromeCheckboxValue = isChecked; 
-	}
-	
-	public void setOperaCheckValue(boolean isChecked) {
-		chromeCheckboxValue = isChecked; 
-	}
-	
 	public boolean getChromeCheckboxValue() {
 		return chromeCheckboxValue;
 	}
-	
+	public void setIECheckValue(boolean isChecked) {
+		ieCheckboxValue = isChecked; 
+	}
 	public boolean getIECheckboxValue() {
 		return ieCheckboxValue;
 	}
-	
+	public void setFirefoxCheckValue(boolean isChecked) {
+		firefoxCheckboxValue = isChecked; 
+	}
 	public boolean getFirefoxCheckboxValue() {
 		return firefoxCheckboxValue;
 	}
-	
+	public void setOperaCheckValue(boolean isChecked) {
+		operaCheckboxValue = isChecked; 
+	}
 	public boolean getOperaCheckValue() {
 		return operaCheckboxValue;
 	}
@@ -88,13 +96,24 @@ public class RunPanel extends JPanel implements ActionListener {
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
 		
+		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
 		propertiesFile = getPropertiesFile();
 		
-		String keywordSheet = "Sheet2";
-		String dataSheet = "TestSheet";
-		String OS = "WINDOWS";
+		String keywordSheet = getKeywordSheetText();
+		String dataSheet = getDataSheetText();
+		
+		String temp = System.getProperty("os.name");
+		
+		if(temp.contains("Windows")){
+			OS = "WINDOWS";
+		}else if(temp.contains("Mac")){
+			OS = "MAC";
+		}else{
+			OS = "LINUX";
+		}
+		
 		String bit = "64";
 		
 		chromeCheckboxValue = getChromeCheckboxValue();
@@ -117,13 +136,19 @@ public class RunPanel extends JPanel implements ActionListener {
 			drivers+="Opera,";
 		
 		
+		System.out.println(chromeCheckboxValue);
+		System.out.println(ieCheckboxValue);
+		System.out.println(firefoxCheckboxValue);
+		System.out.println(operaCheckboxValue);
+		
+		System.out.println(drivers);
+		
 		drivers=drivers.substring(0, drivers.lastIndexOf(","));
+		
+		System.out.println(drivers);
 		
 		prepareTests.main(new String[] {
 					dataExcelFile.toString().replace("\\", "/"),
-					//"C:/Users/Joe/Documents/Newfolder/testData.xlsx",
-					//"C:/Users/Joe/Documents/Newfolder/testKeyword.xlsx",
-					//"C:/Users/Joe/Documents/Newfolder/test.properties",
 					keywordExcelFile.toString().replace("\\", "/"),
 					propertiesFile.toString().replace("\\", "/"),
 					keywordSheet,
@@ -132,9 +157,6 @@ public class RunPanel extends JPanel implements ActionListener {
 					bit,
 					drivers.toString()
 		});
-		
-		System.out.println("DEBUG--chromeCheckboxValue " + chromeCheckboxValue);
-		
 	}
 }
 

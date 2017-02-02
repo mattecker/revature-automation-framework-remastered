@@ -7,11 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class CheckBoxPanel extends JPanel {
-	public String CHROME= "Chrome";
-	public String IE="IE";
-	public String FIREFOX= "FireFox";
-	public String OPERA="Opera";
-	
+
 	private JCheckBox chromeCheckBox;
 	private JCheckBox ieCheckBox;
 	private JCheckBox firefoxCheckBox;
@@ -19,25 +15,40 @@ public class CheckBoxPanel extends JPanel {
 	
 	public CheckBoxPanel()
 	{
+		
+		//Set layout of panel
 		setLayout(new GridLayout(4,1));
-		chromeCheckBox=new JCheckBox("Chrome");
-		ieCheckBox = new JCheckBox("IE");
-		firefoxCheckBox= new JCheckBox("Firefox");
-		operaCheckBox=new JCheckBox("opera");
 		setBorder(BorderFactory.createTitledBorder("Browsers"));
 		
-		add(chromeCheckBox);
-		add(ieCheckBox);
-		add(firefoxCheckBox);
-		add(operaCheckBox);
-		
+		setLayout(new GridLayout(4,1));
+        chromeCheckBox=new JCheckBox("Chrome");
+        chromeCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        chromeCheckBox.setForeground(Color.gray);
+        
+        ieCheckBox = new JCheckBox("IE");
+        ieCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        ieCheckBox.setForeground(Color.gray);
+        
+        firefoxCheckBox= new JCheckBox("Firefox");
+        firefoxCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        firefoxCheckBox.setForeground(Color.gray);
+        
+        operaCheckBox=new JCheckBox("Opera");
+        operaCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        operaCheckBox.setForeground(Color.gray);
+        
+		//Add action listeners
 		chromeCheckBox.addActionListener(new ChromeCheckBoxListener());
 		ieCheckBox.addActionListener(new IECheckBoxListener());
 		firefoxCheckBox.addActionListener(new FirefoxCheckBoxListener());
 		operaCheckBox.addActionListener(new OperaCheckBoxListener());
 		
+		//Add check boxes to panel
+		add(chromeCheckBox);
+		add(ieCheckBox);
+		add(firefoxCheckBox);
+		add(operaCheckBox);
 	}
-	
 }
 
 class ChromeCheckBoxListener implements ActionListener {
@@ -48,15 +59,14 @@ class ChromeCheckBoxListener implements ActionListener {
 		boolean isSelected = false;
 		RunPanel runPanel = new RunPanel();
 		
-		// TODO Auto-generated method stub
 		JCheckBox checkbox = (JCheckBox)e.getSource();
 		if(checkbox.isSelected()) {
-			System.out.println("DEBUG--Chrome checkbox is selected");
 			isSelected = true;
+			//Chrome check box is now selected
 			runPanel.setChromeCheckValue(isSelected);
 			
 		} else {
-			System.out.println("DEBUG--Chrome checkbox is  not selected");
+			//Chrome check box is now unselected
 			runPanel.setChromeCheckValue(isSelected);
 		}
 	}
@@ -68,18 +78,17 @@ class IECheckBoxListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		boolean isSelected;
+		boolean isSelected = false;
+		RunPanel runPanel = new RunPanel();
 		
-		// TODO Auto-generated method stub
 		JCheckBox checkbox = (JCheckBox)e.getSource();
 		if(checkbox.isSelected()) {
-			System.out.println("DEBUG--IE checkbox is selected");
 			isSelected = true;
-			RunPanel runPanel = new RunPanel();
+			//IE check box is now selected
 			runPanel.setIECheckValue(isSelected);
-			
 		} else {
-			System.out.println("DEBUG--IE checkbox is not selected");
+			//IE check box is now unselected
+			runPanel.setIECheckValue(isSelected);
 		}
 	}
 	
@@ -90,18 +99,17 @@ class FirefoxCheckBoxListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		boolean isSelected;
-		
-		// TODO Auto-generated method stub
+		boolean isSelected = false;
+		RunPanel runPanel = new RunPanel();
+
 		JCheckBox checkbox = (JCheckBox)e.getSource();
 		if(checkbox.isSelected()) {
-			System.out.println("DEBUG--Firefox checkbox is selected");
 			isSelected = true;
-			RunPanel runPanel = new RunPanel();
+			//Firefox check box is now selected
 			runPanel.setFirefoxCheckValue(isSelected);
-			
 		} else {
-			System.out.println("DEBUG--Firefox checkbox is not selected");
+			//Firefox check box is now unselected
+			runPanel.setFirefoxCheckValue(isSelected);
 		}
 	}
 }
@@ -111,19 +119,17 @@ class OperaCheckBoxListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		boolean isSelected;
+		boolean isSelected = false;
+		RunPanel runPanel = new RunPanel();
 		
-		// TODO Auto-generated method stub
 		JCheckBox checkbox = (JCheckBox)e.getSource();
 		if(checkbox.isSelected()) {
-			System.out.println("DEBUG--Opera checkbox is selected");
 			isSelected = true;
-			RunPanel runPanel = new RunPanel();
+			//Opera check box is now selected
 			runPanel.setOperaCheckValue(isSelected);
-			
 		} else {
-			System.out.println("DEBUG--Opera checkbox is not selected");
+			//Opera check box is now unselected
+			runPanel.setOperaCheckValue(isSelected);
 		}
 	}
-	
 }
