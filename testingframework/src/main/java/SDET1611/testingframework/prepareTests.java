@@ -28,8 +28,6 @@ public class prepareTests {
     	
 
     	if(drivers != null){
-        Properties p = new Properties();
-	    	File f = new File(System.getProperty("user.dir")+"/src/main/resources/tests.properties");
 	    	
 	    	for(int i = 0; i < drivers.length; i++){
 	    		try{
