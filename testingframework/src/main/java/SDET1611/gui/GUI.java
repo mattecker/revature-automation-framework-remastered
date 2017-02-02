@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.Properties;
@@ -211,8 +213,8 @@ public class GUI extends JFrame{
 	      uploadKeywordExcelButton.addActionListener(new UploadKeywordExcelListener());
 		  uploadDataExcelButton.addActionListener(new UploadDataExcelListener());
 		  uploadPropertiesButton.addActionListener(new UploadPropertiesListener());
-		  keywordSheetTextField.addActionListener(new KeywordSheetTextListener());
-		  dataSheetTextField.addActionListener(new DataSheetTextListener());
+		  keywordSheetTextField.addFocusListener(new KeywordSheetTextListener());
+		  dataSheetTextField.addFocusListener(new DataSheetTextListener());
 		    
 	      add(panel);
 		  setVisible(true);
@@ -283,28 +285,42 @@ public class GUI extends JFrame{
 	}
 	
 
-class KeywordSheetTextListener implements ActionListener {
+class KeywordSheetTextListener implements FocusListener {
 	
 	final RunPanel runPanel = new RunPanel();
-	
+
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
 		JTextField input = (JTextField)e.getSource();		
 		runPanel.setKeywordSheetText(input.getText());
 		System.out.println("DEBUG--- input text : "+input.getText());
+		
 	}
 	
 	
 }
 
-class DataSheetTextListener implements ActionListener {
+class DataSheetTextListener implements FocusListener {
 	
 	final RunPanel runPanel = new RunPanel();
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void focusGained(FocusEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void focusLost(FocusEvent e) {
 		JTextField input = (JTextField)e.getSource();		
 		runPanel.setDataSheetText(input.getText());
+		
 	}
 }
 
