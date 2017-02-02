@@ -7,9 +7,7 @@ import java.util.Properties;
 
 public class prepareTests {
 	
-    public static void main( String[] args ) 
-    {
-    	
+    public static void main(String[] args){
     	String dataFilePath = args[0];
     	String keywordFilePath = args[1];
     	String propertiesFilePath = args[2];
@@ -28,9 +26,7 @@ public class prepareTests {
     	System.out.println(args[6]);
     	System.out.println(args[7]);
     	
-    	
-    	if(drivers!=null){
-    	
+    	if(drivers != null){
 	    	Properties p = new Properties();
 	    	File f = new File(System.getProperty("user.dir")+"/src/main/resources/tests.properties");
 	    	

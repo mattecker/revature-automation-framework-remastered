@@ -63,7 +63,6 @@ public class HybridTest {
 	 */
 	@BeforeSuite
 	public void setUp() throws IOException{
-		
 		driver = DriverHolder.getDriver(OSName, driverName, Bit);
 		WebOp = new WebOperation(driver);
 		
@@ -86,14 +85,12 @@ public class HybridTest {
 	 * @throws AssertionError When a test has failed this error gets thrown.
 	 */
 	@Test(dataProvider="hybridData")
-	public void allTests(String testCaseName, String keyword, String objectName, String objectType, String value) throws AssertionError {
-		
+	public void allTests(String testCaseName, String keyword, String objectName, String objectType, String value) throws AssertionError {	
 		try{
 			Assert.assertEquals(WebOp.action(objectProperties, keyword, objectName, objectType, value), true, "Success at "+testCaseName + " " +keyword);
 		}catch(AssertionError e){
 			Assert.fail("Failed at "+testCaseName + " " +keyword); //TODO make better failure message?
 		}
-		
 	}
 		
 	/**
@@ -144,7 +141,6 @@ public class HybridTest {
 	 */
 	@DataProvider(name="hybridData")
 	public Object[][] getDataFromProvider() throws IOException {
-		
 		//List of Object[] that will contain testing values for the action in the @test
 		ArrayList<Object[]> testingValues = new ArrayList<Object[]>();
 		
@@ -155,7 +151,6 @@ public class HybridTest {
 		
 		//Temp variable for storing the scenario name for each step in a scenario
 		String scenarioName = "";
-		
 		
 		for(int s = 0; s < keywordSheetName.length; s++){
 			keywordSheet = ReadExcelFile.readExcel(KeywordFilePath, KeywordFileName, keywordSheetName[s]);
