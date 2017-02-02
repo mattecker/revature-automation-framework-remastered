@@ -11,7 +11,7 @@ public class GUITitle extends JPanel {
 	{
 		JLabel TestTitle= new JLabel("Hybrid Testing App");
         TestTitle.setFont(new Font("Serif", Font.BOLD, 35));
-        TestTitle.setForeground(Color.GRAY);
+        TestTitle.setForeground(Color.black);
         add(TestTitle);
 	}
 }
