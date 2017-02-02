@@ -16,7 +16,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class HybridTest {
-	
+	static int threadCount = 0; //tests.properties count
 	WebDriver driver;
 	private String OSName;
 	private String driverName;
@@ -41,7 +41,7 @@ public class HybridTest {
 	public HybridTest() throws IOException{
 		//TODO Set up to test all available drivers
 		Properties p = new Properties();
-		p.load(new FileInputStream(new File(home+"/src/main/resources/tests.properties")));
+		p.load(new FileInputStream(new File(home+"/src/main/resources/tests"+threadCount+++".properties")));
 		driverName = p.getProperty("driver");
 		OSName = p.getProperty("OS");
 		Bit = p.getProperty("bit");
