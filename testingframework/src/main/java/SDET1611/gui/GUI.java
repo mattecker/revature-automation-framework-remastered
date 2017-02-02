@@ -82,7 +82,8 @@ public class GUI extends JFrame{
 	        // set your theme
 	        SmartLookAndFeel.setCurrentTheme(props);
 	        // select the Look and Feel
-	        UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+	        //com.jtattoo.plaf.smart.SmartLookAndFeel
 	    }
         catch(Exception ex) {
         	ex.printStackTrace();
