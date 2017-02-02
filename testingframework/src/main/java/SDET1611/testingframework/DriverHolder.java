@@ -1,5 +1,7 @@
 package SDET1611.testingframework;
 
+import java.io.File;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -15,7 +17,7 @@ import org.openqa.selenium.safari.SafariDriver;
  */
 public class DriverHolder {
 	
-	final private static String dir = "src/main/resources/Drivers/";
+	final private static String dir = "src"+File.separator+"main"+File.separator+"resources"+File.separator+"Drivers"+File.separator;
 	
 	// Get Linux x32 Google Chrome Driver
 	private static WebDriver getChromeDriverLinux32(){
