@@ -21,6 +21,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -30,9 +32,9 @@ import com.jtattoo.plaf.smart.SmartLookAndFeel;
 import SDET1611.testingframework.ReadExcelFile;
 
 /**
- * There is code duplicate from UploadPanel.java into this class
- * So styling can be implemented to the upload panel.
- * It needs some refactoring but the code works.
+ * There is code duplicate from UploadPanel.java into this class So styling can
+ * be implemented to the upload panel. It needs some refactoring but the code
+ * works.
  *
  */
 public class GUI extends JFrame{
@@ -49,15 +51,17 @@ public class GUI extends JFrame{
 	private static JLabel showDataDrivenFileLoc = new JLabel("");
     private static JLabel showPropertiesFileLoc = new JLabel("");*/
 	private static JLabel showHybridFileLoc = new JLabel("");
-	
-	public GUI()
-	{
+
+	private static JLabel keySheetExists = new JLabel("");
+	private static JLabel dataSheetExists = new JLabel("");
+
+	public GUI() {
 		super("Hybrid Testing App");
-		
-		setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
+
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setBackground(new Color(201,203, 255));
+		setBackground(new Color(201, 203, 255));
 		JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File");
         JMenuItem menuItem = new JMenuItem("Exit");
@@ -98,9 +102,33 @@ public class GUI extends JFrame{
 		runPanels.setBackground(new Color(201,203, 255));
 		guiTitle.setBackground(new Color(201,203, 255));
 		
+		// load Numbus UI
+		try {
+			loadNimbus();
+		} catch (ClassNotFoundException |
+				 InstantiationException |
+				 IllegalAccessException |
+				 UnsupportedLookAndFeelException e) {
+			// e.printStackTrace();
+
+			// load old UI if nimbus isn't available
+			System.out.println("Nimbus UI not found or failed to load.");
+			loadBackupUI();
+		}
+		
+		menu.add(menuItem);
+		menuBar.add(menu);
+		setJMenuBar(menuBar);
+		guiTitle = new GUITitle();
+		ckpanel = new CheckBoxPanel();
+		ckpanel.setBackground(new Color(201, 203, 255));
+		runPanels = new RunPanel();
+		runPanels.setBackground(new Color(201, 203, 255));
+		guiTitle.setBackground(new Color(201, 203, 255));
+
 		add(guiTitle, BorderLayout.NORTH);
-		add(ckpanel,BorderLayout.WEST);
-		//add(td, BorderLayout.WEST);
+		add(ckpanel, BorderLayout.WEST);
+		// add(td, BorderLayout.WEST);
 		add(runPanels, BorderLayout.SOUTH);
 		//JLabel keywordLabel = new JLabel("Keyword driven File");
 		
@@ -234,14 +262,14 @@ public class GUI extends JFrame{
 	/*class UploadKeywordExcelListener implements ActionListener {
 		final JFileChooser fc = new JFileChooser();
 		final RunPanel runPanel = new RunPanel();
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//Get return value
 			int returnVal = fc.showOpenDialog(fc);
-			//If success then get file
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				//Should be keyword excel file
+			// If success then get file
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				// Should be keyword excel file
 				File keywordExcelFile = fc.getSelectedFile();
 				runPanel.setKeywordExcelFile(keywordExcelFile);
 				showKeywordFileLoc.setText(runPanel.getKeywordPath());
@@ -252,39 +280,38 @@ public class GUI extends JFrame{
 	class UploadDataExcelListener implements ActionListener {
 		final JFileChooser fc = new JFileChooser();
 		final RunPanel runPanel = new RunPanel();
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//Get return value
 			int returnVal = fc.showOpenDialog(fc);
-			//If success then get file
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				//Should be keyword excel file
+			// If success then get file
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				// Should be keyword excel file
 				File dataExcelFile = fc.getSelectedFile();
 				runPanel.setDataExcelFile(dataExcelFile);
 				showDataDrivenFileLoc.setText(runPanel.getDataDrivenPath());
-			}	
+			}
 		}
 	}
 
 	class UploadPropertiesListener implements ActionListener {
 		final JFileChooser fc = new JFileChooser();
 		final RunPanel runPanel = new RunPanel();
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//Get return value
 			int returnVal = fc.showOpenDialog(fc);
-			//If success then get file
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				//Should be keyword excel file
+			// If success then get file
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				// Should be keyword excel file
 				File propertiesFile = fc.getSelectedFile();
 				runPanel.setPropertiesFile(propertiesFile);
 				showPropertiesFileLoc.setText(runPanel.getPropertiesFilePath());
-			}	
+			}
 		}
 	}
-	
 
 	class KeywordSheetTextListener implements FocusListener {
 		final RunPanel runPanel = new RunPanel();
@@ -353,6 +380,39 @@ public class GUI extends JFrame{
 					exception.printStackTrace();
 				}
 			}
+		}
+	}
+
+	public void loadNimbus() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				UIManager.setLookAndFeel(info.getClassName());
+				break;
+			}
+		}
+	}
+	public void loadBackupUI() {
+		try {
+			// old UI
+			Properties props = new Properties();
+	
+			props.put("buttonColorLight", "50 230 227");
+			props.put("buttonColorDark", "38 63 255");
+	
+			props.put("rolloverColorLight", "131 237 242");
+			props.put("rolloverColorDark", "25 173 255");
+	
+			// set your theme
+			SmartLookAndFeel.setCurrentTheme(props);
+			// select the Look and Feel
+			UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+			// com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
+		} catch (ClassNotFoundException |
+				 InstantiationException |
+				 IllegalAccessException	|
+				 UnsupportedLookAndFeelException e) {
+			//e.printStackTrace();
+			System.out.println("Default UI has failed to laod.");
 		}
 	}
 }

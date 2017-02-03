@@ -314,17 +314,17 @@ public class HybridTest {
 	}
 	
 	public void setPropertiesPath(){
-		PropertiesFilePath = home.getAbsolutePath()+"/src/test/resources/TestData/test.properties";
+//		PropertiesFilePath = home.getAbsolutePath()+"/src/test/resources/TestData/test.properties";
 		PropertiesFileName =  getFileName(PropertiesFilePath);
 	}
 	
 	public void setKeywordPath(){
-		KeywordFilePath =  home.getAbsolutePath()+"/src/test/resources/TestData/testKeyword.xlsx";
+//		KeywordFilePath =  home.getAbsolutePath()+"/src/test/resources/TestData/testKeyword.xlsx";
 		KeywordFileName =  getFileName(KeywordFilePath);
 	}
 	
 	public void setDataPath(){
-		DataFilePath =  home.getAbsolutePath()+"/src/test/resources/TestData/testData.xlsx";
+//		DataFilePath =  home.getAbsolutePath()+"/src/test/resources/TestData/testData.xlsx";
 		DataFileName =  getFileName(DataFilePath);
 	}
 	
