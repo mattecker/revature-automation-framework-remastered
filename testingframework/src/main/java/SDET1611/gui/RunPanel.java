@@ -28,6 +28,9 @@ public class RunPanel extends JPanel implements ActionListener {
 	static private String keywordSheetText;
 	static private String dataSheetText;
 	
+	private static String keyExist;
+	private static String dataExist;
+	
 	public RunPanel() {
 		
 		JButton runTestButton = new JButton("Run Test");
@@ -104,6 +107,20 @@ public class RunPanel extends JPanel implements ActionListener {
 	public boolean getFirefoxCheckboxValue() {
 		return firefoxCheckboxValue;
 	}
+	
+	public void setKeySheetExists(String exists){
+		keyExist = exists;
+	}
+	public String getKeySheetExists(){
+		return keyExist;
+	}
+	public void setDataSheetExists(String exists){
+		dataExist = exists;
+	}
+	public String getDataSheetExists(){
+		return dataExist;
+	}
+	
 //	public void setOperaCheckValue(boolean isChecked) {
 //		operaCheckboxValue = isChecked; 
 //	}
