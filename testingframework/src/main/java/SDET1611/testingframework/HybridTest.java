@@ -39,23 +39,15 @@ public class HybridTest {
 	WebOperation WebOp;
 	
 	public HybridTest() throws IOException{
-		//TODO Set up to test all available drivers
-		Properties p = new Properties();
-		p.load(new FileInputStream(new File(home+"/src/main/resources/tests"+threadCount+++".properties")));
-		driverName = p.getProperty("driver");
-		OSName = p.getProperty("OS");
-		Bit = p.getProperty("bit");
-		setPropertiesPath(p.getProperty("propertiesFilePath").replace("\\", ""));
-		setKeywordPath(p.getProperty("keywordFilePath").replace("\\", ""));
-		setDataPath(p.getProperty("dataFilePath").replace("\\", ""));
+		driverName = PropObj.getDriver();
+		OSName = PropObj.OS;
+		Bit = PropObj.bit;
+		setPropertiesPath(PropObj.propertiesFilePath.replace("\\", ""));
+		setKeywordPath(PropObj.keywordFilePath.replace("\\", ""));
+		setDataPath(PropObj.dataFilePath.replace("\\", ""));
 		
-		keywordSheetName = p.getProperty("keywordSheetNames").split(",");
-		dataSheetName = p.getProperty("dataSheetNames").split(",");
-		
-		System.out.println("DEBUG ---- key sheet name 1 --> "+keywordSheetName[0]);
-		System.out.println("DEBUG ---- data sheet name 1 --> "+dataSheetName[0]);
-		
-		//driver = DriverHolder.getChromeDriver();
+		keywordSheetName = PropObj.keywordSheetNames.split(",");
+		dataSheetName = PropObj.dataSheetNames.split(",");
 	}
 
 	/**
