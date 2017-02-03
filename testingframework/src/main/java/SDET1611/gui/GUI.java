@@ -358,6 +358,7 @@ public class GUI extends JFrame{
 	public void loadNimbus() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
+//				UIManager.put("nimbusBlueGrey", new Color(0, 0, 255));
 				UIManager.setLookAndFeel(info.getClassName());
 				break;
 			}
