@@ -40,6 +40,7 @@ public class HybridTest {
 	
 	public HybridTest() throws IOException{
 		driverName = PropObj.getDriver();
+		Thread.currentThread().setName(driverName);
 		OSName = PropObj.OS;
 		Bit = PropObj.bit;
 		setPropertiesPath(PropObj.propertiesFilePath.replace("\\", ""));
