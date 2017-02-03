@@ -88,7 +88,9 @@ public class HybridTest {
 	public void allTests(String testCaseName, String keyword, String objectName, String objectType, String value) throws AssertionError {	
 		try{
 			Assert.assertEquals(WebOp.action(objectProperties, keyword, objectName, objectType, value), true, "Success at "+testCaseName + " " +keyword);
+			System.out.println("Success at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 		}catch(AssertionError e){
+			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 			Assert.fail("Failed at "+testCaseName + " " +keyword); //TODO make better failure message?
 		}
 	}
