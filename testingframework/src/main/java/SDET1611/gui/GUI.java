@@ -74,34 +74,6 @@ public class GUI extends JFrame{
             }
         });
         
-        try {
-	        Properties props = new Properties();
-	
-	        props.put("buttonColorLight", "50 230 227");
-	        props.put("buttonColorDark", "38 63 255");
-	
-	        props.put("rolloverColorLight", "131 237 242"); 
-	        props.put("rolloverColorDark", "25 173 255"); 
-	
-	        // set your theme
-	        SmartLookAndFeel.setCurrentTheme(props);
-	        // select the Look and Feel
-	        UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-	        //com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
-	    } catch(Exception ex){
-        	ex.printStackTrace();
-        }
-        
-        menu.add(menuItem);
-        menuBar.add(menu);
-        setJMenuBar(menuBar);
-		guiTitle = new GUITitle();
-		ckpanel=new CheckBoxPanel();
-		ckpanel.setBackground(new Color(201,203, 255));
-		runPanels=new RunPanel();
-		runPanels.setBackground(new Color(201,203, 255));
-		guiTitle.setBackground(new Color(201,203, 255));
-		
 		// load Numbus UI
 		try {
 			loadNimbus();
@@ -386,6 +358,7 @@ public class GUI extends JFrame{
 	public void loadNimbus() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
+//				UIManager.put("nimbusBlueGrey", new Color(0, 0, 255));
 				UIManager.setLookAndFeel(info.getClassName());
 				break;
 			}
