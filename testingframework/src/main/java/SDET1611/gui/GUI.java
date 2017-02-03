@@ -53,6 +53,9 @@ public class GUI extends JFrame {
 	private static JLabel showKeywordFileLoc = new JLabel("");
 	private static JLabel showDataDrivenFileLoc = new JLabel("");
 	private static JLabel showPropertiesFileLoc = new JLabel("");
+	
+	private static JLabel keySheetExists = new JLabel("");
+	private static JLabel dataSheetExists = new JLabel("");
 
 	public GUI() {
 		super("Hybrid Testing App");
@@ -295,7 +298,8 @@ public class GUI extends JFrame {
 			JTextField input = (JTextField) e.getSource();
 			runPanel.setKeywordSheetText(input.getText());
 			System.out.println("DEBUG--- input text : " + input.getText());
-
+			//upload if the sheet exists
+			keySheetExists.setText(runPanel.getKeySheetExists());
 		}
 
 	}
@@ -314,7 +318,8 @@ public class GUI extends JFrame {
 		public void focusLost(FocusEvent e) {
 			JTextField input = (JTextField) e.getSource();
 			runPanel.setDataSheetText(input.getText());
-
+			//upload if the sheet exists
+			dataSheetExists.setText(runPanel.getDataSheetExists());
 		}
 	}
 
