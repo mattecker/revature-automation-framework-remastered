@@ -8,7 +8,7 @@ public class TestThread extends Thread {
 	private Thread t;
 	private String threadName;
 
-	TestThread(String name){
+	public TestThread(String name){
 		threadName = name;
 		System.out.println("Creating " +  threadName );
 	}

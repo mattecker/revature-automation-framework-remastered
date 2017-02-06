@@ -59,8 +59,8 @@ public class HybridTest {
 		Bit = testInfo[6];
 		System.out.println(Bit);
 		
-		// TODO: This needs to be called from i to getDrivers().length
-		driverName = testProp.getDrivers()[0].toUpperCase(); // Only called once in @BeforeSuite
+		System.out.println(Thread.currentThread().getName().toUpperCase());
+		driverName =  Thread.currentThread().getName().toUpperCase();
 	}
 
 	/**
@@ -97,7 +97,9 @@ public class HybridTest {
 			System.out.println("Success at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 		}catch(AssertionError e){
 			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
-			Assert.fail("ASSERT FAIL: Failed at "+testCaseName + " " +keyword); //TODO make better failure message?
+			Assert.fail("Failed at "+testCaseName + " " +keyword); //TODO make better failure message?
+		}catch(InvalidObjectSelectorException e){
+			Assert.fail(e.getMessage());
 		}
 	}
 		
