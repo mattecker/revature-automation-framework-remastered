@@ -118,8 +118,6 @@ public class GUI extends JFrame{
 		JButton uploadDataExcelButton = new JButton("Upload");
 		JButton uploadPropertiesButton = new JButton("Upload");*/
 		JButton uploadHybridFilesButton = new JButton("Upload");
-		
-		JButton ResetTest = new JButton("Reset");
 	
 		//Add textfields
         /*JTextField keywordSheetTextField = new JTextField(10);
@@ -217,10 +215,6 @@ public class GUI extends JFrame{
 	    gbc.gridx = 4;
 	    gbc.gridy = 0;
 	    panel.add(showHybridFileLoc,gbc);
-	    
-	    gbc.gridx = 3;
-	    gbc.gridy = 2;
-	    panel.add(ResetTest,gbc);
 	      
 		/*keywordSheetLabel = new JLabel("Keyword Sheet");
 	    dataSheetLabel = new JLabel("Data Sheet");
@@ -233,8 +227,6 @@ public class GUI extends JFrame{
 		keywordSheetTextField.addFocusListener(new KeywordSheetTextListener());
 		dataSheetTextField.addFocusListener(new DataSheetTextListener());*/
 	    uploadHybridFilesButton.addActionListener(new uploadHybridTestsListener());
-	    
-	    ResetTest.addActionListener(new ResetTestListener());
 		    
 	    add(panel);
 		setVisible(true);
@@ -396,20 +388,5 @@ public class GUI extends JFrame{
 			//e.printStackTrace();
 			System.out.println("Default UI has failed to laod.");
 		}
-	}
-	
-	class ResetTestListener implements ActionListener{
-
-		RunPanel runPanel = new RunPanel();
-		PropObj po = new PropObj();
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			showHybridFileLoc.setText("");
-			po.setInitCount(0);
-			
-		}
-		
 	}
 }

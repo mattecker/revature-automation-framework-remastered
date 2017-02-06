@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
+import SDET1611.testingframework.PropObj;
 import SDET1611.testingframework.prepareTests;
 
 public class RunPanel extends JPanel implements ActionListener {
@@ -131,6 +132,8 @@ public class RunPanel extends JPanel implements ActionListener {
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
 		
+		PropObj po = new PropObj();
+		
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
@@ -193,5 +196,7 @@ public class RunPanel extends JPanel implements ActionListener {
 					bit,
 					drivers.toString()
 		});
+		
+		po.setInitCount(0);
 	}
 }
