@@ -56,16 +56,6 @@ public class GUI extends JFrame{
 	private static JLabel keySheetExists = new JLabel("");
 	private static JLabel dataSheetExists = new JLabel("");
 
-	/*private static String showTestResults = "";
-	private static JLabel showResults = new JLabel(showTestResults);
-	
-	public void setShowResults(String testResults){
-		showTestResults = testResults;
-	}
-	public String getShowResults() {
-		return showTestResults;
-	}*/
-	
 	public GUI() {
 		super("Hybrid Testing App");
 
@@ -181,6 +171,7 @@ public class GUI extends JFrame{
 	    gbc.fill = GridBagConstraints.HORIZONTAL;
 	    //gbc.gridwidth = 2;
 	    panel.add(keywordSheet,gbc);  
+<<<<<<< HEAD
 	      
 	    gbc.gridx = 3;
 	    gbc.gridy = 2;      
@@ -188,6 +179,15 @@ public class GUI extends JFrame{
 	    //gbc.gridwidth = 2;
 	    panel.add(uploadPropertiesButton,gbc);  
 	      
+=======
+	      
+	    gbc.gridx = 3;
+	    gbc.gridy = 2;      
+	    gbc.fill = GridBagConstraints.HORIZONTAL;
+	    //gbc.gridwidth = 2;
+	    panel.add(uploadPropertiesButton,gbc);  
+	      
+>>>>>>> 0876cc20ddd8dc536a25928039e6559f97e814c5
 	    //Keyword Sheet
 	    gbc.gridx = 0;
 	    gbc.gridy = 2;      
@@ -225,10 +225,6 @@ public class GUI extends JFrame{
 	    gbc.gridx = 4;
 	    gbc.gridy = 0;
 	    panel.add(showHybridFileLoc,gbc);
-	    
-	    //gbc.gridx = 0;
-	    //gbc.gridy = 1;
-	    //panel.add(showResults,gbc);
 	      
 		/*keywordSheetLabel = new JLabel("Keyword Sheet");
 	    dataSheetLabel = new JLabel("Data Sheet");

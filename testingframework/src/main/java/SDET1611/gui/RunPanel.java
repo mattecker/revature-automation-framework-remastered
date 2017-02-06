@@ -11,8 +11,6 @@ import javax.swing.JPanel;
 
 import SDET1611.testingframework.MultithreadTests;
 import SDET1611.testingframework.PropObj;
-import SDET1611.testingframework.TestThread;
-import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 public class RunPanel extends JPanel implements ActionListener {
@@ -135,7 +133,6 @@ public class RunPanel extends JPanel implements ActionListener {
 	
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
-				
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();

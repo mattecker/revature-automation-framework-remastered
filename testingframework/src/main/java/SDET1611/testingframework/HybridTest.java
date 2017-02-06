@@ -38,8 +38,7 @@ public class HybridTest {
 
 	WebOperation WebOp;
 	
-	public HybridTest() throws IOException{
-		
+	public HybridTest() throws IOException{		
 		PropObj testProp = PropObj.getInstance();
 		String[] testInfo = testProp.getInfo();
 		
