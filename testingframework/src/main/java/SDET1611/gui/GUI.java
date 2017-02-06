@@ -170,7 +170,7 @@ public class GUI extends JFrame{
 	    gbc.gridy = 3;      
 	    gbc.fill = GridBagConstraints.HORIZONTAL;
 	    //gbc.gridwidth = 2;
-	    panel.add(keywordSheet,gbc);  
+	    panel.add(keywordSheet,gbc);
 	      
 	    gbc.gridx = 3;
 	    gbc.gridy = 2;      
