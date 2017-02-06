@@ -17,10 +17,10 @@ public class CheckBoxPanel extends JPanel {
 	{
 		
 		//Set layout of panel
-		setLayout(new GridLayout(3,1));
+		setLayout(new GridLayout(4,1));
 		setBorder(BorderFactory.createTitledBorder("Browsers"));
 		
-		setLayout(new GridLayout(3,1));
+		setLayout(new GridLayout(4,1));
         chromeCheckBox=new JCheckBox("Chrome");
         chromeCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
         chromeCheckBox.setForeground(Color.black);
@@ -35,7 +35,7 @@ public class CheckBoxPanel extends JPanel {
         
         edgeCheckBox=new JCheckBox("Edge");
         edgeCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
-        edgeCheckBox.setForeground(Color.gray);
+        edgeCheckBox.setForeground(Color.black);
         
 		//Add action listeners
 		chromeCheckBox.addActionListener(new ChromeCheckBoxListener());
