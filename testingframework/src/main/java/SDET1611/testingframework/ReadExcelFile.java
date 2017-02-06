@@ -13,26 +13,31 @@ public class ReadExcelFile {
 
 	/**
 	 * Reads an excel file and returns a worksheet object
-	 * @param filePath 		The path to the excel file
-	 * @param fileName		The name of the excel file
-	 * @param sheetName		The name of the requested worksheet in the excel file.
-	 * @return				The requested worksheet
-	 * @throws 				IOException If the file cannot be found
+	 * 
+	 * @param filePath
+	 *            The path to the excel file
+	 * @param fileName
+	 *            The name of the excel file
+	 * @param sheetName
+	 *            The name of the requested worksheet in the excel file.
+	 * @return The requested worksheet
+	 * @throws IOException
+	 *             If the file cannot be found
 	 */
 	public static Sheet readExcel(String filePath, String sheetName) throws IOException {
 		File file = new File(filePath);
 		FileInputStream inputStream = new FileInputStream(file);
 		Workbook workBook = null;
 		String fileExtensionName = filePath.substring(filePath.indexOf("."));
-		
-		if(fileExtensionName.equals(".xlsx")) {
+
+		if (fileExtensionName.equals(".xlsx")) {
 			workBook = new XSSFWorkbook(inputStream);
-		} else if(fileExtensionName.equals(".xls")) {
+		} else if (fileExtensionName.equals(".xls")) {
 			workBook = new HSSFWorkbook(inputStream);
 		}
-		
+
 		Sheet sheet = workBook.getSheet(sheetName);
-		
+
 		return sheet;
 	}
 }
