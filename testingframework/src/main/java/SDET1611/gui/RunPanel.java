@@ -21,11 +21,9 @@ public class RunPanel extends JPanel implements ActionListener {
 
 	static private File keywordExcelFile;
 	static private File dataExcelFile;
-	static private File propertiesFile;
 
 	static private String keywordPath;
 	static private String dataDrivenPath;
-	static private String popertiesPath;
 
 	static private boolean chromeCheckboxValue;
 	static private boolean ieCheckboxValue;
@@ -93,7 +91,7 @@ public class RunPanel extends JPanel implements ActionListener {
 	}
 
 	// Property file methods
-	public void setPropertiesFile(File file) {
+	/*public void setPropertiesFile(File file) {
 		propertiesFile = file;
 		popertiesPath = file.getName();
 	}
@@ -104,7 +102,7 @@ public class RunPanel extends JPanel implements ActionListener {
 
 	public File getPropertiesFile() {
 		return propertiesFile;
-	}
+	}*/
 
 	// Check box methods
 	public void setChromeCheckValue(boolean isChecked) {
@@ -168,7 +166,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
-		propertiesFile = getPropertiesFile();
+		//propertiesFile = getPropertiesFile();
 
 		String keywordSheet = getKeywordSheetText();
 		String dataSheet = getDataSheetText();
@@ -217,7 +215,7 @@ public class RunPanel extends JPanel implements ActionListener {
 
 		if (!drivers.isEmpty()) {
 			PropObj testProperties = PropObj.tryToCreateInstance(dataExcelFile.toString().replace("\\", "/"),
-					keywordExcelFile.toString().replace("\\", "/"), propertiesFile.toString().replace("\\", "/"),
+					keywordExcelFile.toString().replace("\\", "/"),
 					keywordSheet, dataSheet, OS, bit, drivers.toArray(new String[drivers.size()]));
 
 			for (int i = 0; i < drivers.size(); i++) {
