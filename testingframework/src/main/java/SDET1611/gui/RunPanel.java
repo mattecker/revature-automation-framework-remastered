@@ -183,7 +183,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		System.out.println(drivers);
 
 		// check that at least one of the browsers is selected
-		if(!chromeCheckboxValue && !ieCheckboxValue && !ieCheckboxValue) {
+		if(!chromeCheckboxValue && !ieCheckboxValue && !firefoxCheckboxValue) {
 			JOptionPane.showMessageDialog(null, "No Browsers were selected. Please select a browser to continue.");
 		} else {
 			drivers=drivers.substring(0, drivers.lastIndexOf(","));
