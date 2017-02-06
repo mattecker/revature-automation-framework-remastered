@@ -83,41 +83,6 @@ public class DriverHolder {
 		return driver;
 	}
 	
-	// Get Linux x32 Opera Driver
-	private static WebDriver getOperaDriverLinux32(){
-		System.setProperty("webdriver.Opera.driver",dir+"Linux32Operadriver");
-		WebDriver driver = new OperaDriver();
-		return driver;
-	}
-	
-	// Get Windows x32 Opera Driver
-	private static WebDriver getOperaDriverWindows32(){
-		System.setProperty("webdriver.Opera.driver",dir+"Windows32Operadriver.exe");
-		WebDriver driver = new OperaDriver();
-		return driver;
-	}
-	
-	// Get Linux x64 Opera Driver
-	private static WebDriver getOperaDriverLinux64(){
-		System.setProperty("webdriver.Opera.driver",dir+"Linux64Operadriver");
-		WebDriver driver = new OperaDriver();
-		return driver;
-	}
-	
-	// Get Windows x64 Opera Driver
-	private static WebDriver getOperaDriverWindows64(){
-		System.setProperty("webdriver.Opera.driver",dir+"Windows64Operadriver.exe");
-		WebDriver driver = new OperaDriver();
-		return driver;
-	}
-	
-	// Get Mac Opera Driver
-	private static WebDriver getOperaDriverMac(){
-		System.setProperty("webdriver.Opera.driver",dir+"MacOperadriver");
-		WebDriver driver = new OperaDriver();
-		return driver;
-	}
-	
 	// Get x32 Microsoft Internet Explorer Driver
 	private static WebDriver getIEDriver32(){
 		System.setProperty("webdriver.ie.driver",dir+"IEDriverServer_32.exe");
@@ -195,22 +160,6 @@ public class DriverHolder {
 	    		  return DriverHolder.getIEDriver32();
 	      case "EDGE":
 	    	  return DriverHolder.getEdgeDriver();
-	      case "OPERA":
-	    	  if(OS.equals("MAC")){
-	    		  return DriverHolder.getOperaDriverMac();
-	    	  }
-	    	  else if(OS.equals("WINDOWS")){
-	    		  if(bit.equals("64"))
-	    			  return DriverHolder.getOperaDriverWindows64();
-	    		  else // 32 bit
-	    			  return DriverHolder.getOperaDriverWindows32();
-	    	  }
-	    	  else{//Linux
-	    		  if(bit.equals("64"))
-	    			  return DriverHolder.getOperaDriverLinux64();
-	    		  else // 32 bit
-	    			  return DriverHolder.getOperaDriverLinux32();
-	    	  }
 	      case "SAFARI":
 	    	  	return getSafariDriver();
 	      default:
