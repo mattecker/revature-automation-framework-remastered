@@ -37,9 +37,9 @@ public class TestFunctions {
 		WebOperation wo = new WebOperation(driver);
 	
 		//Perform web operation actions
-		wo.action(p, "go_to_url", "", "", "url");
-		wo.action(p, "input_text", "name", "username", "yuvi1");
-		wo.action(p, "input_text", "name", "password", "yuvi1");
+		//wo.action(p, "go_to_url", "", "", "url");
+		//wo.action(p, "input_text", "name", "username", "yuvi1");
+		//wo.action(p, "input_text", "name", "password", "yuvi1");
 		
 		// close driver here
 		driver.close();
@@ -100,11 +100,11 @@ public class TestFunctions {
 				}
 				
 				//Call action to perform an event
-				webOperation.action(objectProperties,
-									row.getCell(1).toString(), 
-									objectName, 
-									objectType, 
-									objectValue);
+				//webOperation.action(objectProperties,
+									//row.getCell(1).toString(), 
+									//objectName, 
+									//objectType, 
+									//objectValue);
 				
 			}
 			else {
