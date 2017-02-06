@@ -52,7 +52,7 @@ public class WebOperation {
 				element = driver.findElement(this.getObject(p, objectType, objectName));
 				if(element != null){
 					Select select = new Select(element);
-					select.selectByVisibleText(value);
+					select.selectByValue(value);
 					testbool = true;
 				}
 				break;
@@ -84,7 +84,12 @@ public class WebOperation {
 			case "SELECT_CHECKBOX":
 				ArrayList<WebElement> list = (ArrayList<WebElement>) driver.findElements(this.getObject(p, objectType, objectName));
 				if(list != null){
-					list.get(list.indexOf(value)).click();
+					//list.get(list.indexOf(value)).click();
+					for(WebElement w: list){
+						if(w.getAttribute("value") == value){
+							w.click();
+						}
+					}
 					testbool = true;
 				}
 				break;
@@ -128,7 +133,7 @@ public class WebOperation {
 				if(driver != null){
 					String txt = driver.getTitle().trim();
 					//System.out.println("Debug---  txt = '"+txt+"'  p.getProperty("+objectName+") = '"+p.getProperty(objectName).trim()+"'");
-					if(txt.equals(p.getProperty(objectName).trim())){
+					if(txt.equals(value.trim())){
 						testbool = true;
 					}
 				}
