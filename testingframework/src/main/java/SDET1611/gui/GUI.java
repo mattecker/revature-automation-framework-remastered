@@ -333,11 +333,9 @@ public class GUI extends JFrame{
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//Get return value
 			int returnVal = fc.showOpenDialog(fc);
-			//If success then get file
+			
 			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				//Should be keyword excel file
 				File hybridFiles = fc.getSelectedFile();
 				showHybridFileLoc.setText(hybridFiles.getName());
 				
