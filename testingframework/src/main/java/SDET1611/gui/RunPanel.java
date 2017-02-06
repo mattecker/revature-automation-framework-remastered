@@ -26,7 +26,7 @@ public class RunPanel extends JPanel implements ActionListener {
 	static private boolean chromeCheckboxValue;
 	static private boolean ieCheckboxValue;
 	static private boolean firefoxCheckboxValue;
-//	static private boolean operaCheckboxValue;
+	static private boolean edgeCheckboxValue;
 	
 	static private String keywordSheetText;
 	static private String dataSheetText;
@@ -124,12 +124,12 @@ public class RunPanel extends JPanel implements ActionListener {
 		return dataExist;
 	}
 	
-//	public void setOperaCheckValue(boolean isChecked) {
-//		operaCheckboxValue = isChecked; 
-//	}
-//	public boolean getOperaCheckValue() {
-//		return operaCheckboxValue;
-//	}
+	public void setEdgeCheckValue(boolean isChecked) {
+		edgeCheckboxValue = isChecked; 
+	}
+	public boolean getEdgeCheckValue() {
+		return edgeCheckboxValue;
+	}
 	
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
@@ -156,7 +156,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		chromeCheckboxValue = getChromeCheckboxValue();
 		ieCheckboxValue = getIECheckboxValue();
 		firefoxCheckboxValue = getFirefoxCheckboxValue();
-//		operaCheckboxValue = getOperaCheckValue();
+		edgeCheckboxValue = getEdgeCheckValue();
 		
 		List<String> drivers = new ArrayList<String>();
 		
@@ -169,14 +169,14 @@ public class RunPanel extends JPanel implements ActionListener {
 		if(firefoxCheckboxValue)
 			drivers.add("Firefox");
 		
-//		if(operaCheckboxValue)
-//			drivers.add("Opera");
+		if(edgeCheckboxValue)
+			drivers.add("Edge");
 		
 		
 //		System.out.println(chromeCheckboxValue);
 //		System.out.println(ieCheckboxValue);
 //		System.out.println(firefoxCheckboxValue);
-//		System.out.println(operaCheckboxValue);
+//		System.out.println(edgeCheckboxValue);
 		
 		System.out.println(drivers);
 
