@@ -31,23 +31,36 @@ public class HybridTest {
 	private String KeywordFileName;
 	private Sheet keywordSheet;
 	private Sheet dataSheet;
-	private String[] keywordSheetName;
-	private String[] dataSheetName;
+	private String keywordSheetName;
+	private String dataSheetName;
 	private int kdRowCount;
 	private int ddRowCount;
 
 	WebOperation WebOp;
 	
-	public HybridTest() throws IOException{
-		driverName = PropObj.getDriver();
-		OSName = PropObj.OS;
-		Bit = PropObj.bit;
-		setPropertiesPath(PropObj.propertiesFilePath.replace("\\", ""));
-		setKeywordPath(PropObj.keywordFilePath.replace("\\", ""));
-		setDataPath(PropObj.dataFilePath.replace("\\", ""));
+	public HybridTest() throws IOException{		
+		PropObj testProp = PropObj.getInstance();
+		String[] testInfo = testProp.getInfo();
 		
-		keywordSheetName = PropObj.keywordSheetNames.split(",");
-		dataSheetName = PropObj.dataSheetNames.split(",");
+		DataFilePath = testInfo[0].replace("\\", "");
+		System.out.println(DataFilePath);
+		KeywordFilePath = testInfo[1].replace("\\", "");
+		System.out.println(KeywordFilePath);
+		PropertiesFilePath = testInfo[2].replace("\\", "");
+		System.out.println(PropertiesFilePath);
+		
+		keywordSheetName = testInfo[3];
+		System.out.println(keywordSheetName);
+		dataSheetName = testInfo[4];
+		System.out.println(dataSheetName);
+		
+		OSName = testInfo[5];
+		System.out.println(OSName);
+		Bit = testInfo[6];
+		System.out.println(Bit);
+		
+		// TODO: This needs to be called from i to getDrivers().length
+		driverName = testProp.getDrivers()[0].toUpperCase(); // Only called once in @BeforeSuite
 	}
 
 	/**
@@ -146,9 +159,8 @@ public class HybridTest {
 		//Temp variable for storing the scenario name for each step in a scenario
 		String scenarioName = "";
 		
-		for(int s = 0; s < keywordSheetName.length; s++){
-			keywordSheet = ReadExcelFile.readExcel(KeywordFilePath, KeywordFileName, keywordSheetName[s]);
-	        dataSheet = ReadExcelFile.readExcel(DataFilePath, DataFileName, dataSheetName[s]);
+			keywordSheet = ReadExcelFile.readExcel(KeywordFilePath, keywordSheetName);
+	        dataSheet = ReadExcelFile.readExcel(DataFilePath, dataSheetName);
 	        kdRowCount = keywordSheet.getLastRowNum() - keywordSheet.getFirstRowNum();
 			ddRowCount = dataSheet.getLastRowNum() - dataSheet.getFirstRowNum();
 			
@@ -239,7 +251,6 @@ public class HybridTest {
 					testingValues.add(rowObject);
 				}
 			}
-		}
 		
 		/*
 		 * Convert testingValues to 2D array so it can be returned.
@@ -253,91 +264,4 @@ public class HybridTest {
 		return newObject;
 	}
 	
-	public String getPropertiesPath(){
-		return PropertiesFilePath;
-	}
-	
-	public String getKeywordPath(){
-		return KeywordFilePath;
-	}
-	
-	public String getDataPath(){
-		return DataFilePath;
-	}
-	
-	public String getPropertiesName(){
-		return PropertiesFileName;
-	}
-	
-	public String getKeywordName(){
-		return KeywordFileName;
-	}
-	
-	public String getDataName(){
-		return DataFileName;
-	}
-	
-	public String getKeywordSheetName(int index){
-		return keywordSheetName[index];
-	}
-	
-	public String getDataSheetName(int index){
-		return dataSheetName[index];
-	}
-	
-	private static String getFileDelimiter(){
-		//return System.getProperty("file.separator").trim();
-		return "/";
-	}
-	
-	public void setPropertiesPath(String path){
-		PropertiesFilePath = path;
-		PropertiesFileName =  getFileName(PropertiesFilePath);
-	}
-
-	public void setKeywordPath(String path){
-		KeywordFilePath =  path;
-		KeywordFileName =  getFileName(KeywordFilePath);
-	}
-	
-	public void setDataPath(String path){
-		DataFilePath =  path;
-		DataFileName =  getFileName(DataFilePath);
-	}
-	
-	public void setPropertiesPath(){
-//		PropertiesFilePath = home.getAbsolutePath()+"/src/test/resources/TestData/test.properties";
-		PropertiesFileName =  getFileName(PropertiesFilePath);
-	}
-	
-	public void setKeywordPath(){
-//		KeywordFilePath =  home.getAbsolutePath()+"/src/test/resources/TestData/testKeyword.xlsx";
-		KeywordFileName =  getFileName(KeywordFilePath);
-	}
-	
-	public void setDataPath(){
-//		DataFilePath =  home.getAbsolutePath()+"/src/test/resources/TestData/testData.xlsx";
-		DataFileName =  getFileName(DataFilePath);
-	}
-	
-	public String getDriverName() {
-		return driverName;
-	}
-
-	public void setDriverName(String name){
-		driverName =  name;
-	}
-	
-	public String getOSName() {
-		return OSName;
-	}
-	
-	public void setOStName(String name){
-		OSName =  name;
-	}
-	
-	private static String getFileName(String path){
-		String[] split = path.split(getFileDelimiter());
-		return split[split.length-1];
-	}
 }

@@ -132,11 +132,14 @@ public class DriverHolder {
 		return driver;
 	}
 	
+	// Get the only Microsoft Edge Driver I could find
 	private static WebDriver getEdgeDriver(){
 		System.setProperty("webdriver.edge.driver",dir+"MicrosoftWebDriver.exe");
 		EdgeDriver driver = new EdgeDriver();
 		return driver;
 	}
+	
+	// The Safari driver should already come installed with safari
 	private static WebDriver getSafariDriver(){
 		System.setProperty("webdriver.safari.driver","/usr/bin/safaridriver");
 		SafariDriver driver = new SafariDriver();

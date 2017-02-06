@@ -19,11 +19,11 @@ public class ReadExcelFile {
 	 * @return				The requested worksheet
 	 * @throws 				IOException If the file cannot be found
 	 */
-	public static Sheet readExcel(String filePath, String fileName, String sheetName) throws IOException {
+	public static Sheet readExcel(String filePath, String sheetName) throws IOException {
 		File file = new File(filePath);
 		FileInputStream inputStream = new FileInputStream(file);
 		Workbook workBook = null;
-		String fileExtensionName = fileName.substring(fileName.indexOf("."));
+		String fileExtensionName = filePath.substring(filePath.indexOf("."));
 		
 		if(fileExtensionName.equals(".xlsx")) {
 			workBook = new XSSFWorkbook(inputStream);
