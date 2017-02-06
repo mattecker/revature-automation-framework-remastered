@@ -9,6 +9,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import SDET1611.testingframework.PropObj;
 import SDET1611.testingframework.prepareTests;
 
 public class RunPanel extends JPanel implements ActionListener {
@@ -132,6 +133,8 @@ public class RunPanel extends JPanel implements ActionListener {
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
 		
+		PropObj po = new PropObj();
+		
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
@@ -178,8 +181,7 @@ public class RunPanel extends JPanel implements ActionListener {
 //		System.out.println(operaCheckboxValue);
 		
 		System.out.println(drivers);
-		
-		//TODO Fix this last index out of bound exception error triggered by not selecting a browser.
+
 		// check that at least one of the browsers is selected
 		if(!chromeCheckboxValue && !ieCheckboxValue && !ieCheckboxValue) {
 			JOptionPane.showMessageDialog(null, "No Browsers were selected. Please select a browser to continue.");
@@ -197,6 +199,8 @@ public class RunPanel extends JPanel implements ActionListener {
 						bit,
 						drivers.toString()
 			});
+      po.setInitCount(0);
 		}
+
 	}
 }
