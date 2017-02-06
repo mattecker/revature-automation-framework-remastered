@@ -57,7 +57,7 @@ public class TestFunctions {
 		WebOperation webOperation = new WebOperation(driver);
 		
 		//Read keyword excel sheet
-		Sheet sheet = ReadExcelFile.readExcel(excelFilePath, "MercuryKeyword.xlsx", "TestSheet");
+		Sheet sheet = ReadExcelFile.readExcel(excelFilePath, "TestSheet");
 		//Get row count in excel sheet
 		System.out.println("DEBUG----GETTING ROW COUNT----DEBUG");
 		System.out.println("DEBUG----" + sheet + "----DEBUG");

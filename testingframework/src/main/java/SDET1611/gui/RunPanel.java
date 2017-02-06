@@ -3,12 +3,15 @@ package SDET1611.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
-import SDET1611.testingframework.prepareTests;
+import SDET1611.testingframework.MultithreadTests;
+import SDET1611.testingframework.PropObj;
+import javax.swing.JOptionPane;
 
 public class RunPanel extends JPanel implements ActionListener {
 	
@@ -130,7 +133,6 @@ public class RunPanel extends JPanel implements ActionListener {
 	
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
-		
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
@@ -156,34 +158,30 @@ public class RunPanel extends JPanel implements ActionListener {
 		firefoxCheckboxValue = getFirefoxCheckboxValue();
 //		operaCheckboxValue = getOperaCheckValue();
 		
-		String drivers = "";
+		List<String> drivers = new ArrayList<String>();
 		
 		if(chromeCheckboxValue)
-			drivers+= "Chrome,";
+			drivers.add("Chrome");
 		
 		if(ieCheckboxValue)
-			drivers+="IE,";
+			drivers.add("IE");
 		
 		if(firefoxCheckboxValue)
-			drivers+="Firefox,";
+			drivers.add("Firefox");
 		
 //		if(operaCheckboxValue)
-//			drivers+="Opera,";
+//			drivers.add("Opera");
 		
 		
-		System.out.println(chromeCheckboxValue);
-		System.out.println(ieCheckboxValue);
-		System.out.println(firefoxCheckboxValue);
+//		System.out.println(chromeCheckboxValue);
+//		System.out.println(ieCheckboxValue);
+//		System.out.println(firefoxCheckboxValue);
 //		System.out.println(operaCheckboxValue);
 		
 		System.out.println(drivers);
-		
-		//TODO Fix this last index out of bound exception error triggered by not selecting a browser.
-		drivers=drivers.substring(0, drivers.lastIndexOf(","));
-		
-		System.out.println(drivers);
-		
-		prepareTests.main(new String[] {
+
+		if(!drivers.isEmpty()){
+			PropObj testProperties = PropObj.tryToCreateInstance(
 					dataExcelFile.toString().replace("\\", "/"),
 					keywordExcelFile.toString().replace("\\", "/"),
 					propertiesFile.toString().replace("\\", "/"),
@@ -191,7 +189,15 @@ public class RunPanel extends JPanel implements ActionListener {
 					dataSheet,
 					OS,
 					bit,
-					drivers.toString()
-		});
+					drivers.toArray(new String[drivers.size()])
+			);
+			
+			MultithreadTests.runDrivers(testProperties.getDrivers());
+			
+		}
+		else { 
+			JOptionPane.showMessageDialog(null, "No Browsers were selected. Please select a browser to continue.");
+		}
+
 	}
 }

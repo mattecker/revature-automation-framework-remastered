@@ -29,6 +29,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 
+import SDET1611.testingframework.PropObj;
 import SDET1611.testingframework.ReadExcelFile;
 
 /**
@@ -170,6 +171,7 @@ public class GUI extends JFrame{
 	    gbc.fill = GridBagConstraints.HORIZONTAL;
 	    //gbc.gridwidth = 2;
 	    panel.add(keywordSheet,gbc);  
+<<<<<<< HEAD
 	      
 	    gbc.gridx = 3;
 	    gbc.gridy = 2;      
@@ -177,6 +179,15 @@ public class GUI extends JFrame{
 	    //gbc.gridwidth = 2;
 	    panel.add(uploadPropertiesButton,gbc);  
 	      
+=======
+	      
+	    gbc.gridx = 3;
+	    gbc.gridy = 2;      
+	    gbc.fill = GridBagConstraints.HORIZONTAL;
+	    //gbc.gridwidth = 2;
+	    panel.add(uploadPropertiesButton,gbc);  
+	      
+>>>>>>> 0876cc20ddd8dc536a25928039e6559f97e814c5
 	    //Keyword Sheet
 	    gbc.gridx = 0;
 	    gbc.gridy = 2;      
@@ -340,7 +351,7 @@ public class GUI extends JFrame{
 				
 				//Get Properties File
 				try{
-					Sheet propertiesSheet = ReadExcelFile.readExcel(hybridFiles.getAbsolutePath(), hybridFiles.getName(), "Properties");
+					Sheet propertiesSheet = ReadExcelFile.readExcel(hybridFiles.getAbsolutePath(), "Properties");
 					Row hybridRow = propertiesSheet.getRow(0);
 					String propertiesPath = hybridRow.getCell(0).toString();
 					File propertiesFile = new File(propertiesPath);
