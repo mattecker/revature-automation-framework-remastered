@@ -97,6 +97,8 @@ public class HybridTest {
 		}catch(AssertionError e){
 			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 			Assert.fail("Failed at "+testCaseName + " " +keyword); //TODO make better failure message?
+		}catch(InvalidObjectSelectorException e){
+			Assert.fail(e.getMessage());
 		}
 	}
 		

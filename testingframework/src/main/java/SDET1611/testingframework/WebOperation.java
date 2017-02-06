@@ -23,8 +23,9 @@ public class WebOperation {
 	 * @param objectName	The name of the web element being interacted with
 	 * @param objectType	The type of the web element being interacted with
 	 * @param value			Additional data to be used depending on the operation / object type
+	 * @throws InvalidObjectSelectorException 
 	 */
-	public boolean action(Properties p, String operation, String objectName, String objectType, String value) {
+	public boolean action(Properties p, String operation, String objectName, String objectType, String value) throws InvalidObjectSelectorException {
 		boolean testbool = false;
 		WebElement element;
 		
@@ -179,8 +180,9 @@ public class WebOperation {
 	 * @param type		The type of selector to be used to find the element
 	 * @param value		The name or other identifying aspect of the element
 	 * @return			The requested web element
+	 * @throws InvalidObjectSelectorException 
 	 */
-	private By getObject(Properties p, String type, String value) {
+	private By getObject(Properties p, String type, String value) throws InvalidObjectSelectorException {
 		//System.out.println("DEBUG---PropertyName: " + type + "----DEBUG");
 		//System.out.println("DEBUG---PropertyValue: " + value + "----DEBUG");
 		By toBeReturned = null;
@@ -209,9 +211,13 @@ public class WebOperation {
 			toBeReturned = By.tagName(p.getProperty(value));
 			break;
 		case "xpath":
+			toBeReturned = By.xpath(p.getProperty(value));
+			break;
+		case "csslocator":
+			toBeReturned = By.cssSelector(p.getProperty(value));
 			break;
 		default:
-			//TODO
+			throw(new InvalidObjectSelectorException(p.getProperty(value)));
 		}
 		
 		return toBeReturned;
