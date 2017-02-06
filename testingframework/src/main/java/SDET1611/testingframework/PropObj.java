@@ -16,6 +16,14 @@ public class PropObj {
 	
 	public static String[] drivers;
 	private static int count = 0;
+	
+	public void setInitCount(int number){
+		count = number;
+	}
+	public int countReset(){
+		return count;
+	}
+	
 	public synchronized static String getDriver(){
 		return drivers[count++].toUpperCase();
 	}
