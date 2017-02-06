@@ -12,15 +12,16 @@ public class CheckBoxPanel extends JPanel {
 	private JCheckBox ieCheckBox;
 	private JCheckBox firefoxCheckBox;
 	private JCheckBox edgeCheckBox;
+	private JCheckBox safariCheckBox;
 	
 	public CheckBoxPanel()
 	{
 		
 		//Set layout of panel
-		setLayout(new GridLayout(4,1));
+		setLayout(new GridLayout(5,1));
 		setBorder(BorderFactory.createTitledBorder("Browsers"));
 		
-		setLayout(new GridLayout(4,1));
+		setLayout(new GridLayout(5,1));
         chromeCheckBox=new JCheckBox("Chrome");
         chromeCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
         chromeCheckBox.setForeground(Color.black);
@@ -37,17 +38,24 @@ public class CheckBoxPanel extends JPanel {
         edgeCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
         edgeCheckBox.setForeground(Color.black);
         
+
+        safariCheckBox=new JCheckBox("Safari");
+        safariCheckBox.setFont(new Font("Serif", Font.BOLD, 20));
+        safariCheckBox.setForeground(Color.black);
+        
 		//Add action listeners
 		chromeCheckBox.addActionListener(new ChromeCheckBoxListener());
 		ieCheckBox.addActionListener(new IECheckBoxListener());
 		firefoxCheckBox.addActionListener(new FirefoxCheckBoxListener());
 		edgeCheckBox.addActionListener(new edgeCheckBoxListener());
+		safariCheckBox.addActionListener(new safariCheckboxListener());
 		
 		//Add check boxes to panel
 		add(chromeCheckBox);
 		add(ieCheckBox);
 		add(firefoxCheckBox);
 		add(edgeCheckBox);
+		add(safariCheckBox);
 	}
 }
 
@@ -130,6 +138,26 @@ class edgeCheckBoxListener implements ActionListener {
 		} else {
 			//Opera check box is now unselected
 			runPanel.setEdgeCheckValue(isSelected);
+		}
+	}
+}
+
+class safariCheckboxListener implements ActionListener {
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		boolean isSelected = false;
+		RunPanel runPanel = new RunPanel();
+		
+		JCheckBox checkbox = (JCheckBox)e.getSource();
+		if(checkbox.isSelected()) {
+			isSelected = true;
+			//safari check box is now selected
+			runPanel.setSafariCheckboxValue(isSelected);
+		} else {
+			//safari check box is now unselected
+			runPanel.setSafariCheckboxValue(isSelected);
 		}
 	}
 }
