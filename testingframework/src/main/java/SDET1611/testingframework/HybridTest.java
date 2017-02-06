@@ -23,39 +23,43 @@ public class HybridTest {
 	private String Bit;
 	static File home = new File(System.getProperty("user.dir"));
 	private String PropertiesFilePath;
-	private String PropertiesFileName;
 	private Properties objectProperties;
 	private String DataFilePath;
-	private String DataFileName;
 	private String KeywordFilePath;
-	private String KeywordFileName;
 	private Sheet keywordSheet;
 	private Sheet dataSheet;
-	private String[] keywordSheetName;
-	private String[] dataSheetName;
+	private String keywordSheetName;
+	private String dataSheetName;
 	private int kdRowCount;
 	private int ddRowCount;
 
 	WebOperation WebOp;
 	
 	public HybridTest() throws IOException{
-		//TODO Set up to test all available drivers
-		Properties p = new Properties();
-		p.load(new FileInputStream(new File(home+"/src/main/resources/tests"+threadCount+++".properties")));
-		driverName = p.getProperty("driver");
-		OSName = p.getProperty("OS");
-		Bit = p.getProperty("bit");
-		setPropertiesPath(p.getProperty("propertiesFilePath").replace("\\", ""));
-		setKeywordPath(p.getProperty("keywordFilePath").replace("\\", ""));
-		setDataPath(p.getProperty("dataFilePath").replace("\\", ""));
 		
-		keywordSheetName = p.getProperty("keywordSheetNames").split(",");
-		dataSheetName = p.getProperty("dataSheetNames").split(",");
+		PropObj testProp = PropObj.getInstance();
+		String[] testInfo = testProp.getInfo();
 		
-		System.out.println("DEBUG ---- key sheet name 1 --> "+keywordSheetName[0]);
-		System.out.println("DEBUG ---- data sheet name 1 --> "+dataSheetName[0]);
+		DataFilePath = testInfo[0].replace("\\", "");
+		System.out.println("DataFilePath: " + DataFilePath);
+		KeywordFilePath = testInfo[1].replace("\\", "");
+		System.out.println("KeywordFilePath: " + KeywordFilePath);
+		PropertiesFilePath = testInfo[2].replace("\\", "");
+		System.out.println("PropFilePath: " + PropertiesFilePath);
 		
-		//driver = DriverHolder.getChromeDriver();
+		keywordSheetName = testInfo[3];
+		System.out.println("keywordSheetName: " + keywordSheetName);
+		dataSheetName = testInfo[4];
+		System.out.println("dataSheetName: " + dataSheetName);
+		
+		OSName = testInfo[5];
+		System.out.println(OSName);
+		Bit = testInfo[6];
+		System.out.println(Bit);
+		
+		// TODO: This needs to be called from i to getDrivers().length
+		driverName = testProp.getDrivers()[0]; // Only called once in @BeforeSuite
+		System.out.println("Driver is: " + driverName);
 	}
 
 	/**
@@ -88,8 +92,10 @@ public class HybridTest {
 	public void allTests(String testCaseName, String keyword, String objectName, String objectType, String value) throws AssertionError {	
 		try{
 			Assert.assertEquals(WebOp.action(objectProperties, keyword, objectName, objectType, value), true, "Success at "+testCaseName + " " +keyword);
+			System.out.println("Success at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 		}catch(AssertionError e){
-			Assert.fail("Failed at "+testCaseName + " " +keyword); //TODO make better failure message?
+			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
+			Assert.fail("Failed at "+testCaseName + " " +keyword);
 		}
 	}
 		
@@ -152,98 +158,96 @@ public class HybridTest {
 		//Temp variable for storing the scenario name for each step in a scenario
 		String scenarioName = "";
 		
-		for(int s = 0; s < keywordSheetName.length; s++){
-			keywordSheet = ReadExcelFile.readExcel(KeywordFilePath, KeywordFileName, keywordSheetName[s]);
-	        dataSheet = ReadExcelFile.readExcel(DataFilePath, DataFileName, dataSheetName[s]);
-	        kdRowCount = keywordSheet.getLastRowNum() - keywordSheet.getFirstRowNum();
-			ddRowCount = dataSheet.getLastRowNum() - dataSheet.getFirstRowNum();
-			
-			// Adjusts kdRowCount to ensure tests aren't run on empty rows
-			boolean readyToTest = false;
-			while(!readyToTest){
-				if((keywordSheet.getRow(kdRowCount).getCell(0)==null) && (keywordSheet.getRow(kdRowCount).getCell(2)==null)){
-					keywordSheet.removeRow(keywordSheet.getRow(kdRowCount));
-					kdRowCount--;
-				}
-				else if(kdRowCount==0)
-					break;
-				else
-					readyToTest=true;
+		keywordSheet = ReadExcelFile.readExcel(KeywordFilePath, keywordSheetName);
+        dataSheet = ReadExcelFile.readExcel(DataFilePath, dataSheetName);
+        kdRowCount = keywordSheet.getLastRowNum() - keywordSheet.getFirstRowNum();
+		ddRowCount = dataSheet.getLastRowNum() - dataSheet.getFirstRowNum();
+		
+		// Adjusts kdRowCount to ensure tests aren't run on empty rows
+		boolean readyToTest = false;
+		while(!readyToTest){
+			if((keywordSheet.getRow(kdRowCount).getCell(0)==null) && (keywordSheet.getRow(kdRowCount).getCell(2)==null)){
+				keywordSheet.removeRow(keywordSheet.getRow(kdRowCount));
+				kdRowCount--;
 			}
+			else if(kdRowCount==0)
+				break;
+			else
+				readyToTest=true;
+		}
+		
+		/*
+		 * For each row in the Data sheet.
+		 * We want to set up test for all scenarios in the keyword sheet for a single row before going to
+		 * the next row in the data sheet in order to prevent data mismatches. We start out at 1  becasue row 0
+		 * is the column names.
+		 */
+		for(int r = 1; r <= ddRowCount; r++){
+			Row ddRow = dataSheet.getRow(r);
 			
-			/*
-			 * For each row in the Data sheet.
-			 * We want to set up test for all scenarios in the keyword sheet for a single row before going to
-			 * the next row in the data sheet in order to prevent data mismatches. We start out at 1  becasue row 0
-			 * is the column names.
-			 */
-			for(int r = 1; r <= ddRowCount; r++){
-				Row ddRow = dataSheet.getRow(r);
+			//For each row in the keyword sheet we want to write tests for our given data row.
+			for(int i = 0; i < kdRowCount; i++){
+				Object[] rowObject = new Object[5];
 				
-				//For each row in the keyword sheet we want to write tests for our given data row.
-				for(int i = 0; i < kdRowCount; i++){
-					Object[] rowObject = new Object[5];
-					
-					// First row contains description words therefore start at second row.
-		            Row kdRow = keywordSheet.getRow(i+1);
-	       
-					/*
-					 * Skip scenario name rows, and sets first cell for steps to the scenario name EX:
-					 *  __________________
-					 * |  Name  | keyword | 
-					 * |--------|---------|
-					 * |  Login |         | <-- Skip this row
-					 * ---------|---------|
-					 * |        |inputText| <-- Set test name in this row
-					 * --------------------
-					 */
-					if((kdRow.getCell(0) != null) && (!kdRow.getCell(0).toString().equals(""))){
-						scenarioName = kdRow.getCell(0).toString();
-						continue;
-					} else {
-						rowObject[0] = scenarioName;
-					}
-					
-		            //For each column in a row of keyword sheet, skip first column because it is set as test name
-					for(int j = 1 ; j < kdRow.getLastCellNum() ; j++){
-		                //If there is a value in Value column get it from data sheet
-		                if(j == 4 && kdRow.getCell(j) != null) {
-		                    String value = kdRow.getCell(j).toString();
-	
-	                        /*
-	                         * For each column in a row of the data row, we search for the column in the data sheet that 
-	                         * matches the value from the keyword sheet.
-	                         */
-	                        for(int l = 0 ; l < ddRow.getLastCellNum() ; l++){
-	                            if(value.equals(dataSheet.getRow(0).getCell(l).toString())){
-	                                cellData = ddRow.getCell(l).toString();
-	                                isDataValue = true;
-	                            }        
-	                        } 
-		                }
-						
-		                /*
-		                 * If the column of the row we are looking at is null, set it to an Empty string,
-		                 * because null pointers.
-		                 * 
-		                 * If the column is not null, and is not the value column (determined by the isDataValue boolean)
-		                 */
-						if (kdRow.getCell(j) == null){
-							cellData = "";
-						} else if(isDataValue == false){
-		                    cellData = kdRow.getCell(j).toString();
-		                }
-						
-		                isDataValue = false;
-						rowObject[j] = cellData;
-					}
+				// First row contains description words therefore start at second row.
+	            Row kdRow = keywordSheet.getRow(i+1);
+       
+				/*
+				 * Skip scenario name rows, and sets first cell for steps to the scenario name EX:
+				 *  __________________
+				 * |  Name  | keyword | 
+				 * |--------|---------|
+				 * |  Login |         | <-- Skip this row
+				 * ---------|---------|
+				 * |        |inputText| <-- Set test name in this row
+				 * --------------------
+				 */
+				if((kdRow.getCell(0) != null) && (!kdRow.getCell(0).toString().equals(""))){
+					scenarioName = kdRow.getCell(0).toString();
+					continue;
+				} else {
+					rowObject[0] = scenarioName;
+				}
+				
+	            //For each column in a row of keyword sheet, skip first column because it is set as test name
+				for(int j = 1 ; j < kdRow.getLastCellNum() ; j++){
+	                //If there is a value in Value column get it from data sheet
+	                if(j == 4 && kdRow.getCell(j) != null) {
+	                    String value = kdRow.getCell(j).toString();
+
+                        /*
+                         * For each column in a row of the data row, we search for the column in the data sheet that 
+                         * matches the value from the keyword sheet.
+                         */
+                        for(int l = 0 ; l < ddRow.getLastCellNum() ; l++){
+                            if(value.equals(dataSheet.getRow(0).getCell(l).toString())){
+                                cellData = ddRow.getCell(l).toString();
+                                isDataValue = true;
+                            }        
+                        } 
+	                }
 					
 	                /*
-	                 * Now that rowObject has been filled with the test to be run, add that row
-	                 * to the master ArrayObject. 
+	                 * If the column of the row we are looking at is null, set it to an Empty string,
+	                 * because null pointers.
+	                 * 
+	                 * If the column is not null, and is not the value column (determined by the isDataValue boolean)
 	                 */
-					testingValues.add(rowObject);
+					if (kdRow.getCell(j) == null){
+						cellData = "";
+					} else if(isDataValue == false){
+	                    cellData = kdRow.getCell(j).toString();
+	                }
+					
+	                isDataValue = false;
+					rowObject[j] = cellData;
 				}
+				
+                /*
+                 * Now that rowObject has been filled with the test to be run, add that row
+                 * to the master ArrayObject. 
+                 */
+				testingValues.add(rowObject);
 			}
 		}
 		
@@ -257,93 +261,5 @@ public class HybridTest {
 			}
 		}
 		return newObject;
-	}
-	
-	public String getPropertiesPath(){
-		return PropertiesFilePath;
-	}
-	
-	public String getKeywordPath(){
-		return KeywordFilePath;
-	}
-	
-	public String getDataPath(){
-		return DataFilePath;
-	}
-	
-	public String getPropertiesName(){
-		return PropertiesFileName;
-	}
-	
-	public String getKeywordName(){
-		return KeywordFileName;
-	}
-	
-	public String getDataName(){
-		return DataFileName;
-	}
-	
-	public String getKeywordSheetName(int index){
-		return keywordSheetName[index];
-	}
-	
-	public String getDataSheetName(int index){
-		return dataSheetName[index];
-	}
-	
-	private static String getFileDelimiter(){
-		//return System.getProperty("file.separator").trim();
-		return "/";
-	}
-	
-	public void setPropertiesPath(String path){
-		PropertiesFilePath = path;
-		PropertiesFileName =  getFileName(PropertiesFilePath);
-	}
-
-	public void setKeywordPath(String path){
-		KeywordFilePath =  path;
-		KeywordFileName =  getFileName(KeywordFilePath);
-	}
-	
-	public void setDataPath(String path){
-		DataFilePath =  path;
-		DataFileName =  getFileName(DataFilePath);
-	}
-	
-	public void setPropertiesPath(){
-		PropertiesFilePath = home.getAbsolutePath()+"/src/test/resources/TestData/test.properties";
-		PropertiesFileName =  getFileName(PropertiesFilePath);
-	}
-	
-	public void setKeywordPath(){
-		KeywordFilePath =  home.getAbsolutePath()+"/src/test/resources/TestData/testKeyword.xlsx";
-		KeywordFileName =  getFileName(KeywordFilePath);
-	}
-	
-	public void setDataPath(){
-		DataFilePath =  home.getAbsolutePath()+"/src/test/resources/TestData/testData.xlsx";
-		DataFileName =  getFileName(DataFilePath);
-	}
-	
-	public String getDriverName() {
-		return driverName;
-	}
-
-	public void setDriverName(String name){
-		driverName =  name;
-	}
-	
-	public String getOSName() {
-		return OSName;
-	}
-	
-	public void setOStName(String name){
-		OSName =  name;
-	}
-	
-	private static String getFileName(String path){
-		String[] split = path.split(getFileDelimiter());
-		return split[split.length-1];
 	}
 }
