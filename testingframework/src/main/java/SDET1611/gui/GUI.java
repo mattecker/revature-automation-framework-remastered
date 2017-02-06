@@ -296,7 +296,7 @@ public class GUI extends JFrame {
 				// showDataDrivenFileLoc.setText(runPanel.getDataDrivenPath());
 
 				// Get Properties File
-				try {
+				/*try {
 					Sheet propertiesSheet = ReadExcelFile.readExcel(hybridFiles.getAbsolutePath(), "Properties");
 					Row hybridRow = propertiesSheet.getRow(0);
 					String propertiesPath = hybridRow.getCell(0).toString();
@@ -305,7 +305,7 @@ public class GUI extends JFrame {
 					// showPropertiesFileLoc.setText(runPanel.getPropertiesFilePath());
 				} catch (Exception exception) {
 					exception.printStackTrace();
-				}
+				}*/
 			}
 		}
 	}

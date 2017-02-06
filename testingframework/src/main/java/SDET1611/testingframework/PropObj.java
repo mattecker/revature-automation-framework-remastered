@@ -19,11 +19,11 @@ public class PropObj implements Serializable {
 
 	private static PropObj instance = null;
 
-	private PropObj(String dataFilePath, String keywordFilePath, String propFilePath, String keywordSheetNames,
+	private PropObj(String dataFilePath, String keywordFilePath, String keywordSheetNames,
 			String dataSheetNames, String OS, String bit, String[] drivers) {
 		this.dataFilePath = dataFilePath;
 		this.keywordFilePath = keywordFilePath;
-		this.propertiesFilePath = propFilePath;
+		//this.propertiesFilePath = propFilePath;
 		this.keywordSheetNames = keywordSheetNames;
 		this.dataSheetNames = dataSheetNames;
 		this.OS = OS;
@@ -31,10 +31,10 @@ public class PropObj implements Serializable {
 		this.drivers = drivers;
 	}
 
-	public static PropObj tryToCreateInstance(String dataFilePath, String keywordFilePath, String propFilePath,
+	public static PropObj tryToCreateInstance(String dataFilePath, String keywordFilePath,
 			String keywordSheetNames, String dataSheetNames, String OS, String bit, String[] drivers) {
 		if (instance == null) {
-			instance = new PropObj(dataFilePath, keywordFilePath, propFilePath, keywordSheetNames, dataSheetNames, OS,
+			instance = new PropObj(dataFilePath, keywordFilePath, keywordSheetNames, dataSheetNames, OS,
 					bit, drivers);
 		}
 		return instance;
