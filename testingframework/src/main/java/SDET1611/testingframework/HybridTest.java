@@ -59,8 +59,8 @@ public class HybridTest {
 		Bit = testInfo[6];
 		System.out.println(Bit);
 		
-		// TODO: This needs to be called from i to getDrivers().length
-		driverName = testProp.getDrivers()[0].toUpperCase(); // Only called once in @BeforeSuite
+		System.out.println(Thread.currentThread().getName().toUpperCase());
+		driverName =  Thread.currentThread().getName().toUpperCase();
 	}
 
 	/**

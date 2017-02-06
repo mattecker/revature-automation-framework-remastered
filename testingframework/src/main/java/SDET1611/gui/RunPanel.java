@@ -1,5 +1,7 @@
 package SDET1611.gui;
 
+import SDET1611.testingframework.TestThread;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,6 +13,8 @@ import javax.swing.JPanel;
 
 import SDET1611.testingframework.MultithreadTests;
 import SDET1611.testingframework.PropObj;
+import SDET1611.testingframework.TestThread;
+
 import javax.swing.JOptionPane;
 
 public class RunPanel extends JPanel implements ActionListener {
@@ -27,6 +31,7 @@ public class RunPanel extends JPanel implements ActionListener {
 	static private boolean ieCheckboxValue;
 	static private boolean firefoxCheckboxValue;
 	static private boolean edgeCheckboxValue;
+	private static boolean safariCheckboxValue;
 	
 	static private String keywordSheetText;
 	static private String dataSheetText;
@@ -110,7 +115,12 @@ public class RunPanel extends JPanel implements ActionListener {
 	public boolean getFirefoxCheckboxValue() {
 		return firefoxCheckboxValue;
 	}
-	
+	public void setSafariCheckboxValue(boolean isChecked){
+		safariCheckboxValue = isChecked;
+	}
+	public boolean getSafariCheckValue(){
+		return safariCheckboxValue;
+	}
 	public void setKeySheetExists(String exists){
 		keyExist = exists;
 	}
@@ -157,6 +167,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		ieCheckboxValue = getIECheckboxValue();
 		firefoxCheckboxValue = getFirefoxCheckboxValue();
 		edgeCheckboxValue = getEdgeCheckValue();
+		safariCheckboxValue = getSafariCheckValue();
 		
 		List<String> drivers = new ArrayList<String>();
 		
@@ -171,6 +182,9 @@ public class RunPanel extends JPanel implements ActionListener {
 		
 		if(edgeCheckboxValue)
 			drivers.add("Edge");
+		
+		if(safariCheckboxValue)
+			drivers.add("Safari");
 		
 		
 //		System.out.println(chromeCheckboxValue);
@@ -192,7 +206,12 @@ public class RunPanel extends JPanel implements ActionListener {
 					drivers.toArray(new String[drivers.size()])
 			);
 			
-			MultithreadTests.runDrivers(testProperties.getDrivers());
+			for(int i = 0; i < drivers.size(); i++){
+		    	TestThread T = new TestThread( drivers.get(i) );
+		    	T.setName(drivers.get(i));
+				T.start();
+	    	}
+			System.gc();
 			
 		}
 		else { 
