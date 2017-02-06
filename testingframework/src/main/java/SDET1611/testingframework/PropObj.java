@@ -6,7 +6,6 @@ import java.io.Serializable;
  *	A Single instance of this class exists for any one instance of the GUI
  *	It contains the information necessary to complete the test.
  */
-<<<<<<< HEAD
 
 public class PropObj implements Serializable { 
 	private static String dataFilePath;
@@ -57,28 +56,4 @@ public class PropObj implements Serializable {
     public String[] getDrivers() {
     	return drivers;
     }
-=======
-public class PropObj { 
-	public static String dataFilePath;
-	public static String keywordFilePath;
-	public static String propertiesFilePath;
-	public static String keywordSheetNames;
-	public static String dataSheetNames;
-	public static String OS;
-	public static String bit;
-	
-	public static String[] drivers;
-	private static int count = 0;
-	
-	public void setInitCount(int number){
-		count = number;
-	}
-	public int countReset(){
-		return count;
-	}
-	
-	public synchronized static String getDriver(){
-		return drivers[count++].toUpperCase();
-	}
->>>>>>> b43fe8fe174ca004c74cd68d271fe54ba06c3b16
 }
