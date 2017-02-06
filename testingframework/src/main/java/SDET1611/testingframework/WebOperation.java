@@ -25,7 +25,8 @@ public class WebOperation {
 	 * @param value			Additional data to be used depending on the operation / object type
 	 * @throws InvalidObjectSelectorException 
 	 */
-	public boolean action(Properties p, String operation, String objectName, String objectType, String value) throws InvalidObjectSelectorException {
+	//public boolean action(Properties p, String operation, String objectName, String objectType, String value) {
+	public boolean action(String operation, String objectName, String objectType, String value) throws InvalidObjectSelectorException {
 		boolean testbool = false;
 		WebElement element;
 		
@@ -38,7 +39,8 @@ public class WebOperation {
 			 */
 			switch(operation.toUpperCase()) {
 			case "CLICK":
-				element = driver.findElement(this.getObject(p, objectType, objectName));
+				//element = driver.findElement(this.getObject(p, objectType, objectName));
+				element = driver.findElement(this.getObject(objectType, objectName));
 				if(element != null){
 					element.click();
 					testbool = true;
@@ -50,7 +52,8 @@ public class WebOperation {
 			case "SELECT DROPDOWN":
 			case "SELECTDROPDOWN":
 			case "SELECT_DROPDOWN":
-				element = driver.findElement(this.getObject(p, objectType, objectName));
+				//element = driver.findElement(this.getObject(p, objectType, objectName));
+				element = driver.findElement(this.getObject(objectType, objectName));
 				if(element != null){
 					Select select = new Select(element);
 					select.selectByValue(value);
@@ -60,7 +63,8 @@ public class WebOperation {
 			case "DESELECT DROPDOWN":
 			case "DESELECTDROPDOWN":
 			case "DESELECT_DROPDOWN":
-				element = driver.findElement(this.getObject(p, objectType, objectName));
+				//element = driver.findElement(this.getObject(p, objectType, objectName));
+				element = driver.findElement(this.getObject(objectType, objectName));
 				if(element != null){
 					Select select = new Select(element);
 					select.deselectByValue(value);
@@ -70,7 +74,8 @@ public class WebOperation {
 			case "DESELECT ALL":
 			case "DESELECTALL":
 			case "DESELECT_ALL":
-				element = driver.findElement(this.getObject(p, objectType, objectName));
+				//element = driver.findElement(this.getObject(p, objectType, objectName));
+				element = driver.findElement(this.getObject(objectType, objectName));
 				if(element != null){
 					Select select = new Select(element);
 					select.deselectAll();
@@ -83,7 +88,8 @@ public class WebOperation {
 			case "SELECT CHECKBOX":
 			case "SELECTCHECKBOX":
 			case "SELECT_CHECKBOX":
-				ArrayList<WebElement> list = (ArrayList<WebElement>) driver.findElements(this.getObject(p, objectType, objectName));
+				//ArrayList<WebElement> list = (ArrayList<WebElement>) driver.findElements(this.getObject(p, objectType, objectName));
+				ArrayList<WebElement> list = (ArrayList<WebElement>) driver.findElements(this.getObject(objectType, objectName));
 				if(list != null){
 					//list.get(list.indexOf(value)).click();
 					for(WebElement w: list){
@@ -97,7 +103,8 @@ public class WebOperation {
 			case "DESELECT CHECKBOX":
 			case "DESELECTCHECKBOX":
 			case "DESELECT_CHECKBOX":
-				ArrayList<WebElement> olist = (ArrayList<WebElement>) driver.findElements(this.getObject(p, objectType, objectName));
+				//ArrayList<WebElement> olist = (ArrayList<WebElement>) driver.findElements(this.getObject(p, objectType, objectName));
+				ArrayList<WebElement> olist = (ArrayList<WebElement>) driver.findElements(this.getObject(objectType, objectName));
 				if(olist != null){
 					if(olist.get(olist.indexOf(value)).isSelected())
 						olist.get(olist.indexOf(value)).click();
@@ -111,7 +118,8 @@ public class WebOperation {
 			case "INPUTS":
 			case "TYPES":
 			case "WRITES":
-				element = driver.findElement(this.getObject(p, objectType, objectName));
+				//element = driver.findElement(this.getObject(p, objectType, objectName));
+				element = driver.findElement(this.getObject(objectType, objectName));
 				if(element != null){
 					element.sendKeys(value);
 					testbool = true;
@@ -148,7 +156,7 @@ public class WebOperation {
 				if(driver != null){
 					String txt = driver.getCurrentUrl().trim();
 					//System.out.println("Debug---  txt = '"+txt+"'  p.getProperty("+objectName+") = '"+p.getProperty(objectName).trim()+"'");
-					if(txt.contains(p.getProperty(objectName).trim())){
+					if(txt.contains(objectName.trim())){
 						testbool = true;
 					}
 				}
@@ -156,10 +164,11 @@ public class WebOperation {
 			case "GET TEXT":
 			case "GET_TEXT":
 			case "GETTEXT":
-				element = driver.findElement(this.getObject(p, objectType, objectName));
+				//element = driver.findElement(this.getObject(p, objectType, objectName));
+				element = driver.findElement(this.getObject(objectType, objectName));
 				if(element != null){
 					String txt = element.getText();
-					if(txt == p.getProperty(objectName)){
+					if(txt == objectName){
 						testbool = true;
 					}
 				}
@@ -182,7 +191,8 @@ public class WebOperation {
 	 * @return			The requested web element
 	 * @throws InvalidObjectSelectorException 
 	 */
-	private By getObject(Properties p, String type, String value) throws InvalidObjectSelectorException {
+	//private By getObject(Properties p, String type, String value) {
+	private By getObject(String type, String value) throws InvalidObjectSelectorException {
 		//System.out.println("DEBUG---PropertyName: " + type + "----DEBUG");
 		//System.out.println("DEBUG---PropertyValue: " + value + "----DEBUG");
 		By toBeReturned = null;
@@ -190,34 +200,34 @@ public class WebOperation {
 		switch(str) {
 	
 		case "classname": 
-			toBeReturned = By.className(p.getProperty(value));
+			toBeReturned = By.className(value);
 			break;
 		case "css":
-			toBeReturned = By.cssSelector(p.getProperty(value));
+			toBeReturned = By.cssSelector(value);
 			break;
 		case "id":
-			toBeReturned = By.id(p.getProperty(value));
+			toBeReturned = By.id(value);
 			break;
 		case "linktext":
-			toBeReturned = By.linkText(p.getProperty(value));
+			toBeReturned = By.linkText(value);
 			break;
 		case "name":
-			toBeReturned = By.name(p.getProperty(value));
+			toBeReturned = By.name(value);
 			break;
 		case "partiallink":
-			toBeReturned = By.partialLinkText(p.getProperty(value));
+			toBeReturned = By.partialLinkText(value);
 			break;
 		case "tagname":
-			toBeReturned = By.tagName(p.getProperty(value));
+			toBeReturned = By.tagName(value);
 			break;
 		case "xpath":
-			toBeReturned = By.xpath(p.getProperty(value));
+			toBeReturned = By.xpath(value);
 			break;
 		case "csslocator":
-			toBeReturned = By.cssSelector(p.getProperty(value));
+			toBeReturned = By.cssSelector(value);
 			break;
 		default:
-			throw(new InvalidObjectSelectorException(p.getProperty(value)));
+			throw(new InvalidObjectSelectorException(value));
 		}
 		
 		return toBeReturned;

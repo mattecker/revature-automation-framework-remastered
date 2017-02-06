@@ -22,9 +22,9 @@ public class HybridTest {
 	private String driverName;
 	private String Bit;
 	static File home = new File(System.getProperty("user.dir"));
-	private String PropertiesFilePath;
-	private String PropertiesFileName;
-	private Properties objectProperties;
+	//private String PropertiesFilePath;
+	//private String PropertiesFileName;
+	//private Properties objectProperties;
 	private String DataFilePath;
 	private String DataFileName;
 	private String KeywordFilePath;
@@ -46,8 +46,8 @@ public class HybridTest {
 		System.out.println(DataFilePath);
 		KeywordFilePath = testInfo[1].replace("\\", "");
 		System.out.println(KeywordFilePath);
-		PropertiesFilePath = testInfo[2].replace("\\", "");
-		System.out.println(PropertiesFilePath);
+		//PropertiesFilePath = testInfo[2].replace("\\", "");
+		//System.out.println(PropertiesFilePath);
 		
 		keywordSheetName = testInfo[3];
 		System.out.println(keywordSheetName);
@@ -71,7 +71,7 @@ public class HybridTest {
 		driver = DriverHolder.getDriver(OSName, driverName, Bit);
 		WebOp = new WebOperation(driver);
 		
-		objectProperties = ReadObjectFile.getObjectData(PropertiesFilePath);
+		//objectProperties = ReadObjectFile.getObjectData(PropertiesFilePath);
         // TODO: find way to dynamically change the sheet name
 		//Get row counts
 	}
@@ -92,7 +92,8 @@ public class HybridTest {
 	@Test(dataProvider="hybridData")
 	public void allTests(String testCaseName, String keyword, String objectName, String objectType, String value) throws AssertionError {	
 		try{
-			Assert.assertEquals(WebOp.action(objectProperties, keyword, objectName, objectType, value), true, "Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
+			//Assert.assertEquals(WebOp.action(objectProperties, keyword, objectName, objectType, value), true, "Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
+			Assert.assertEquals(WebOp.action(keyword, objectName, objectType, value), true, "Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 			System.out.println("Success at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 		}catch(AssertionError e){
 			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
