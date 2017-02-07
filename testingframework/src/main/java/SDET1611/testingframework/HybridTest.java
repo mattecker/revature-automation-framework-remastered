@@ -69,7 +69,7 @@ public class HybridTest {
 	 */
 	@AfterSuite
 	public void closeDown() {
-		driver.close();
+		driver.quit();
 		System.gc();
 	}
 
