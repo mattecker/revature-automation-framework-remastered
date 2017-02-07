@@ -1,6 +1,8 @@
 package SDET1611.testingframework;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Single instance of this class exists for any one instance of the GUI It
@@ -18,6 +20,27 @@ public class PropObj implements Serializable {
 	private static String[] drivers;
 
 	private static PropObj instance = null;
+	
+	private static List<String> driverExists = new ArrayList<>();
+	
+	public static boolean getDriverExistence(){
+		if(driverExists.isEmpty()){
+			return false;
+		}
+		return true;
+	}
+	
+	public static void setDriverExists(String driverName){
+		driverExists.add(driverName);
+	}
+	public static void removeDiverExists(String driverName){
+		for(String driver:driverExists){
+			if(driver.equals(driverName)){
+				driverExists.remove(driver);
+				break;
+			}
+		}
+	}
 
 	private PropObj(String dataFilePath, String keywordFilePath, String keywordSheetNames,
 			String dataSheetNames, String OS, String bit, String[] drivers) {
