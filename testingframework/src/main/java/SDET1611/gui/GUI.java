@@ -24,10 +24,6 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 64c1117afb86874e48699fb3e49e29c017c9362f
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 
 /**
@@ -116,29 +112,9 @@ public class GUI extends JFrame {
 
 		gbc.gridx = 4;
 		gbc.gridy = 0;
-<<<<<<< HEAD
-		panel.add(showHybridFileLoc, gbc);
-		
-=======
+
 		inputPanel.add(showHybridFileLoc, gbc);
 
-		/*
-		 * keywordSheetLabel = new JLabel("Keyword Sheet"); dataSheetLabel = new
-		 * JLabel("Data Sheet"); add(keywordSheetLabel); add(dataSheetLabel);
-		 */
-
-		/*
-		 * uploadKeywordExcelButton.addActionListener(new
-		 * UploadKeywordExcelListener());
-		 * uploadDataExcelButton.addActionListener(new
-		 * UploadDataExcelListener());
-		 * uploadPropertiesButton.addActionListener(new
-		 * UploadPropertiesListener());
-		 * keywordSheetTextField.addFocusListener(new
-		 * KeywordSheetTextListener()); dataSheetTextField.addFocusListener(new
-		 * DataSheetTextListener());
-		 */
->>>>>>> 64c1117afb86874e48699fb3e49e29c017c9362f
 		uploadHybridFilesButton.addActionListener(new uploadHybridTestsListener());
 
 		comboPanel.setLayout(new BorderLayout());
