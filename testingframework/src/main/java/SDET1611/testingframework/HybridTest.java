@@ -70,7 +70,7 @@ public class HybridTest {
 	@AfterSuite
 	public void closeDown() {
 		driver.quit();
-		PropObj.removeDiverExists(Thread.currentThread().getName());
+		PropObj.removeDriverExists(Thread.currentThread().getName());
 		System.gc();
 	}
 
