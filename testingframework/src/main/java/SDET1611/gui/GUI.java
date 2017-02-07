@@ -93,7 +93,10 @@ public class GUI extends JFrame {
 		
 		
 		this.add(guiTitle, BorderLayout.NORTH);
+		
 		JPanel comboPanel = new JPanel();
+		comboPanel.setBackground(new Color(201,203,255));
+		
 		// add(td, BorderLayout.WEST);
 		this.add(runPanels, BorderLayout.SOUTH);
 		// JLabel keywordLabel = new JLabel("Keyword driven File");
