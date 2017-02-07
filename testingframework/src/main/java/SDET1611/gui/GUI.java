@@ -24,13 +24,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
-
-import SDET1611.testingframework.PropObj;
-import SDET1611.testingframework.ReadExcelFile;
 
 /**
  * There is code duplicate from UploadPanel.java into this class So styling can
@@ -54,16 +49,13 @@ public class GUI extends JFrame {
 	 */
 	private static JLabel showHybridFileLoc = new JLabel("");
 
-	private static JLabel keySheetExists = new JLabel("");
-	private static JLabel dataSheetExists = new JLabel("");
-
 	public GUI() {
 		super("Hybrid Testing App");
 
-		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
-		setBackground(new Color(201, 203, 255));
+		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		this.setBackground(new Color(201, 203, 255));
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("File");
 		JMenuItem menuItem = new JMenuItem("Exit");
@@ -78,14 +70,14 @@ public class GUI extends JFrame {
 
 		// load Numbus UI
 		try {
-			loadNimbus();
+			this.loadNimbus();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			// e.printStackTrace();
 
 			// load old UI if nimbus isn't available
 			System.out.println("Nimbus UI not found or failed to load.");
-			loadBackupUI();
+			this.loadBackupUI();
 		}
 
 		menu.add(menuItem);
@@ -97,15 +89,17 @@ public class GUI extends JFrame {
 		runPanels = new RunPanel();
 		runPanels.setBackground(new Color(201, 203, 255));
 		guiTitle.setBackground(new Color(201, 203, 255));
-
-		add(guiTitle, BorderLayout.NORTH);
-		add(ckpanel, BorderLayout.WEST);
+		
+		
+		
+		this.add(guiTitle, BorderLayout.NORTH);
+		JPanel comboPanel = new JPanel();
 		// add(td, BorderLayout.WEST);
-		add(runPanels, BorderLayout.SOUTH);
+		this.add(runPanels, BorderLayout.SOUTH);
 		// JLabel keywordLabel = new JLabel("Keyword driven File");
 
 		// Add labels
-		setFont(new Font("Serif", Font.BOLD, 20));
+		this.setFont(new Font("Serif", Font.BOLD, 20));
 		/*
 		 * JLabel dataLabel = new JLabel("Data Driven File"); JLabel
 		 * propertiesLabel = new JLabel("Properties File"); JLabel keywordSheet
@@ -114,27 +108,15 @@ public class GUI extends JFrame {
 		 */
 		JLabel hybridLabel = new JLabel("Hybrid Files");
 
-		// Add buttons
-		/*
-		 * JButton uploadKeywordExcelButton = new JButton("Upload"); JButton
-		 * uploadDataExcelButton = new JButton("Upload"); JButton
-		 * uploadPropertiesButton = new JButton("Upload");
-		 */
 		JButton uploadHybridFilesButton = new JButton("Upload");
 
-		// Add textfields
-		/*
-		 * JTextField keywordSheetTextField = new JTextField(10); JTextField
-		 * dataSheetTextField = new JTextField(10);
-		 */
+		JPanel inputPanel = new JPanel();
 
-		JPanel panel = new JPanel();
-
-		panel.setBackground(new Color(201, 203, 255));
-		panel.setSize(300, 300);
+		inputPanel.setBackground(new Color(201, 203, 255));
+		inputPanel.setSize(300, 300);
 		GridBagLayout layout = new GridBagLayout();
 
-		panel.setLayout(layout);
+		inputPanel.setLayout(layout);
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		/*
@@ -184,15 +166,15 @@ public class GUI extends JFrame {
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		panel.add(hybridLabel, gbc);
+		inputPanel.add(hybridLabel, gbc);
 
 		gbc.gridx = 3;
 		gbc.gridy = 0;
-		panel.add(uploadHybridFilesButton, gbc);
+		inputPanel.add(uploadHybridFilesButton, gbc);
 
 		gbc.gridx = 4;
 		gbc.gridy = 0;
-		panel.add(showHybridFileLoc, gbc);
+		inputPanel.add(showHybridFileLoc, gbc);
 
 		/*
 		 * keywordSheetLabel = new JLabel("Keyword Sheet"); dataSheetLabel = new
@@ -212,8 +194,12 @@ public class GUI extends JFrame {
 		 */
 		uploadHybridFilesButton.addActionListener(new uploadHybridTestsListener());
 
-		add(panel);
-		setVisible(true);
+		comboPanel.setLayout(new BorderLayout());
+		comboPanel.add(ckpanel, BorderLayout.NORTH);
+		comboPanel.add(inputPanel, BorderLayout.SOUTH);
+		this.add(comboPanel,BorderLayout.WEST);
+		this.add(new SysPanel(), BorderLayout.CENTER);
+		this.setVisible(true);
 	}
 
 	/*
