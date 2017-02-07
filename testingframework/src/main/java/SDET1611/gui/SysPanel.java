@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
  */
 public class SysPanel extends JScrollPane {
 	
-	JTextArea resultArea = new JTextArea();
+	static JTextArea resultArea = new JTextArea();
 	
 	/**
 	 * Default / only constructor.
