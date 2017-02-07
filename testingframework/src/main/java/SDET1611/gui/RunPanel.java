@@ -147,6 +147,8 @@ public class RunPanel extends JPanel implements ActionListener {
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
 		if(!PropObj.getDriverExistence()){
+			
+			SysPanel.resultArea.setText("");
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();

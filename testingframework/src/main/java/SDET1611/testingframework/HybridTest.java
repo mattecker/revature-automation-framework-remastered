@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -86,19 +87,25 @@ public class HybridTest {
 			throws AssertionError {
 		try {
 			Assert.assertEquals(WebOp.action(keyword, objectName, objectType, value), true,
-					"Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
+					"\n\nFailed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value + "\n");
 			System.out.println(
 					"Success at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 		} catch (AssertionError e) {
 			System.out.println(
-					"Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
+					"\n\nFailed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value + "\n");
 			Assert.fail("Failed at " + testCaseName + " " + keyword); // TODO
 																		// make
 																		// better
 																		// failure
 																		// message?
 		} catch (InvalidObjectSelectorException e) {
+			System.out.println("\n\n");
+			System.out.println(e.getMessage());
 			Assert.fail(e.getMessage());
+		} catch (NoSuchElementException e){
+			System.out.println("\n\n");
+			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value + ". " + e.getMessage() + "\n");
+			Assert.fail("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 		}
 	}
 
