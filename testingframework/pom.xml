@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>SDET1611</groupId>
-	<artifactId>testingframework</artifactId>
+	<artifactId>exec-maven-plugin</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
@@ -61,6 +61,23 @@
 					<redirectTestOutputToFile>false</redirectTestOutputToFile>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+	            <groupId>org.codehaus.mojo</groupId>
+	            <artifactId>exec-maven-plugin</artifactId>
+	            <version>1.2.1</version>
+	            <executions>
+	                <execution>
+	                    <goals>
+	                        <goal>java</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	            <configuration>
+	                <mainClass>SDET1611.testingframework.Main</mainClass>
+	            </configuration>
+            </plugin>
+			
 		</plugins>
 		<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
 			<version>2.18.1</version> <configuration> <testFailureIgnore>true</testFailureIgnore> 
