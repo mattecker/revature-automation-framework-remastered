@@ -207,8 +207,8 @@ public class RunPanel extends JPanel implements ActionListener {
 		} else {
 			JOptionPane.showMessageDialog(null, "No Browsers were selected. Please select a browser to continue.");
 		}
-		}else{
-			System.out.println("Threads are currently running!!!");
-		}
+		}//else{
+			//System.out.println("Threads are currently running!!!");
+		//}
 	}
 }
