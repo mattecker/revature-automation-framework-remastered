@@ -146,6 +146,7 @@ public class RunPanel extends JPanel implements ActionListener {
 
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
+		if(!PropObj.getDriverExistence()){
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
@@ -198,6 +199,7 @@ public class RunPanel extends JPanel implements ActionListener {
 			for (int i = 0; i < drivers.size(); i++) {
 				TestThread T = new TestThread(drivers.get(i));
 				T.setName(drivers.get(i));
+				PropObj.setDriverExists(drivers.get(i));
 				T.start();
 			}
 			System.gc();
@@ -205,6 +207,8 @@ public class RunPanel extends JPanel implements ActionListener {
 		} else {
 			JOptionPane.showMessageDialog(null, "No Browsers were selected. Please select a browser to continue.");
 		}
-
+		}//else{
+			//System.out.println("Threads are currently running!!!");
+		//}
 	}
 }
