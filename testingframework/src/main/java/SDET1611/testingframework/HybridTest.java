@@ -3,12 +3,15 @@ package SDET1611.testingframework;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestContext;
+import org.testng.TestRunner;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
@@ -60,8 +63,13 @@ public class HybridTest {
 	 *             If the data provided is not found.
 	 */
 	@BeforeSuite
-	public void setUp() throws IOException {
+	public void setUp(ITestContext ctx) throws IOException {
 		driver = DriverHolder.getDriver(OSName, driverName, Bit);
+		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		TestRunner runner = (TestRunner) ctx;
+		
+		//TODO Figure out a directory to send the test result HTML to.
+		//runner.setOutputDirectory("C:\\Users\\cavan\\Documents");
 		WebOp = new WebOperation(driver);
 	}
 
@@ -104,7 +112,7 @@ public class HybridTest {
 			Assert.fail(e.getMessage());
 		} catch (NoSuchElementException e){
 			System.out.println("\n\n");
-			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value + ". " + e.getMessage() + "\n");
+			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value + ". " + "objectName is not associated with any object on the current webpage." + "\n");
 			Assert.fail("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 		}
 	}
