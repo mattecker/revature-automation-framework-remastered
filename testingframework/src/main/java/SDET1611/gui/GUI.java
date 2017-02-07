@@ -110,8 +110,8 @@ public class GUI extends JFrame {
 		gbc.gridy = 0;
 		inputPanel.add(uploadHybridFilesButton, gbc);
 
-		gbc.gridx = 4;
-		gbc.gridy = 0;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
 
 		inputPanel.add(showHybridFileLoc, gbc);
 
