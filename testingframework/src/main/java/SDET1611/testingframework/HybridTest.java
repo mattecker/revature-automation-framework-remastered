@@ -1,10 +1,8 @@
 package SDET1611.testingframework;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -22,13 +20,8 @@ public class HybridTest {
 	private String driverName;
 	private String Bit;
 	static File home = new File(System.getProperty("user.dir"));
-	// private String PropertiesFilePath;
-	// private String PropertiesFileName;
-	// private Properties objectProperties;
 	private String DataFilePath;
-	private String DataFileName;
 	private String KeywordFilePath;
-	private String KeywordFileName;
 	private Sheet keywordSheet;
 	private Sheet dataSheet;
 	private String keywordSheetName;
@@ -46,8 +39,6 @@ public class HybridTest {
 		System.out.println(DataFilePath);
 		KeywordFilePath = testInfo[1].replace("\\", "");
 		System.out.println(KeywordFilePath);
-		// PropertiesFilePath = testInfo[2].replace("\\", "");
-		// System.out.println(PropertiesFilePath);
 
 		keywordSheetName = testInfo[3];
 		System.out.println(keywordSheetName);
@@ -71,10 +62,6 @@ public class HybridTest {
 	public void setUp() throws IOException {
 		driver = DriverHolder.getDriver(OSName, driverName, Bit);
 		WebOp = new WebOperation(driver);
-
-		// objectProperties = ReadObjectFile.getObjectData(PropertiesFilePath);
-		// TODO: find way to dynamically change the sheet name
-		// Get row counts
 	}
 
 	/**
@@ -97,10 +84,6 @@ public class HybridTest {
 	public void allTests(String testCaseName, String keyword, String objectName, String objectType, String value)
 			throws AssertionError {
 		try {
-			// Assert.assertEquals(WebOp.action(objectProperties, keyword,
-			// objectName, objectType, value), true, "Failed at: " +
-			// testCaseName + " " + keyword + " " + objectName + " " +
-			// objectType + " " + value);
 			Assert.assertEquals(WebOp.action(keyword, objectName, objectType, value), true,
 					"Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value);
 			System.out.println(
@@ -120,56 +103,44 @@ public class HybridTest {
 
 	/**
 	 * @return Data to be tested
-	 * @throws IOException
-	 *             In case of unreadable files
+	 * @throws IOException In case of unreadable files
 	 * 
-	 *             You may have to read this function more than once to
-	 *             understand the logic here.
+	 * You may have to read this function more than once to understand the logic here.
 	 * 
-	 *             This method uses 5 nested for loops to iterate through
-	 *             combinations of two 2D arrays, a keyword file and a data
-	 *             File, for each pair of data and keyword sheets. This data
-	 *             provider returns a 2D array of Strings, where each row is a
-	 *             test to be performed, and each step.
+	 * This method uses 5 nested for loops to iterate through
+	 * combinations of two 2D arrays, a keyword file and a data
+	 * File, for each pair of data and keyword sheets. This data
+	 * provider returns a 2D array of Strings, where each row is a
+	 * test to be performed, and each step.
 	 * 
-	 *             EX:
+	 * EX:
 	 * 
-	 *             |ScenarioName| Keyword | Object | Object Type | Value |
-	 *             |------------|-----------|-----------|-------------|---------
-	 *             ---------| | Login | | | | |
-	 *             |------------|-----------|-----------|-------------|---------
-	 *             ---------| | | Go To URL | | | UrlColumn |
-	 *             |------------|-----------|-----------|-------------|---------
-	 *             ---------| | | InputText | username | name | UserNameColumn |
-	 *             |------------|-----------|-----------|-------------|---------
-	 *             ---------| | | InputText | password | name | passwordColumn |
-	 *             |------------|-----------|-----------|-------------|---------
-	 *             ---------| | | Click | login | name | |
-	 *             |------------|-----------|-----------|-------------|---------
-	 *             ---------|
+	 * |ScenarioName|  Keyword  |  Object   | Object Type |     Value        |
+	 * |------------|-----------|-----------|-------------|------------------|
+	 * |   Login    |           |           |             |                  |
+	 * |------------|-----------|-----------|-------------|------------------|
+	 * |            | Go To URL |           |             |    UrlColumn     |
+	 * |------------|-----------|-----------|-------------|------------------|
+	 * |            | InputText | username  |    name     |  UserNameColumn  |
+	 * |------------|-----------|-----------|-------------|------------------|
+	 * |            | InputText | password  |    name     |  passwordColumn  |
+	 * |------------|-----------|-----------|-------------|------------------|
+	 * |            |   Click   |   login   |    name     |                  |
+	 * |------------|-----------|-----------|-------------|------------------|
 	 * 
-	 *             This file hooks to a data sheet formatted as such:
+	 * This file hooks to a data sheet formatted as such:
 	 * 
-	 *             | UrlColumn | UserNameColumn | passwordColumn |
-	 *             |-------------|------------------|-------------------|
-	 *             |(someLongURL)| yuvi1 | yuvi1 |
-	 *             |-------------|------------------|-------------------| |
-	 *             (anotherURL)| johnDoe | myPass |
-	 *             |-------------|------------------|-------------------|
-	 *
-	 *             Also required is a properties file, which relates the Object
-	 *             column of the keyword file to the elements on the webpage. It
-	 *             acts similar to an Object repository.
-	 *
-	 *             ------------------------ | # comments | | | |
-	 *             username=userName | | password=userPass | | |
-	 *             |______________________|
+	 * |  UrlColumn  |  UserNameColumn  |  passwordColumn   |
+	 * |-------------|------------------|-------------------|
+	 * |(someLongURL)|       yuvi1      |       yuvi1       |
+	 * |-------------|------------------|-------------------|
+	 * |(anotherURL) |      johnDoe     |      myPass       |
+	 * |-------------|------------------|-------------------|
 	 * 
 	 */
 	@DataProvider(name = "hybridData")
 	public Object[][] getDataFromProvider() throws IOException {
-		// List of Object[] that will contain testing values for the action in
-		// the @test
+		// List of Object[] that will contain testing values for the action in the @test
 		ArrayList<Object[]> testingValues = new ArrayList<Object[]>();
 
 		boolean isDataValue = false;
@@ -177,8 +148,7 @@ public class HybridTest {
 		// Temp variable used to assign values into the ArrayObject
 		String cellData = null;
 
-		// Temp variable for storing the scenario name for each step in a
-		// scenario
+		// Temp variable for storing the scenario name for each step in a scenario
 		String scenarioName = "";
 
 		keywordSheet = ReadExcelFile.readExcel(KeywordFilePath, keywordSheetName);
@@ -208,21 +178,15 @@ public class HybridTest {
 		for (int r = 1; r <= ddRowCount; r++) {
 			Row ddRow = dataSheet.getRow(r);
 
-			// For each row in the keyword sheet we want to write tests for our
-			// given data row.
+			// For each row in the keyword sheet we want to write tests for our given data row.
 			for (int i = 0; i < kdRowCount; i++) {
 				Object[] rowObject = new Object[5];
 
-				// First row contains description words therefore start at
-				// second row.
+				// First row contains description words therefore start at second row.
 				Row kdRow = keywordSheet.getRow(i + 1);
 
 				/*
-				 * Skip scenario name rows, and sets first cell for steps to the
-				 * scenario name EX: __________________ | Name | keyword |
-				 * |--------|---------| | Login | | <-- Skip this row
-				 * ---------|---------| | |inputText| <-- Set test name in this
-				 * row --------------------
+				 * Skip scenario name rows, and sets first cell for steps to the next row
 				 */
 				if ((kdRow.getCell(0) != null) && (!kdRow.getCell(0).toString().equals(""))) {
 					scenarioName = kdRow.getCell(0).toString();
@@ -234,8 +198,7 @@ public class HybridTest {
 				// For each column in a row of keyword sheet, skip first column
 				// because it is set as test name
 				for (int j = 1; j < kdRow.getLastCellNum(); j++) {
-					// If there is a value in Value column get it from data
-					// sheet
+					// If there is a value in Value column get it from data sheet
 					if (j == 4 && kdRow.getCell(j) != null) {
 						String value = kdRow.getCell(j).toString();
 
@@ -288,5 +251,4 @@ public class HybridTest {
 		}
 		return newObject;
 	}
-
 }

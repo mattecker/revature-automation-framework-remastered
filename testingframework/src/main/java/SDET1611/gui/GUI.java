@@ -24,13 +24,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
-
-import SDET1611.testingframework.PropObj;
-import SDET1611.testingframework.ReadExcelFile;
 
 /**
  * There is code duplicate from UploadPanel.java into this class So styling can
@@ -41,21 +35,10 @@ import SDET1611.testingframework.ReadExcelFile;
 public class GUI extends JFrame {
 	private CheckBoxPanel ckpanel;
 	private GUITitle guiTitle;
-	// private JPanel lastpanel;
 	private RunPanel runPanels;
-	// private JLabel keywordSheetLabel;
-	// private JLabel dataSheetLabel;
 	final int WINDOW_WIDTH = 700, WINDOW_HEIGHT = 500;
 
-	/*
-	 * private static JLabel showKeywordFileLoc = new JLabel(""); private static
-	 * JLabel showDataDrivenFileLoc = new JLabel(""); private static JLabel
-	 * showPropertiesFileLoc = new JLabel("");
-	 */
 	private static JLabel showHybridFileLoc = new JLabel("");
-
-	private static JLabel keySheetExists = new JLabel("");
-	private static JLabel dataSheetExists = new JLabel("");
 
 	public GUI() {
 		super("Hybrid Testing App");
@@ -81,7 +64,6 @@ public class GUI extends JFrame {
 			loadNimbus();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			// e.printStackTrace();
 
 			// load old UI if nimbus isn't available
 			System.out.println("Nimbus UI not found or failed to load.");
@@ -100,33 +82,14 @@ public class GUI extends JFrame {
 
 		add(guiTitle, BorderLayout.NORTH);
 		add(ckpanel, BorderLayout.WEST);
-		// add(td, BorderLayout.WEST);
 		add(runPanels, BorderLayout.SOUTH);
-		// JLabel keywordLabel = new JLabel("Keyword driven File");
 
-		// Add labels
+		// Add label
 		setFont(new Font("Serif", Font.BOLD, 20));
-		/*
-		 * JLabel dataLabel = new JLabel("Data Driven File"); JLabel
-		 * propertiesLabel = new JLabel("Properties File"); JLabel keywordSheet
-		 * = new JLabel("Keyword Sheet"); JLabel dataSheet = new JLabel(
-		 * "Data Sheet");
-		 */
 		JLabel hybridLabel = new JLabel("Hybrid Files");
 
-		// Add buttons
-		/*
-		 * JButton uploadKeywordExcelButton = new JButton("Upload"); JButton
-		 * uploadDataExcelButton = new JButton("Upload"); JButton
-		 * uploadPropertiesButton = new JButton("Upload");
-		 */
+		// Add button
 		JButton uploadHybridFilesButton = new JButton("Upload");
-
-		// Add textfields
-		/*
-		 * JTextField keywordSheetTextField = new JTextField(10); JTextField
-		 * dataSheetTextField = new JTextField(10);
-		 */
 
 		JPanel panel = new JPanel();
 
@@ -136,51 +99,6 @@ public class GUI extends JFrame {
 
 		panel.setLayout(layout);
 		GridBagConstraints gbc = new GridBagConstraints();
-
-		/*
-		 * gbc.fill = GridBagConstraints.HORIZONTAL;//add gbc.gridx = 4;
-		 * gbc.gridy = 0; panel.add(showKeywordFileLoc,gbc);
-		 * 
-		 * gbc.fill = GridBagConstraints.HORIZONTAL; gbc.gridx = 0; gbc.gridy =
-		 * 0; panel.add(keywordLabel,gbc);
-		 * 
-		 * gbc.gridx = 3; gbc.gridy = 0;
-		 * panel.add(uploadKeywordExcelButton,gbc);
-		 * 
-		 * gbc.fill = GridBagConstraints.HORIZONTAL;//add gbc.gridx = 4;
-		 * gbc.gridy = 1; panel.add(showDataDrivenFileLoc,gbc);
-		 * 
-		 * gbc.fill = GridBagConstraints.HORIZONTAL; //gbc.ipady = 20; gbc.gridx
-		 * = 0; gbc.gridy = 1; panel.add(dataLabel,gbc);
-		 * 
-		 * gbc.gridx = 3; gbc.gridy =1; panel.add(uploadDataExcelButton,gbc);
-		 * 
-		 * gbc.fill = GridBagConstraints.HORIZONTAL;//add gbc.gridx = 4;
-		 * gbc.gridy = 2; panel.add(showPropertiesFileLoc,gbc);
-		 * 
-		 * gbc.gridx = 0; gbc.gridy = 3; gbc.fill =
-		 * GridBagConstraints.HORIZONTAL; //gbc.gridwidth = 2;
-		 * panel.add(keywordSheet,gbc);
-		 * 
-		 * gbc.gridx = 3; gbc.gridy = 2; gbc.fill =
-		 * GridBagConstraints.HORIZONTAL; //gbc.gridwidth = 2;
-		 * panel.add(uploadPropertiesButton,gbc);
-		 * 
-		 * //Keyword Sheet gbc.gridx = 0; gbc.gridy = 2; gbc.fill =
-		 * GridBagConstraints.HORIZONTAL; //gbc.gridwidth = 2;
-		 * panel.add(propertiesLabel,gbc);
-		 * 
-		 * gbc.gridx = 3; gbc.gridy = 3; gbc.fill =
-		 * GridBagConstraints.HORIZONTAL;
-		 * 
-		 * //gbc.gridwidth = 2; panel.add(keywordSheetTextField,gbc);
-		 * 
-		 * //dataDriven Sheet gbc.gridx = 0; gbc.gridy = 4; gbc.fill =
-		 * GridBagConstraints.HORIZONTAL; panel.add(dataSheet,gbc);
-		 * 
-		 * gbc.gridx = 3; gbc.gridy = 4; gbc.gridheight = 2; gbc.fill =
-		 * GridBagConstraints.HORIZONTAL; panel.add(dataSheetTextField,gbc);
-		 */
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -193,85 +111,12 @@ public class GUI extends JFrame {
 		gbc.gridx = 4;
 		gbc.gridy = 0;
 		panel.add(showHybridFileLoc, gbc);
-
-		/*
-		 * keywordSheetLabel = new JLabel("Keyword Sheet"); dataSheetLabel = new
-		 * JLabel("Data Sheet"); add(keywordSheetLabel); add(dataSheetLabel);
-		 */
-
-		/*
-		 * uploadKeywordExcelButton.addActionListener(new
-		 * UploadKeywordExcelListener());
-		 * uploadDataExcelButton.addActionListener(new
-		 * UploadDataExcelListener());
-		 * uploadPropertiesButton.addActionListener(new
-		 * UploadPropertiesListener());
-		 * keywordSheetTextField.addFocusListener(new
-		 * KeywordSheetTextListener()); dataSheetTextField.addFocusListener(new
-		 * DataSheetTextListener());
-		 */
+		
 		uploadHybridFilesButton.addActionListener(new uploadHybridTestsListener());
 
 		add(panel);
 		setVisible(true);
 	}
-
-	/*
-	 * class UploadKeywordExcelListener implements ActionListener { final
-	 * JFileChooser fc = new JFileChooser(); final RunPanel runPanel = new
-	 * RunPanel();
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { //Get return value
-	 * int returnVal = fc.showOpenDialog(fc); // If success then get file if
-	 * (returnVal == JFileChooser.APPROVE_OPTION) { // Should be keyword excel
-	 * file File keywordExcelFile = fc.getSelectedFile();
-	 * runPanel.setKeywordExcelFile(keywordExcelFile);
-	 * showKeywordFileLoc.setText(runPanel.getKeywordPath()); } } }
-	 * 
-	 * class UploadDataExcelListener implements ActionListener { final
-	 * JFileChooser fc = new JFileChooser(); final RunPanel runPanel = new
-	 * RunPanel();
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { //Get return value
-	 * int returnVal = fc.showOpenDialog(fc); // If success then get file if
-	 * (returnVal == JFileChooser.APPROVE_OPTION) { // Should be keyword excel
-	 * file File dataExcelFile = fc.getSelectedFile();
-	 * runPanel.setDataExcelFile(dataExcelFile);
-	 * showDataDrivenFileLoc.setText(runPanel.getDataDrivenPath()); } } }
-	 * 
-	 * class UploadPropertiesListener implements ActionListener { final
-	 * JFileChooser fc = new JFileChooser(); final RunPanel runPanel = new
-	 * RunPanel();
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { //Get return value
-	 * int returnVal = fc.showOpenDialog(fc); // If success then get file if
-	 * (returnVal == JFileChooser.APPROVE_OPTION) { // Should be keyword excel
-	 * file File propertiesFile = fc.getSelectedFile();
-	 * runPanel.setPropertiesFile(propertiesFile);
-	 * showPropertiesFileLoc.setText(runPanel.getPropertiesFilePath()); } } }
-	 * 
-	 * class KeywordSheetTextListener implements FocusListener { final RunPanel
-	 * runPanel = new RunPanel();
-	 * 
-	 * @Override public void focusGained(FocusEvent e) {
-	 * 
-	 * }
-	 * 
-	 * @Override public void focusLost(FocusEvent e) { JTextField input =
-	 * (JTextField)e.getSource(); runPanel.setKeywordSheetText(input.getText());
-	 * System.out.println("DEBUG--- input text : "+input.getText()); } }
-	 * 
-	 * class DataSheetTextListener implements FocusListener { final RunPanel
-	 * runPanel = new RunPanel();
-	 * 
-	 * @Override public void focusGained(FocusEvent arg0) {
-	 * 
-	 * }
-	 * 
-	 * @Override public void focusLost(FocusEvent e) { JTextField input =
-	 * (JTextField)e.getSource(); runPanel.setDataSheetText(input.getText()); }
-	 * }
-	 */
 
 	class uploadHybridTestsListener implements ActionListener {
 		final JFileChooser fc = new JFileChooser();
@@ -288,24 +133,10 @@ public class GUI extends JFrame {
 				// Get Keyword File
 				runPanel.setKeywordExcelFile(hybridFiles);
 				runPanel.setKeywordSheetText("Keywords");
-				// showKeywordFileLoc.setText(runPanel.getKeywordPath());
 
 				// Get Data File
 				runPanel.setDataExcelFile(hybridFiles);
 				runPanel.setDataSheetText("Data");
-				// showDataDrivenFileLoc.setText(runPanel.getDataDrivenPath());
-
-				// Get Properties File
-				/*try {
-					Sheet propertiesSheet = ReadExcelFile.readExcel(hybridFiles.getAbsolutePath(), "Properties");
-					Row hybridRow = propertiesSheet.getRow(0);
-					String propertiesPath = hybridRow.getCell(0).toString();
-					File propertiesFile = new File(propertiesPath);
-					runPanel.setPropertiesFile(propertiesFile);
-					// showPropertiesFileLoc.setText(runPanel.getPropertiesFilePath());
-				} catch (Exception exception) {
-					exception.printStackTrace();
-				}*/
 			}
 		}
 	}
@@ -314,7 +145,6 @@ public class GUI extends JFrame {
 			UnsupportedLookAndFeelException {
 		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 			if ("Nimbus".equals(info.getName())) {
-				// UIManager.put("nimbusBlueGrey", new Color(0, 0, 255));
 				UIManager.setLookAndFeel(info.getClassName());
 				break;
 			}
@@ -339,7 +169,6 @@ public class GUI extends JFrame {
 			// com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			// e.printStackTrace();
 			System.out.println("Default UI has failed to laod.");
 		}
 	}
