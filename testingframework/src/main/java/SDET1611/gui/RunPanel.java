@@ -11,9 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import SDET1611.testingframework.MultithreadTests;
 import SDET1611.testingframework.PropObj;
-import SDET1611.testingframework.TestThread;
 
 import javax.swing.JOptionPane;
 
@@ -56,7 +54,6 @@ public class RunPanel extends JPanel implements ActionListener {
 	}
 
 	public String getKeywordPath() {
-		// System.out.println(keywordPath);
 		return keywordPath;
 	}
 
@@ -89,20 +86,6 @@ public class RunPanel extends JPanel implements ActionListener {
 	public String getDataSheetText() {
 		return dataSheetText;
 	}
-
-	// Property file methods
-	/*public void setPropertiesFile(File file) {
-		propertiesFile = file;
-		popertiesPath = file.getName();
-	}
-
-	public String getPropertiesFilePath() {
-		return popertiesPath;
-	}
-
-	public File getPropertiesFile() {
-		return propertiesFile;
-	}*/
 
 	// Check box methods
 	public void setChromeCheckValue(boolean isChecked) {
@@ -166,7 +149,6 @@ public class RunPanel extends JPanel implements ActionListener {
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
-		//propertiesFile = getPropertiesFile();
 
 		String keywordSheet = getKeywordSheetText();
 		String dataSheet = getDataSheetText();
@@ -205,11 +187,6 @@ public class RunPanel extends JPanel implements ActionListener {
 
 		if (safariCheckboxValue)
 			drivers.add("Safari");
-
-		// System.out.println(chromeCheckboxValue);
-		// System.out.println(ieCheckboxValue);
-		// System.out.println(firefoxCheckboxValue);
-		// System.out.println(edgeCheckboxValue);
 
 		System.out.println(drivers);
 
