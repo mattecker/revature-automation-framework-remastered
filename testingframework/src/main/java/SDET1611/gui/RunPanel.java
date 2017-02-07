@@ -189,9 +189,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		if (safariCheckboxValue)
 			drivers.add("Safari");
 
-		System.out.println(drivers);
-
-		if (!drivers.isEmpty()) {
+		if (!drivers.isEmpty() && keywordSheet != null) {
 			PropObj testProperties = PropObj.tryToCreateInstance(dataExcelFile.toString().replace("\\", "/"),
 					keywordExcelFile.toString().replace("\\", "/"),
 					keywordSheet, dataSheet, OS, bit, drivers.toArray(new String[drivers.size()]));
@@ -204,8 +202,10 @@ public class RunPanel extends JPanel implements ActionListener {
 			}
 			System.gc();
 
-		} else {
+		} else if (keywordSheet != null){
 			JOptionPane.showMessageDialog(null, "No Browsers were selected. Please select a browser to continue.");
+		} else {
+			JOptionPane.showMessageDialog(null, "No Hybrid file selected. Please select a hybrid file to continue.");
 		}
 		}//else{
 			//System.out.println("Threads are currently running!!!");
