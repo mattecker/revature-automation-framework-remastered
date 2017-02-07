@@ -106,10 +106,11 @@ public class GUI extends JFrame {
 		gbc.gridy = 0;
 		inputPanel.add(hybridLabel, gbc);
 
-		gbc.gridx = 3;
+		gbc.gridx = 1;
 		gbc.gridy = 0;
 		inputPanel.add(uploadHybridFilesButton, gbc);
 
+		gbc.gridwidth = 3;
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 
