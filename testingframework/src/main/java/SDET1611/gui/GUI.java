@@ -24,6 +24,10 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 64c1117afb86874e48699fb3e49e29c017c9362f
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 
 /**
@@ -43,10 +47,10 @@ public class GUI extends JFrame {
 	public GUI() {
 		super("Hybrid Testing App");
 
-		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
-		setBackground(new Color(201, 203, 255));
+		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		this.setBackground(new Color(201, 203, 255));
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("File");
 		JMenuItem menuItem = new JMenuItem("Exit");
@@ -61,13 +65,13 @@ public class GUI extends JFrame {
 
 		// load Numbus UI
 		try {
-			loadNimbus();
+			this.loadNimbus();
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 
 			// load old UI if nimbus isn't available
 			System.out.println("Nimbus UI not found or failed to load.");
-			loadBackupUI();
+			this.loadBackupUI();
 		}
 
 		menu.add(menuItem);
@@ -80,42 +84,69 @@ public class GUI extends JFrame {
 		runPanels.setBackground(new Color(201, 203, 255));
 		guiTitle.setBackground(new Color(201, 203, 255));
 
-		add(guiTitle, BorderLayout.NORTH);
-		add(ckpanel, BorderLayout.WEST);
-		add(runPanels, BorderLayout.SOUTH);
+		this.add(guiTitle, BorderLayout.NORTH);
+		
+		JPanel comboPanel = new JPanel();
+		comboPanel.setBackground(new Color(201,203,255));
+
+		this.add(runPanels, BorderLayout.SOUTH);
 
 		// Add label
-		setFont(new Font("Serif", Font.BOLD, 20));
+		this.setFont(new Font("Serif", Font.BOLD, 20));
 		JLabel hybridLabel = new JLabel("Hybrid Files");
 
-		// Add button
 		JButton uploadHybridFilesButton = new JButton("Upload");
 
-		JPanel panel = new JPanel();
+		JPanel inputPanel = new JPanel();
 
-		panel.setBackground(new Color(201, 203, 255));
-		panel.setSize(300, 300);
+		inputPanel.setBackground(new Color(201, 203, 255));
+		inputPanel.setSize(300, 300);
 		GridBagLayout layout = new GridBagLayout();
 
-		panel.setLayout(layout);
+		inputPanel.setLayout(layout);
 		GridBagConstraints gbc = new GridBagConstraints();
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		panel.add(hybridLabel, gbc);
+		inputPanel.add(hybridLabel, gbc);
 
 		gbc.gridx = 3;
 		gbc.gridy = 0;
-		panel.add(uploadHybridFilesButton, gbc);
+		inputPanel.add(uploadHybridFilesButton, gbc);
 
 		gbc.gridx = 4;
 		gbc.gridy = 0;
+<<<<<<< HEAD
 		panel.add(showHybridFileLoc, gbc);
 		
+=======
+		inputPanel.add(showHybridFileLoc, gbc);
+
+		/*
+		 * keywordSheetLabel = new JLabel("Keyword Sheet"); dataSheetLabel = new
+		 * JLabel("Data Sheet"); add(keywordSheetLabel); add(dataSheetLabel);
+		 */
+
+		/*
+		 * uploadKeywordExcelButton.addActionListener(new
+		 * UploadKeywordExcelListener());
+		 * uploadDataExcelButton.addActionListener(new
+		 * UploadDataExcelListener());
+		 * uploadPropertiesButton.addActionListener(new
+		 * UploadPropertiesListener());
+		 * keywordSheetTextField.addFocusListener(new
+		 * KeywordSheetTextListener()); dataSheetTextField.addFocusListener(new
+		 * DataSheetTextListener());
+		 */
+>>>>>>> 64c1117afb86874e48699fb3e49e29c017c9362f
 		uploadHybridFilesButton.addActionListener(new uploadHybridTestsListener());
 
-		add(panel);
-		setVisible(true);
+		comboPanel.setLayout(new BorderLayout());
+		comboPanel.add(ckpanel, BorderLayout.NORTH);
+		comboPanel.add(inputPanel, BorderLayout.SOUTH);
+		this.add(comboPanel,BorderLayout.WEST);
+		this.add(new SysPanel(), BorderLayout.CENTER);
+		this.setVisible(true);
 	}
 
 	class uploadHybridTestsListener implements ActionListener {
