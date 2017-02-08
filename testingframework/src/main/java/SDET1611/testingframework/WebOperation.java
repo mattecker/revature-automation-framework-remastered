@@ -164,7 +164,7 @@ public class WebOperation {
 				element = driver.findElement(this.getObject(objectType, objectName));
 				if (element != null) {
 					String txt = element.getText();
-					if (txt == objectName) {
+					if ((txt.trim()).equals(value.trim())) {
 						testbool = true;
 					}
 				} else {
