@@ -136,7 +136,12 @@ public class GUI extends JFrame {
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File hybridFiles = fc.getSelectedFile();
-				showHybridFileLoc.setText(hybridFiles.getName());
+				if(hybridFiles.getName().length() > 20){
+					showHybridFileLoc.setText(hybridFiles.getName().substring(0, 20).concat("..."));
+				}
+				else {
+					showHybridFileLoc.setText(hybridFiles.getName());
+				}
 
 				// Get Keyword File
 				runPanel.setKeywordExcelFile(hybridFiles);

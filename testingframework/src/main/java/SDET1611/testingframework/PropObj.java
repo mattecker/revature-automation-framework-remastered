@@ -33,7 +33,7 @@ public class PropObj implements Serializable {
 	public static void setDriverExists(String driverName){
 		driverExists.add(driverName);
 	}
-	public static void removeDiverExists(String driverName){
+	public static void removeDriverExists(String driverName){
 		for(String driver:driverExists){
 			if(driver.equals(driverName)){
 				driverExists.remove(driver);

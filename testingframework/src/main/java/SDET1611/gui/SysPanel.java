@@ -2,7 +2,6 @@ package SDET1611.gui;
 
 import java.io.PrintStream;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
