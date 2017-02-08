@@ -25,6 +25,7 @@ public class PropObj implements Serializable {
 	
 	public static boolean getDriverExistence(){
 		if(driverExists.isEmpty()){
+			deleteInstance();
 			return false;
 		}
 		return true;
