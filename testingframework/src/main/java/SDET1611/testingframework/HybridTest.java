@@ -108,8 +108,8 @@ public class HybridTest {
 																		// message?
 		} catch (InvalidObjectSelectorException e) {
 			System.out.println("\n\n");
-			System.out.println(e.getMessage());
-			Assert.fail(e.getMessage());
+			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value + ". " + "objectType is not a valid type, please view the documentation for valid types. \n");
+			Assert.fail("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value + ". " + "objectType is not a valid type, please view the documentation for valid types.");
 		} catch (NoSuchElementException e){
 			System.out.println("\n\n");
 			System.out.println("Failed at: " + testCaseName + " " + keyword + " " + objectName + " " + objectType + " " + value + ". " + "objectName is not associated with any object on the current webpage." + "\n");
