@@ -2,7 +2,6 @@ package SDET1611.gui;
 
 import java.io.PrintStream;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -12,7 +11,7 @@ import javax.swing.JTextArea;
  */
 public class SysPanel extends JScrollPane {
 	
-	JTextArea resultArea = new JTextArea();
+	static JTextArea resultArea = new JTextArea();
 	
 	/**
 	 * Default / only constructor.

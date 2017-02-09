@@ -11,9 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import SDET1611.testingframework.MultithreadTests;
 import SDET1611.testingframework.PropObj;
-import SDET1611.testingframework.TestThread;
 
 import javax.swing.JOptionPane;
 
@@ -56,7 +54,6 @@ public class RunPanel extends JPanel implements ActionListener {
 	}
 
 	public String getKeywordPath() {
-		// System.out.println(keywordPath);
 		return keywordPath;
 	}
 
@@ -89,20 +86,6 @@ public class RunPanel extends JPanel implements ActionListener {
 	public String getDataSheetText() {
 		return dataSheetText;
 	}
-
-	// Property file methods
-	/*public void setPropertiesFile(File file) {
-		propertiesFile = file;
-		popertiesPath = file.getName();
-	}
-
-	public String getPropertiesFilePath() {
-		return popertiesPath;
-	}
-
-	public File getPropertiesFile() {
-		return propertiesFile;
-	}*/
 
 	// Check box methods
 	public void setChromeCheckValue(boolean isChecked) {
@@ -163,10 +146,12 @@ public class RunPanel extends JPanel implements ActionListener {
 
 	// Run Test action
 	public void actionPerformed(ActionEvent e) {
+		if(!PropObj.getDriverExistence()){
+			
+			SysPanel.resultArea.setText("");
 		String OS;
 		keywordExcelFile = getKeywordExcelFile();
 		dataExcelFile = getDataExcelFile();
-		//propertiesFile = getPropertiesFile();
 
 		String keywordSheet = getKeywordSheetText();
 		String dataSheet = getDataSheetText();
@@ -206,14 +191,7 @@ public class RunPanel extends JPanel implements ActionListener {
 		if (safariCheckboxValue)
 			drivers.add("Safari");
 
-		// System.out.println(chromeCheckboxValue);
-		// System.out.println(ieCheckboxValue);
-		// System.out.println(firefoxCheckboxValue);
-		// System.out.println(edgeCheckboxValue);
-
-		System.out.println(drivers);
-
-		if (!drivers.isEmpty()) {
+		if (!drivers.isEmpty() && keywordSheet != null) {
 			PropObj testProperties = PropObj.tryToCreateInstance(dataExcelFile.toString().replace("\\", "/"),
 					keywordExcelFile.toString().replace("\\", "/"),
 					keywordSheet, dataSheet, OS, bit, drivers.toArray(new String[drivers.size()]));
@@ -221,13 +199,18 @@ public class RunPanel extends JPanel implements ActionListener {
 			for (int i = 0; i < drivers.size(); i++) {
 				TestThread T = new TestThread(drivers.get(i));
 				T.setName(drivers.get(i));
+				PropObj.setDriverExists(drivers.get(i));
 				T.start();
 			}
 			System.gc();
 
-		} else {
+		} else if (keywordSheet != null){
 			JOptionPane.showMessageDialog(null, "No Browsers were selected. Please select a browser to continue.");
+		} else {
+			JOptionPane.showMessageDialog(null, "No Hybrid file selected. Please select a hybrid file to continue.");
 		}
-
+		}//else{
+			//System.out.println("Threads are currently running!!!");
+		//}
 	}
 }

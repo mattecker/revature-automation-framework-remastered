@@ -1,7 +1,6 @@
 package SDET1611.testingframework;
 
 import java.util.ArrayList;
-import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,8 +18,6 @@ public class WebOperation {
 	/**
 	 * Performs a single action determined by passed parameters
 	 * 
-	 * @param p
-	 *            A properties object
 	 * @param operation
 	 *            The name of the operation to be performed
 	 * @param objectName
@@ -32,8 +29,6 @@ public class WebOperation {
 	 *            type
 	 * @throws InvalidObjectSelectorException
 	 */
-	// public boolean action(Properties p, String operation, String objectName,
-	// String objectType, String value) {
 	public boolean action(String operation, String objectName, String objectType, String value)
 			throws InvalidObjectSelectorException {
 		boolean testbool = false;
@@ -49,8 +44,6 @@ public class WebOperation {
 			 */
 			switch (operation.toUpperCase()) {
 			case "CLICK":
-				// element = driver.findElement(this.getObject(p, objectType,
-				// objectName));
 				element = driver.findElement(this.getObject(objectType, objectName));
 				if (element != null) {
 					element.click();
@@ -63,8 +56,6 @@ public class WebOperation {
 			case "SELECT DROPDOWN":
 			case "SELECTDROPDOWN":
 			case "SELECT_DROPDOWN":
-				// element = driver.findElement(this.getObject(p, objectType,
-				// objectName));
 				element = driver.findElement(this.getObject(objectType, objectName));
 				if (element != null) {
 					Select select = new Select(element);
@@ -75,8 +66,6 @@ public class WebOperation {
 			case "DESELECT DROPDOWN":
 			case "DESELECTDROPDOWN":
 			case "DESELECT_DROPDOWN":
-				// element = driver.findElement(this.getObject(p, objectType,
-				// objectName));
 				element = driver.findElement(this.getObject(objectType, objectName));
 				if (element != null) {
 					Select select = new Select(element);
@@ -87,8 +76,6 @@ public class WebOperation {
 			case "DESELECT ALL":
 			case "DESELECTALL":
 			case "DESELECT_ALL":
-				// element = driver.findElement(this.getObject(p, objectType,
-				// objectName));
 				element = driver.findElement(this.getObject(objectType, objectName));
 				if (element != null) {
 					Select select = new Select(element);
@@ -102,13 +89,9 @@ public class WebOperation {
 			case "SELECT CHECKBOX":
 			case "SELECTCHECKBOX":
 			case "SELECT_CHECKBOX":
-				// ArrayList<WebElement> list = (ArrayList<WebElement>)
-				// driver.findElements(this.getObject(p, objectType,
-				// objectName));
 				ArrayList<WebElement> list = (ArrayList<WebElement>) driver
 						.findElements(this.getObject(objectType, objectName));
 				if (list != null) {
-					// list.get(list.indexOf(value)).click();
 					for (WebElement w : list) {
 						if (w.getAttribute("value") == value) {
 							w.click();
@@ -120,9 +103,6 @@ public class WebOperation {
 			case "DESELECT CHECKBOX":
 			case "DESELECTCHECKBOX":
 			case "DESELECT_CHECKBOX":
-				// ArrayList<WebElement> olist = (ArrayList<WebElement>)
-				// driver.findElements(this.getObject(p, objectType,
-				// objectName));
 				ArrayList<WebElement> olist = (ArrayList<WebElement>) driver
 						.findElements(this.getObject(objectType, objectName));
 				if (olist != null) {
@@ -138,8 +118,6 @@ public class WebOperation {
 			case "INPUTS":
 			case "TYPES":
 			case "WRITES":
-				// element = driver.findElement(this.getObject(p, objectType,
-				// objectName));
 				element = driver.findElement(this.getObject(objectType, objectName));
 				if (element != null) {
 					element.sendKeys(value);
@@ -162,9 +140,6 @@ public class WebOperation {
 			case "GETTITLE":
 				if (driver != null) {
 					String txt = driver.getTitle().trim();
-					// System.out.println("Debug--- txt = '"+txt+"'
-					// p.getProperty("+objectName+") =
-					// '"+p.getProperty(objectName).trim()+"'");
 					if (txt.equals(value.trim())) {
 						testbool = true;
 					}
@@ -178,9 +153,6 @@ public class WebOperation {
 			case "GETURL":
 				if (driver != null) {
 					String txt = driver.getCurrentUrl().trim();
-					// System.out.println("Debug--- txt = '"+txt+"'
-					// p.getProperty("+objectName+") =
-					// '"+p.getProperty(objectName).trim()+"'");
 					if (txt.contains(objectName.trim())) {
 						testbool = true;
 					}
@@ -189,12 +161,10 @@ public class WebOperation {
 			case "GET TEXT":
 			case "GET_TEXT":
 			case "GETTEXT":
-				// element = driver.findElement(this.getObject(p, objectType,
-				// objectName));
 				element = driver.findElement(this.getObject(objectType, objectName));
 				if (element != null) {
 					String txt = element.getText();
-					if (txt == objectName) {
+					if ((txt.trim()).equals(value.trim())) {
 						testbool = true;
 					}
 				} else {
@@ -220,10 +190,7 @@ public class WebOperation {
 	 * @return The requested web element
 	 * @throws InvalidObjectSelectorException
 	 */
-	// private By getObject(Properties p, String type, String value) {
 	private By getObject(String type, String value) throws InvalidObjectSelectorException {
-		// System.out.println("DEBUG---PropertyName: " + type + "----DEBUG");
-		// System.out.println("DEBUG---PropertyValue: " + value + "----DEBUG");
 		By toBeReturned = null;
 		String str = type.toLowerCase();
 		switch (str) {
