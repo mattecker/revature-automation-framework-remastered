@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>SDET1611</groupId>
-	<artifactId>exec-maven-plugin</artifactId>
-	<version>0.0.1</version>
+	<artifactId>testingframework</artifactId>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>testingframework</name>
@@ -61,32 +61,36 @@
 					<redirectTestOutputToFile>false</redirectTestOutputToFile>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
-	            <groupId>org.codehaus.mojo</groupId>
-	            <artifactId>exec-maven-plugin</artifactId>
-	            <version>1.2.1</version>
-	            <executions>
-	                <execution>
-	                    <goals>
-	                        <goal>java</goal>
-	                    </goals>
-	                </execution>
-	            </executions>
-	            <configuration>
-	                <mainClass>SDET1611.testingframework.Main</mainClass>
-	            </configuration>
-            </plugin>
-			
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<!-- nothing here -->
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>SDET1611.testingframework.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
-		<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
-			<version>2.18.1</version> <configuration> <testFailureIgnore>true</testFailureIgnore> 
-			<argLine> -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.8.10/aspectjweaver-1.8.10.jar" 
-			</argLine> </configuration> <dependencies> <dependency> <groupId>org.aspectj</groupId> 
-			<artifactId>aspectjweaver</artifactId> <version>1.8.10</version> </dependency> 
-			</dependencies> </plugin> -->
 	</build>
-	<!-- <reporting> <excludeDefaults>true</excludeDefaults> <plugins> <plugin> 
-		<groupId>ru.yandex.qatools.allure</groupId> <artifactId>allure-maven-plugin</artifactId> 
-		<version>2.2</version> </plugin> </plugins> </reporting> -->
 </project>
