@@ -19,269 +19,170 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 
 /**
- * There is code duplicate from UploadPanel.java into this class
- * So styling can be implemented to the upload panel.
- * It needs some refactoring but the code works.
+ * There is code duplicate from UploadPanel.java into this class So styling can
+ * be implemented to the upload panel. It needs some refactoring but the code
+ * works.
  *
  */
-
-public class GUI extends JFrame{
+public class GUI extends JFrame {
 	private CheckBoxPanel ckpanel;
 	private GUITitle guiTitle;
-	private JPanel lastpanel;
 	private RunPanel runPanels;
-	private JLabel keywordSheetLabel;
-	private JLabel dataSheetLabel;
-	final int WINDOW_WIDTH=700,
-			  WINDOW_HEIGHT=500;
-	
-	public GUI()
-	{
+	final int WINDOW_WIDTH = 700, WINDOW_HEIGHT = 500;
+
+	private static JLabel showHybridFileLoc = new JLabel("");
+
+	public GUI() {
 		super("Hybrid Testing App");
-		
-		setSize(WINDOW_WIDTH,WINDOW_HEIGHT);
-		setLayout(new BorderLayout());
-		setBackground(Color.white);
+
+		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		this.setBackground(new Color(201, 203, 255));
 		JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("File");
-        JMenuItem menuItem = new JMenuItem("Exit");
-        
-        
-        // --> File --> Exit --> Closes the window
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, KeyEvent.ALT_MASK));
-        menuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                System.exit(0);
-            }
-        });
-        
-        
-        try {
-	        Properties props = new Properties();
-	
-	        props.put("buttonColorLight", "50 230 227");
-	        props.put("buttonColorDark", "14 158 156");
-	
-	        props.put("rolloverColorLight", "131 237 242"); 
-	        props.put("rolloverColorDark", "51 177 184"); 
-	
-	        // set your theme
-	        SmartLookAndFeel.setCurrentTheme(props);
-	        // select the Look and Feel
-	        UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-	    }
-        catch(Exception ex) {
-        	ex.printStackTrace();
-        }
-        
-        menu.add(menuItem);
-        menuBar.add(menu);
-        setJMenuBar(menuBar);
-		guiTitle = new GUITitle();
-		ckpanel=new CheckBoxPanel();
-		ckpanel.setBackground(Color.white);
-		runPanels=new RunPanel();
-		runPanels.setBackground(Color.white);
-		guiTitle.setBackground(Color.white);
-		
-		add(guiTitle, BorderLayout.NORTH);
-		add(ckpanel,BorderLayout.WEST);
-		//add(td, BorderLayout.WEST);
-		add(runPanels, BorderLayout.SOUTH);
-		JLabel keywordLabel = new JLabel("Keyword driven File");
-		
-		//Add labels
-		setFont(new Font("Serif", Font.BOLD, 20));
-		JLabel dataLabel = new JLabel("Data Driven File");
-		JLabel propertiesLabel = new JLabel("Properties File");
-		JLabel keywordSheet = new JLabel("Keyword Sheet");
-        JLabel dataSheet = new JLabel("Data Sheet");
-		
-		//Add buttons
-		JButton uploadKeywordExcelButton = new JButton("Upload");
-		JButton uploadDataExcelButton = new JButton("Upload");
-		JButton uploadPropertiesButton = new JButton("Upload");
-	
-		//Add textfields
-        JTextField keywordSheetTextField = new JTextField(10);
-        JTextField dataSheetTextField  = new JTextField(10);
-        
-        
-        
-		JPanel panel = new JPanel();
-		
-	      panel.setBackground(Color.white);
-	      panel.setSize(300,300);
-	      GridBagLayout layout = new GridBagLayout();
-	
-	      panel.setLayout(layout);        
-	      GridBagConstraints gbc = new GridBagConstraints();
-	
-	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	      gbc.gridx = 0;
-	      gbc.gridy = 0;
-	      panel.add(keywordLabel,gbc);
-	
-	      gbc.gridx = 3;
-	      gbc.gridy = 0;
-	      panel.add(uploadKeywordExcelButton,gbc); 
-	
-	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	      //gbc.ipady = 20;   
-	      gbc.gridx = 0;
-	      gbc.gridy = 1;
-	      panel.add(dataLabel,gbc); 
-	
-	      gbc.gridx = 3;
-	      gbc.gridy =1;       
-	      panel.add(uploadDataExcelButton,gbc);  
-	
-	      gbc.gridx = 0;
-	      gbc.gridy = 3;      
-	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	      //gbc.gridwidth = 2;
-	      panel.add(keywordSheet,gbc);  
-	      
-	      gbc.gridx = 3;
-	      gbc.gridy = 2;      
-	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	      //gbc.gridwidth = 2;
-	      panel.add(uploadPropertiesButton,gbc);  
-	      
-	      //Keyword Sheet
-	      gbc.gridx = 0;
-	      gbc.gridy = 2;      
-	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	      //gbc.gridwidth = 2;
-	      panel.add(propertiesLabel,gbc);  
-	      
-	      gbc.gridx = 3;
-	      gbc.gridy = 3;      
-	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	
-	      //gbc.gridwidth = 2;
-	      panel.add(keywordSheetTextField,gbc);  
-	      
-	      //dataDriven Sheet
-	      gbc.gridx = 0;
-	      gbc.gridy = 4;      
-	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	      panel.add(dataSheet,gbc);  
-	      
-	      gbc.gridx = 3;
-	      gbc.gridy = 4;   
-	      gbc.gridheight = 2;
-	      gbc.fill = GridBagConstraints.HORIZONTAL;
-	      panel.add(dataSheetTextField,gbc);  
-	      
-		  keywordSheetLabel = new JLabel("Keyword Sheet");
-	      dataSheetLabel = new JLabel("Data Sheet");
-	      add(keywordSheetLabel);
-	      add(dataSheetLabel);
-	      
-	      uploadKeywordExcelButton.addActionListener(new UploadKeywordExcelListener());
-		  uploadDataExcelButton.addActionListener(new UploadDataExcelListener());
-		  uploadPropertiesButton.addActionListener(new UploadPropertiesListener());
-		  keywordSheetTextField.addActionListener(new KeywordSheetTextListener());
-		  dataSheetTextField.addActionListener(new DataSheetTextListener());
-		    
-	      add(panel);
-		  setVisible(true);
+		JMenu menu = new JMenu("File");
+		JMenuItem menuItem = new JMenuItem("Exit");
 
-	}
-	class UploadKeywordExcelListener implements ActionListener {
-		
-		final JFileChooser fc = new JFileChooser();
-		final RunPanel runPanel = new RunPanel();
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			//Get return value
-			int returnVal = fc.showOpenDialog(fc);
-			//If success then get file
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				//Should be keyword excel file
-				File keywordExcelFile = fc.getSelectedFile();
-				runPanel.setKeywordExcelFile(keywordExcelFile);
+		// --> File --> Exit --> Closes the window
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, KeyEvent.ALT_MASK));
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				System.exit(0);
 			}
-			
-			
+		});
+
+		// load Numbus UI
+		try {
+			this.loadNimbus();
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+
+			// load old UI if nimbus isn't available
+			System.out.println("Nimbus UI not found or failed to load.");
+			this.loadBackupUI();
 		}
+
+		menu.add(menuItem);
+		menuBar.add(menu);
+		setJMenuBar(menuBar);
+		guiTitle = new GUITitle();
+		ckpanel = new CheckBoxPanel();
+		ckpanel.setBackground(new Color(201, 203, 255));
+		runPanels = new RunPanel();
+		runPanels.setBackground(new Color(201, 203, 255));
+		guiTitle.setBackground(new Color(201, 203, 255));
+
+		this.add(guiTitle, BorderLayout.NORTH);
+		
+		JPanel comboPanel = new JPanel();
+		comboPanel.setBackground(new Color(201,203,255));
+
+		this.add(runPanels, BorderLayout.SOUTH);
+
+		// Add label
+		this.setFont(new Font("Serif", Font.BOLD, 20));
+		JLabel hybridLabel = new JLabel("Hybrid Files");
+
+		JButton uploadHybridFilesButton = new JButton("Upload");
+
+		JPanel inputPanel = new JPanel();
+
+		inputPanel.setBackground(new Color(201, 203, 255));
+		inputPanel.setSize(300, 300);
+		GridBagLayout layout = new GridBagLayout();
+
+		inputPanel.setLayout(layout);
+		GridBagConstraints gbc = new GridBagConstraints();
+
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		inputPanel.add(hybridLabel, gbc);
+
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		inputPanel.add(uploadHybridFilesButton, gbc);
+
+		gbc.gridwidth = 3;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+
+		inputPanel.add(showHybridFileLoc, gbc);
+
+		uploadHybridFilesButton.addActionListener(new uploadHybridTestsListener());
+
+		comboPanel.setLayout(new BorderLayout());
+		comboPanel.add(ckpanel, BorderLayout.NORTH);
+		comboPanel.add(inputPanel, BorderLayout.SOUTH);
+		this.add(comboPanel,BorderLayout.WEST);
+		this.add(new SysPanel(), BorderLayout.CENTER);
+		this.setVisible(true);
 	}
 
-	class UploadDataExcelListener implements ActionListener {
-
+	class uploadHybridTestsListener implements ActionListener {
 		final JFileChooser fc = new JFileChooser();
 		final RunPanel runPanel = new RunPanel();
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			//Get return value
 			int returnVal = fc.showOpenDialog(fc);
-			//If success then get file
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				//Should be keyword excel file
-				File dataExcelFile = fc.getSelectedFile();
-				runPanel.setDataExcelFile(dataExcelFile);
-			}	
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File hybridFiles = fc.getSelectedFile();
+				if(hybridFiles.getName().length() > 20){
+					showHybridFileLoc.setText(hybridFiles.getName().substring(0, 20).concat("..."));
+				}
+				else {
+					showHybridFileLoc.setText(hybridFiles.getName());
+				}
+
+				// Get Keyword File
+				runPanel.setKeywordExcelFile(hybridFiles);
+				runPanel.setKeywordSheetText("Keywords");
+
+				// Get Data File
+				runPanel.setDataExcelFile(hybridFiles);
+				runPanel.setDataSheetText("Data");
+			}
 		}
-		
 	}
 
-	class UploadPropertiesListener implements ActionListener {
-
-		final JFileChooser fc = new JFileChooser();
-		final RunPanel runPanel = new RunPanel();
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-			//Get return value
-			int returnVal = fc.showOpenDialog(fc);
-			//If success then get file
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				//Should be keyword excel file
-				File propertiesFile = fc.getSelectedFile();
-				runPanel.setPropertiesFile(propertiesFile);
-			}	
+	public void loadNimbus() throws ClassNotFoundException, InstantiationException, IllegalAccessException,
+			UnsupportedLookAndFeelException {
+		for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			if ("Nimbus".equals(info.getName())) {
+				UIManager.setLookAndFeel(info.getClassName());
+				break;
+			}
 		}
-		
 	}
-	
 
-class KeywordSheetTextListener implements ActionListener {
-	
-	final RunPanel runPanel = new RunPanel();
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JTextField input = (JTextField)e.getSource();		
-		runPanel.setKeywordSheetText(input.getText());
-		System.out.println("DEBUG--- input text : "+input.getText());
+	public void loadBackupUI() {
+		try {
+			// old UI
+			Properties props = new Properties();
+
+			props.put("buttonColorLight", "50 230 227");
+			props.put("buttonColorDark", "38 63 255");
+
+			props.put("rolloverColorLight", "131 237 242");
+			props.put("rolloverColorDark", "25 173 255");
+
+			// set your theme
+			SmartLookAndFeel.setCurrentTheme(props);
+			// select the Look and Feel
+			UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+			// com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			System.out.println("Default UI has failed to laod.");
+		}
 	}
-	
-	
-}
-
-class DataSheetTextListener implements ActionListener {
-	
-	final RunPanel runPanel = new RunPanel();
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JTextField input = (JTextField)e.getSource();		
-		runPanel.setDataSheetText(input.getText());
-	}
-}
-
 }

@@ -5,7 +5,7 @@
 
 	<groupId>SDET1611</groupId>
 	<artifactId>testingframework</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>testingframework</name>
@@ -25,104 +25,72 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>org.testng</groupId>
-		    <artifactId>testng</artifactId>
-		    <version>6.10</version>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.10</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>3.0.1</version>
 		</dependency>
-		<!--
-		<dependency>
-			<groupId>ru.yandex.qatools.allure</groupId>
-			<artifactId>allure-cucumber-jvm-adaptor</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-		-->
+		<!-- <dependency> <groupId>ru.yandex.qatools.allure</groupId> <artifactId>allure-cucumber-jvm-adaptor</artifactId> 
+			<version>1.6.1</version> </dependency> -->
 		<dependency>
 			<groupId>com.beust</groupId>
 			<artifactId>jcommander</artifactId>
 			<version>1.60</version>
 		</dependency>
 		<dependency>
-    		<groupId>org.apache.poi</groupId>
-    		<artifactId>poi-ooxml</artifactId>
-    		<version>3.15</version>
-        </dependency>
-        <dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi-ooxml</artifactId>
-		    <version>3.9</version>
-		</dependency> 
-        <dependency>
-		    <groupId>info.cukes</groupId>
-		    <artifactId>cucumber-java</artifactId>
-		    <version>1.2.4</version>
-		</dependency> 
-		<dependency>
-		    <groupId>info.cukes</groupId>
-		    <artifactId>cucumber-core</artifactId>
-		    <version>1.2.4</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.15</version>
 		</dependency>
 		<dependency>
-		    <groupId>info.cukes</groupId>
-		    <artifactId>cucumber-junit</artifactId>
-		    <version>1.2.4</version>
+			<groupId>com.jtattoo</groupId>
+			<artifactId>JTattoo</artifactId>
+			<version>1.6.11</version>
 		</dependency>
-		<dependency>
-		    <groupId>info.cukes</groupId>
-		    <artifactId>cucumber-testng</artifactId>
-		    <version>1.2.5</version>
-		</dependency>
-		<dependency>
-    		<groupId>com.jtattoo</groupId>
-    		<artifactId>JTattoo</artifactId>
-    		<version>1.6.11</version>
-		</dependency>	
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
-			    <artifactId>maven-surefire-plugin</artifactId>
-			    <version>2.7.1</version>
-			    <configuration>
-			        <redirectTestOutputToFile>false</redirectTestOutputToFile>
-			    </configuration>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.7.1</version>
+				<configuration>
+					<redirectTestOutputToFile>false</redirectTestOutputToFile>
+				</configuration>
 			</plugin>
-		</plugins>
 
-	<!--  
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
-				<configuration>
-					<testFailureIgnore>true</testFailureIgnore>
-					 <argLine> -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.8.10/aspectjweaver-1.8.10.jar" 
-						</argLine> 
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.aspectj</groupId>
-						<artifactId>aspectjweaver</artifactId>
-						<version>1.8.10</version>
-					</dependency>
-				</dependencies>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<!-- nothing here -->
 			</plugin>
-		-->
-	</build>
-	<!-- 
-	<reporting>
-		<excludeDefaults>true</excludeDefaults>
-		<plugins>
 			<plugin>
-				<groupId>ru.yandex.qatools.allure</groupId>
-				<artifactId>allure-maven-plugin</artifactId>
-				<version>2.2</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>SDET1611.testingframework.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
-	</reporting>
-	-->
+	</build>
 </project>
